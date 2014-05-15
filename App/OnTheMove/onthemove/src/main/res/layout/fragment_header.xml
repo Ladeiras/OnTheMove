@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="5"
+    android:background="@drawable/ic_launcher"
+    android:gravity="right">
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:id="@+id/help_button"
+        android:typeface="normal"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:enabled="false"
+        android:src="@android:drawable/ic_dialog_info" />
+</LinearLayout>

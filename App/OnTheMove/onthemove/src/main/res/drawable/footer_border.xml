@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<?xml version="1.0" encoding="utf-8"?>
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="line">
+    <stroke
+        android:width="2dp"
+        android:color="@color/onthemovetheme_color" />
+</shape>
+-->
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<item>
+    <shape
+        android:shape="rectangle">
+        <stroke android:width="2dp"
+                android:color="@color/onthemovetheme_color" />
+        <solid android:color="@null" />
+
+    </shape>
+</item>
+
+<item android:top="2dp">
+    <shape
+        android:shape="rectangle">
+        <stroke android:width="2dp" android:color="#FFDDDDDD" />
+        <solid android:color="@null" />
+    </shape>
+</item>
+
+</layer-list>

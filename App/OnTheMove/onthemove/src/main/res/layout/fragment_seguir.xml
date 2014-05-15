@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center"
+    android:weightSum="7">
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="New Button"
+        android:id="@+id/seguir_button"
+        android:background="@drawable/vertical_gradient1"
+        android:drawableLeft="@drawable/onthemovetheme_rate_star_big_off_holo_light"
+        android:drawablePadding="20dp"
+        android:paddingLeft="50dp"
+        android:typeface="normal"
+        android:textColor="#FFFFFFFF"
+        android:gravity="center|left"
+        android:textAppearance="@android:style/TextAppearance.Large"/>
+
+</LinearLayout>

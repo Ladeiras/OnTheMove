@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="6"
+    android:gravity="center"
+    android:background="@drawable/footer_border"
+    android:baselineAligned="false"
+    android:id="@+id/footer_button"
+    android:clickable="true">
+
+    <ImageButton
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:id="@+id/help_button"
+        android:typeface="normal"
+        android:background="@android:color/transparent"
+        android:focusable="false"
+        android:enabled="false"
+        android:gravity="center"
+        android:src="@drawable/onthemovetheme_ic_navigation_drawer"
+        android:adjustViewBounds="false" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="28374"
+        android:id="@+id/codigo_voo_textView"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="Porto - Lisboa"
+        android:id="@+id/origem_destino_textView"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:text="24/06 17:45"
+        android:id="@+id/tempo_estimado_textView"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large" />
+</LinearLayout>

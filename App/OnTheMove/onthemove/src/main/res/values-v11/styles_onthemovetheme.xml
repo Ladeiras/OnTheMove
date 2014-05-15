@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="AutoCompleteTextViewOnTheMoveTheme" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/onthemovetheme_list_selector_holo_light</item>
+	    <item name="android:background">@drawable/onthemovetheme_edit_text_holo_light</item>
+  </style>
+
+  <style name="ButtonOnTheMoveTheme" parent="android:Widget.Holo.Light.Button">
+	  <item name="android:background">@drawable/onthemovetheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="ImageButtonOnTheMoveTheme" parent="android:Widget.Holo.Light.ImageButton">
+	  <item name="android:background">@drawable/onthemovetheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="SpinnerOnTheMoveTheme" parent="android:Widget.Holo.Light.Spinner">
+      <item name="android:background">@drawable/onthemovetheme_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/onthemovetheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="ProgressBarOnTheMoveTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_progress_indeterminate_horizontal_holo_light</item>
+  </style>
+
+  <style name="SeekBarOnTheMoveTheme" parent="android:Widget.Holo.Light.SeekBar">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:thumb">@drawable/onthemovetheme_scrubber_control_selector_holo_light</item>
+  </style>
+
+  <style name="RatingBarOnTheMoveTheme" parent="android:Widget.Holo.Light.RatingBar">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_ratingbar_full_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_ratingbar_full_holo_light</item>
+  </style>
+
+  <style name="RatingBarBigOnTheMoveTheme" parent="android:Widget.Holo.Light.RatingBar.Indicator">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_ratingbar_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_ratingbar_holo_light</item>
+  </style>
+
+  <style name="RatingBarSmallOnTheMoveTheme" parent="android:Widget.Holo.Light.RatingBar.Small">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_ratingbar_small_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_ratingbar_small_holo_light</item>
+  </style>
+
+  <style name="ToggleOnTheMoveTheme" parent="android:Widget.Holo.Light.Button.Toggle">
+      <item name="android:background">@drawable/onthemovetheme_btn_toggle_holo_light</item>
+  </style>
+
+</resources>

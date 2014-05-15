@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="OnTheMoveTheme" parent="@style/_OnTheMoveTheme"/>
+
+  <style name="_OnTheMoveTheme" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextOnTheMoveTheme</item>
+
+    <item name="android:textColorHighlight">#99fe6402</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewOnTheMoveTheme</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxOnTheMoveTheme</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonOnTheMoveTheme</item>
+
+    <item name="android:buttonStyle">@style/ButtonOnTheMoveTheme</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonOnTheMoveTheme</item>
+
+    <item name="android:spinnerStyle">@style/SpinnerOnTheMoveTheme</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemOnTheMoveTheme</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarOnTheMoveTheme</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarOnTheMoveTheme</item>
+
+    <item name="android:ratingBarStyle">@style/RatingBarOnTheMoveTheme</item>
+
+    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigOnTheMoveTheme</item>
+
+    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallOnTheMoveTheme</item>
+
+    <item name="android:buttonStyleToggle">@style/ToggleOnTheMoveTheme</item>
+
+    <item name="android:listViewStyle">@style/ListViewOnTheMoveTheme</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewOnTheMoveTheme.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemOnTheMoveTheme</item>
+
+  </style>
+
+</resources>

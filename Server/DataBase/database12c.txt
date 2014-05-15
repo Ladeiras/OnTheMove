@@ -1,0 +1,6 @@
+ERROR 17002
+
+1. Run CMD Admin privileges
+2. lsnrctl start
+
+---

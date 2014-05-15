@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="EditTextOnTheMoveTheme" parent="android:Widget.EditText">
+	  <item name="android:background">@drawable/onthemovetheme_edit_text_holo_light</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="AutoCompleteTextViewOnTheMoveTheme" parent="android:Widget.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/onthemovetheme_list_selector_holo_light</item>
+	  <item name="android:background">@drawable/onthemovetheme_edit_text_holo_light</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="CheckBoxOnTheMoveTheme" parent="android:Widget.CompoundButton.CheckBox">
+      <item name="android:button">@drawable/onthemovetheme_btn_check_holo_light</item>
+  </style>
+
+  <style name="RadioButtonOnTheMoveTheme" parent="android:Widget.CompoundButton.RadioButton">
+      <item name="android:button">@drawable/onthemovetheme_btn_radio_holo_light</item>
+  </style>
+
+  <style name="ButtonOnTheMoveTheme" parent="android:Widget.Button">
+	  <item name="android:background">@drawable/onthemovetheme_btn_default_holo_light</item>
+	  <item name="android:minHeight">48dip</item>
+	  <item name="android:minWidth">64dip</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ImageButtonOnTheMoveTheme" parent="android:Widget.ImageButton">
+	  <item name="android:background">@drawable/onthemovetheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="SpinnerOnTheMoveTheme" parent="android:Widget.Spinner">
+      <item name="android:background">@drawable/onthemovetheme_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/onthemovetheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="SpinnerDropDownItemOnTheMoveTheme" parent="android:Widget.DropDownItem.Spinner">
+      <item name="android:checkMark">@drawable/onthemovetheme_btn_radio_holo_light</item>
+  </style>
+  <style name="TabOnTheMoveTheme">
+      <item name="android:gravity">center_horizontal</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+      <item name="android:background">@drawable/onthemovetheme_tab_indicator_holo</item>
+      <item name="android:layout_width">0dip</item>
+      <item name="android:layout_weight">1</item>
+      <item name="android:minWidth">80dip</item>
+  </style>
+
+  <style name="TabTextOnTheMoveTheme">
+	  <item name="android:textColor">#000000</item>
+      <item name="android:textSize">12sp</item>
+      <item name="android:textStyle">bold</item>
+      <!-- v14 <item name="android:textAllCaps">true</item> -->
+      <item name="android:ellipsize">marquee</item>
+      <item name="android:maxLines">2</item>
+      <item name="android:maxWidth">180dip</item>
+  </style>
+
+  <style name="ProgressBarOnTheMoveTheme" parent="android:Widget.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_progress_indeterminate_horizontal_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="SeekBarOnTheMoveTheme" parent="android:Widget.SeekBar">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:minHeight">13dip</item>
+      <item name="android:maxHeight">13dip</item>
+      <item name="android:thumb">@drawable/onthemovetheme_scrubber_control_selector_holo_light</item>
+      <item name="android:thumbOffset">16dip</item>
+      <item name="android:paddingLeft">16dip</item>
+      <item name="android:paddingRight">16dip</item>
+  </style>
+
+  <style name="RatingBarOnTheMoveTheme" parent="android:Widget.RatingBar">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_ratingbar_full_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_ratingbar_full_holo_light</item>
+  </style>
+
+  <style name="RatingBarBigOnTheMoveTheme">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_ratingbar_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_ratingbar_holo_light</item>
+      <item name="android:minHeight">35dip</item>
+      <item name="android:maxHeight">35dip</item>
+  </style>
+
+  <style name="RatingBarSmallOnTheMoveTheme">
+      <item name="android:progressDrawable">@drawable/onthemovetheme_ratingbar_small_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/onthemovetheme_ratingbar_small_holo_light</item>
+      <item name="android:minHeight">16dip</item>
+      <item name="android:maxHeight">16dip</item>
+  </style>
+
+  <style name="ToggleOnTheMoveTheme" parent="android:Widget.Button.Toggle">
+      <item name="android:background">@drawable/onthemovetheme_btn_toggle_holo_light</item>
+      <item name="android:minHeight">48dip</item>
+	  <item name="android:textColor">#000000</item>
+  </style>
+
+  <style name="ListViewOnTheMoveTheme" parent="android:Widget.ListView">
+      <item name="android:listSelector">@drawable/onthemovetheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="ListViewOnTheMoveTheme.White" parent="android:Widget.ListView.White">
+      <item name="android:listSelector">@drawable/onthemovetheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="SpinnerItemOnTheMoveTheme" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+      <item name="android:textColor">#000000</item>
+  </style>
+
+</resources>

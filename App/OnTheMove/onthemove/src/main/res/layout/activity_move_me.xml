@@ -28,7 +28,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/ic_launcher">
+            android:background="@drawable/vertical_gradient1">
 
             <TextView
                 android:layout_width="wrap_content"

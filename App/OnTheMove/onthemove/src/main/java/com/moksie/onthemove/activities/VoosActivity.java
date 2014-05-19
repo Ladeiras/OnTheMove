@@ -255,7 +255,7 @@ public class VoosActivity extends FragmentActivity {
 
                 partidas.add(new Voo(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaTempoEstimado,ChegadaTempoEstimado,
-                        PartidaTempoReal,ChegadaTempoReal));
+                        PartidaTempoReal,ChegadaTempoReal,true));
 
                 VooAdapter partidasAdapter = new VooAdapter(this, android.R.layout.simple_expandable_list_item_1, partidas);
                 partidasList = (ListView) findViewById(R.id.listView_partidas);
@@ -306,7 +306,7 @@ public class VoosActivity extends FragmentActivity {
 
                 chegadas.add(new Voo(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaTempoEstimado,ChegadaTempoEstimado,
-                        PartidaTempoReal,ChegadaTempoReal));
+                        PartidaTempoReal,ChegadaTempoReal,false));
 
                 VooAdapter chegadasAdapter = new VooAdapter(this, android.R.layout.simple_expandable_list_item_1, chegadas);
                 chegadasList = (ListView) findViewById(R.id.listView_chegadas);

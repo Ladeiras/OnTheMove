@@ -1,36 +1,56 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:weightSum="6"
-    android:gravity="bottom"
-    android:background="@drawable/ic_launcher">
+    >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:src="@drawable/background_firstpage"
+        android:scaleType="centerCrop" />
 
     <LinearLayout
-        android:orientation="horizontal"
+
+        android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:weightSum="5"
-        android:padding="10dp">
+        android:layout_height="fill_parent"
+        android:weightSum="6"
+        android:gravity="bottom">
 
-        <Spinner
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+        <ImageView
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="4"
-            android:id="@+id/aeroportos"
-            android:prompt="@string/aeroportos_spinner_prompt"
-            android:spinnerMode="dialog"/>
+            android:layout_gravity="center"
+            android:src="@drawable/logo_onmove"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="OK"
-            android:typeface="normal"
-            android:id="@+id/okbutton"/>
+            android:weightSum="5"
+            android:padding="10dp">
+
+            <Spinner
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="4"
+                android:id="@+id/aeroportos"
+                android:prompt="@string/aeroportos_spinner_prompt"
+                android:spinnerMode="dialog"/>
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="OK"
+                android:typeface="normal"
+                android:id="@+id/okbutton"/>
+
+        </LinearLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

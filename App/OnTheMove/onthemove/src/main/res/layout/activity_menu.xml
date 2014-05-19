@@ -4,23 +4,23 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:weightSum="12">
+    android:weightSum="100">
 
     <fragment
         android:name="com.moksie.onthemove.fragments.HeaderFragment"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="11"
         tools:layout="@layout/fragment_header"
         android:id="@+id/menu_header" />
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="16"
         android:text="@string/botao_voos"
         android:id="@+id/voos_button"
-        android:drawableLeft="@drawable/ic_launcher"
+        android:drawableLeft="@drawable/ic_icon_voos"
         android:drawablePadding="20dp"
         android:typeface="normal"
         android:gravity="center|left"
@@ -29,10 +29,10 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="16"
         android:text="@string/botao_calculoderota"
         android:id="@+id/moveme_button"
-        android:drawableLeft="@drawable/ic_launcher"
+        android:drawableLeft="@drawable/ic_icon_calculorota"
         android:drawablePadding="20dp"
         android:typeface="normal"
         android:gravity="center|left"
@@ -41,10 +41,10 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="16"
         android:text="@string/botao_serviços"
         android:id="@+id/servicos_button"
-        android:drawableLeft="@drawable/ic_launcher"
+        android:drawableLeft="@drawable/ic_icon_servicos"
         android:drawablePadding="20dp"
         android:typeface="normal"
         android:gravity="center|left"
@@ -53,10 +53,10 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="16"
         android:text="@string/botao_contactos"
         android:id="@+id/contactos_button"
-        android:drawableLeft="@drawable/ic_launcher"
+        android:drawableLeft="@drawable/ic_icon_contactos"
         android:drawablePadding="20dp"
         android:typeface="normal"
         android:gravity="center|left"
@@ -65,10 +65,10 @@
     <Button
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="16"
         android:text="@string/botao_sobre"
         android:id="@+id/sobre_button"
-        android:drawableLeft="@drawable/ic_launcher"
+        android:drawableLeft="@drawable/ic_icon_sobre"
         android:drawablePadding="20dp"
         android:typeface="normal"
         android:gravity="center|left"
@@ -78,7 +78,7 @@
         android:name="com.moksie.onthemove.fragments.FooterFragment"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_weight="9"
         tools:layout="@layout/fragment_footer"
         android:id="@+id/menu_footer"/>
 

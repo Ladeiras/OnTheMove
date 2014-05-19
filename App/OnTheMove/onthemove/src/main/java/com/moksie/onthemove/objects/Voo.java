@@ -21,10 +21,11 @@ public class Voo implements Parcelable
     private Date chegadatempoestimado;
     private Date partidatemporeal;
     private Date chegadatemporeal;
+    private boolean tipovoo;
 
     public Voo(long id, long codigovoo, String codigocompanhia, String partidacidade,
                String chegadacidade, Date partidatempoestimado, Date chegadatempoestimado,
-               Date partidatemporeal, Date chegadatemporeal) {
+               Date partidatemporeal, Date chegadatemporeal, boolean tipovoo) {
         this.id = id;
         this.codigovoo = codigovoo;
         this.codigocompanhia = codigocompanhia;
@@ -34,6 +35,7 @@ public class Voo implements Parcelable
         this.chegadatempoestimado = chegadatempoestimado;
         this.partidatemporeal = partidatemporeal;
         this.chegadatemporeal = chegadatemporeal;
+        this.tipovoo = tipovoo;
     }
 
     public Voo(String str)
@@ -54,6 +56,8 @@ public class Voo implements Parcelable
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        this.tipovoo = Boolean.parseBoolean(list[9]);
     }
 
     public Voo(Parcel in) {
@@ -66,6 +70,7 @@ public class Voo implements Parcelable
         this.chegadatempoestimado = new Date(in.readLong());
         this.partidatemporeal = new Date(in.readLong());
         this.chegadatemporeal = new Date(in.readLong());
+        this.tipovoo = new Boolean(in.readString());
     }
 
     public long getId() {
@@ -104,6 +109,10 @@ public class Voo implements Parcelable
         return chegadatemporeal;
     }
 
+    public boolean isTipovoo() {
+        return tipovoo;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -120,6 +129,7 @@ public class Voo implements Parcelable
         parcel.writeLong(chegadatempoestimado.getTime());
         parcel.writeLong(partidatemporeal.getTime());
         parcel.writeLong(chegadatemporeal.getTime());
+        parcel.writeString(String.valueOf(tipovoo));
     }
 
     public static final Parcelable.Creator<Voo> CREATOR = new Parcelable.Creator<Voo>() {
@@ -145,6 +155,7 @@ public class Voo implements Parcelable
                 sdf.format(this.getPartidatempoestimado())+","+
                 sdf.format(this.getChegadatempoestimado())+","+
                 sdf.format(this.getPartidatemporeal())+","+
-                sdf.format(this.getChegadatemporeal());
+                sdf.format(this.getChegadatemporeal())+","+
+                this.tipovoo;
     }
 }

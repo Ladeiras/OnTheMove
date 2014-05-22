@@ -1,17 +1,29 @@
 package com.moksie.onthemove.activities;
 
+import android.annotation.TargetApi;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
@@ -35,14 +47,19 @@ public class VooInfoActivity extends FragmentActivity
     private int estado = NAO_SEGUIR;
     private Voo voo;
 
+    private NotificationManager notificationManager;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_voo_info);
 
         Bundle data = getIntent().getExtras();
         voo = (Voo) data.getParcelable("voo");
+
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         parseVooFile();
         updateFragments(estado);
@@ -109,6 +126,7 @@ public class VooInfoActivity extends FragmentActivity
 
     public void updateFooter()
     {
+        ScrollView layout = (ScrollView) findViewById(R.id.voo_info_resizable);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.voo_info_footer);
 
@@ -122,8 +140,18 @@ public class VooInfoActivity extends FragmentActivity
             FooterFragment.setVoo(tempVoo);
             FooterFragment.updateVoo(this);
             FooterFragment.setVisibility(true);
+
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,8f)
+            );
         }
-        else FooterFragment.setVisibility(false);
+        else
+        {
+            FooterFragment.setVisibility(false);
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+            );
+        }
 
         footer.updateVisibility();
     }
@@ -161,6 +189,8 @@ public class VooInfoActivity extends FragmentActivity
             //Footer
             updateFooter();
         }
+
+        createNotification();
     }
 
     public void onClickNaoSeguir()
@@ -175,5 +205,38 @@ public class VooInfoActivity extends FragmentActivity
             //Footer
             updateFooter();
         }
+
+        notificationManager.cancel(01);
+    }
+
+    private void createNotification()
+    {
+        Bitmap bm = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_icon_sobre),
+                getResources().getDimensionPixelSize(android.R.dimen.notification_large_icon_width),
+                getResources().getDimensionPixelSize(android.R.dimen.notification_large_icon_height),
+                true);
+
+        Intent intent = new Intent(this, VooInfoActivity.class);
+        intent.putExtra("voo", voo);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 01, intent, Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setContentIntent(pendingIntent);
+        builder = new NotificationCompat.Builder(getApplicationContext());
+        builder.setContentTitle(voo.getPartidacidade() +" - "+ voo.getChegadacidade());
+        builder.setContentText("O Voo parte às "+ voo.getPartidatempoestimado().getHours());
+        builder.setSubText("Tem 2h para o check-in");
+        //builder.setNumber(101);
+        builder.setTicker("Está agora a seguir um voo");
+        builder.setSmallIcon(R.drawable.ic_icon_sobre);
+        builder.setLargeIcon(bm);
+        builder.setAutoCancel(true);
+        builder.setPriority(0);
+        builder.setOngoing(true);
+
+        final Notification notification = builder.build();
+        notification.flags = Notification.FLAG_NO_CLEAR;
+
+        notificationManager.notify(01,notification);
     }
 }

@@ -3,13 +3,19 @@ package com.moksie.onthemove.activities;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
 import com.moksie.onthemove.fragments.HeaderFragment;
@@ -17,10 +23,15 @@ import com.moksie.onthemove.objects.Aeroporto;
 import com.moksie.onthemove.objects.Voo;
 import com.moksie.onthemove.utilities.FileIO;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class MenuActivity extends FragmentActivity {
 
     private Aeroporto aeroporto;
     private Voo vooASeguir;
+    private Context ctx = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,6 +68,16 @@ public class MenuActivity extends FragmentActivity {
                 MenuActivity.this.startActivity(intent);
             }
         });
+
+        ScheduledExecutorService scheduler =
+                Executors.newSingleThreadScheduledExecutor();
+
+        scheduler.scheduleAtFixedRate
+                (new Runnable() {
+                    public void run() {
+                        //Toast.makeText(ctx,"TOSTA",3000).show();
+                    }
+                }, 5, 5, TimeUnit.SECONDS);
     }
 
     @Override
@@ -84,6 +105,7 @@ public class MenuActivity extends FragmentActivity {
 
     public void updateFooter()
     {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.menu_resizable);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.menu_footer);
 
@@ -97,8 +119,18 @@ public class MenuActivity extends FragmentActivity {
             FooterFragment.setVoo(tempVoo);
             FooterFragment.updateVoo(this);
             FooterFragment.setVisibility(true);
+
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,8f)
+            );
         }
-        else FooterFragment.setVisibility(false);
+        else
+        {
+            FooterFragment.setVisibility(false);
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+            );
+        }
 
         footer.updateVisibility();
     }

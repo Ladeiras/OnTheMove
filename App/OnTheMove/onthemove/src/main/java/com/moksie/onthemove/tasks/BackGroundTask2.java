@@ -1,7 +1,10 @@
 package com.moksie.onthemove.tasks;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
+
+import com.moksie.onthemove.activities.MenuActivity;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

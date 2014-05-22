@@ -69,6 +69,17 @@ public class MenuActivity extends FragmentActivity {
             }
         });
 
+        //Botao Servicos
+        final Button serviceButton = (Button) findViewById(R.id.services_button);
+        serviceButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, ServicesActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("aeroporto", aeroporto);
+                MenuActivity.this.startActivity(intent);
+            }
+        });
+
         ScheduledExecutorService scheduler =
                 Executors.newSingleThreadScheduledExecutor();
 

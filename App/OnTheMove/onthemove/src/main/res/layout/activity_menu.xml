@@ -53,7 +53,7 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="@string/botao_serviços"
-            android:id="@+id/servicos_button"
+            android:id="@+id/services_button"
             android:drawableLeft="@drawable/ic_icon_servicos"
             android:drawablePadding="20dp"
             android:typeface="normal"

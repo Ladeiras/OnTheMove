@@ -1,0 +1,99 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="12">
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.HeaderFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_header"
+        android:id="@+id/move_me_header" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:text="@string/botao_serviços"
+                android:id="@+id/textView" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/botao_mapa_aeroporto"
+            android:id="@+id/services_mapa_aeroporto"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="20dp"
+            android:typeface="normal"
+            android:gravity="center|left"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/botao_lojas"
+            android:id="@+id/services_botao_lojas"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="20dp"
+            android:typeface="normal"
+            android:gravity="center|left"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/botao_restaurantes"
+            android:id="@+id/services_botao_restaurantes"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="20dp"
+            android:typeface="normal"
+            android:gravity="center|left"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/botao_outros_servicos"
+            android:id="@+id/services_botao_outrosservicos"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="20dp"
+            android:typeface="normal"
+            android:gravity="center|left"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+    </LinearLayout>
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.FooterFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_footer"
+        android:id="@+id/move_me_footer"/>
+
+</LinearLayout>

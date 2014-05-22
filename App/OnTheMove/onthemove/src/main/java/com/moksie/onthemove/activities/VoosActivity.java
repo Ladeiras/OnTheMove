@@ -246,12 +246,12 @@ public class VoosActivity extends FragmentActivity {
                 String PartidaTempoRealStr = a.getString(PARTIDATEMPOREAL);
                 String ChegadaTempoRealStr = a.getString(CHEGADATEMPOREAL);
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-                Date PartidaTempoEstimado = sdf.parse(PartidaTempoEstimadoStr);
-                Date ChegadaTempoEstimado = sdf.parse(ChegadaTempoEstimadoStr);
-                Date PartidaTempoReal = sdf.parse(PartidaTempoRealStr);
-                Date ChegadaTempoReal = sdf.parse(ChegadaTempoRealStr);
+                Date PartidaTempoEstimado = MainActivity.sdf.parse(PartidaTempoEstimadoStr);
+                Date ChegadaTempoEstimado = MainActivity.sdf.parse(ChegadaTempoEstimadoStr);
+                Date PartidaTempoReal = MainActivity.sdf.parse(PartidaTempoRealStr);
+                Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
 
                 partidas.add(new Voo(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaTempoEstimado,ChegadaTempoEstimado,
@@ -297,12 +297,12 @@ public class VoosActivity extends FragmentActivity {
                 String PartidaTempoRealStr = a.getString(PARTIDATEMPOREAL);
                 String ChegadaTempoRealStr = a.getString(CHEGADATEMPOREAL);
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-                Date PartidaTempoEstimado = sdf.parse(PartidaTempoEstimadoStr);
-                Date ChegadaTempoEstimado = sdf.parse(ChegadaTempoEstimadoStr);
-                Date PartidaTempoReal = sdf.parse(PartidaTempoRealStr);
-                Date ChegadaTempoReal = sdf.parse(ChegadaTempoRealStr);
+                Date PartidaTempoEstimado = MainActivity.sdf.parse(PartidaTempoEstimadoStr);
+                Date ChegadaTempoEstimado = MainActivity.sdf.parse(ChegadaTempoEstimadoStr);
+                Date PartidaTempoReal = MainActivity.sdf.parse(PartidaTempoRealStr);
+                Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
 
                 chegadas.add(new Voo(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaTempoEstimado,ChegadaTempoEstimado,

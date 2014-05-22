@@ -31,6 +31,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +40,7 @@ import java.util.concurrent.ExecutionException;
 public class MainActivity extends Activity {
 
     public static String FILE_VOO = "voo.txt";
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     private static final String ID = "Id";
     private static final String PAIS = "Pais";

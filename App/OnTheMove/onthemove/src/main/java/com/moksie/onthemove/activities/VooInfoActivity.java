@@ -37,6 +37,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class VooInfoActivity extends FragmentActivity
 {
@@ -225,7 +228,12 @@ public class VooInfoActivity extends FragmentActivity
         builder = new NotificationCompat.Builder(getApplicationContext());
         builder.setContentTitle(voo.getPartidacidade() +" - "+ voo.getChegadacidade());
         builder.setContentText("O Voo parte às "+ voo.getPartidatempoestimado().getHours());
-        builder.setSubText("Tem 2h para o check-in");
+
+        Calendar c = Calendar.getInstance();
+        Date currentDate = c.getTime();
+        long diff = getDateDiff(voo.getPartidatempoestimado(),currentDate,TimeUnit.MILLISECONDS);
+        if(diff < 3600000)
+            builder.setSubText("Tem "+TimeUnit.MINUTES.convert(diff,TimeUnit.MILLISECONDS)+" minutos para o check-in");
         //builder.setNumber(101);
         builder.setTicker("Está agora a seguir um voo");
         builder.setSmallIcon(R.drawable.ic_icon_sobre);
@@ -238,5 +246,11 @@ public class VooInfoActivity extends FragmentActivity
         notification.flags = Notification.FLAG_NO_CLEAR;
 
         notificationManager.notify(01,notification);
+    }
+
+    public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit)
+    {
+        long diffInMillies = date2.getTime() - date1.getTime();
+        return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
     }
 }

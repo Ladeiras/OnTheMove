@@ -80,6 +80,17 @@ public class MenuActivity extends FragmentActivity {
             }
         });
 
+        //Botao Contactos
+        final Button contactsButton = (Button) findViewById(R.id.contacts_button);
+        contactsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, ContactsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("aeroporto", aeroporto);
+                MenuActivity.this.startActivity(intent);
+            }
+        });
+
         ScheduledExecutorService scheduler =
                 Executors.newSingleThreadScheduledExecutor();
 

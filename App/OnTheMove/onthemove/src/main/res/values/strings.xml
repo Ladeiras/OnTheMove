@@ -22,6 +22,7 @@
     <string name="transportes_coletivos">Transportes Coletivos</string>
     <string name="taxis">Táxis</string>
     <string name="title_activity_voos">VoosActivity</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_tab_partidas">TabPartidasActivity</string>
     <string name="title_activity_tab_chegadas">TabChegadasActivity</string>
     <string name="title_activity_voo_info">VooInfoActivity</string>
@@ -31,5 +32,8 @@
     <string name="botao_lojas">Lojas</string>
     <string name="botao_restaurantes">Restaurantes</string>
     <string name="botao_outros_servicos">Outros Serviços</string>
+    <string name="botao_contactos_aeroporto">Contactos Aeroporto</string>
+    <string name="botao_perdidos_achados">Perdidos e Achados</string>
+    <string name="botao_posto_socorro">Posto de Socorro</string>
 
 </resources>

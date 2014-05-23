@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:text="@string/botao_serviços"
+                android:text="@string/botao_contactos"
                 android:id="@+id/textView" />
         </LinearLayout>
 
@@ -42,8 +42,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/botao_mapa_aeroporto"
-            android:id="@+id/services_mapa_aeroporto"
+            android:text="@string/botao_contactos_aeroporto"
+            android:id="@+id/services_contactos_aeroporto"
             android:drawableLeft="@drawable/ic_icon_voos"
             android:drawablePadding="20dp"
             android:typeface="normal"
@@ -54,8 +54,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/botao_lojas"
-            android:id="@+id/services_botao_lojas"
+            android:text="@string/botao_perdidos_achados"
+            android:id="@+id/services_perdidos_achados"
             android:drawableLeft="@drawable/ic_icon_voos"
             android:drawablePadding="20dp"
             android:typeface="normal"
@@ -66,20 +66,8 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/botao_restaurantes"
-            android:id="@+id/services_botao_restaurantes"
-            android:drawableLeft="@drawable/ic_icon_voos"
-            android:drawablePadding="20dp"
-            android:typeface="normal"
-            android:gravity="center|left"
-            android:textAppearance="@android:style/TextAppearance.Large" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="@string/botao_outros_servicos"
-            android:id="@+id/services_botao_outrosservicos"
+            android:text="@string/botao_posto_socorro"
+            android:id="@+id/services_posto_socorro"
             android:drawableLeft="@drawable/ic_icon_voos"
             android:drawablePadding="20dp"
             android:typeface="normal"

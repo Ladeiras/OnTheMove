@@ -37,6 +37,10 @@
             android:label="@string/title_activity_services" >
         </activity>
         <activity
+            android:name="com.moksie.onthemove.activities.ContactsActivity"
+            android:label="@string/title_activity_contacts" >
+        </activity>
+        <activity
             android:name="com.moksie.onthemove.activities.VooInfoActivity"
             android:label="@string/title_activity_voo_info" >
         </activity>

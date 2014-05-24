@@ -28,6 +28,7 @@
     <string name="title_activity_voo_info">VooInfoActivity</string>
     <string name="title_activity_services">ServicesActivity</string>
     <string name="title_activity_footer">FooterActivity</string>
+    <string name="title_activity_other_services">OtherServicesActivity</string>
     <string name="botao_mapa_aeroporto">Mapa Aeroporto</string>
     <string name="botao_lojas">Lojas</string>
     <string name="botao_restaurantes">Restaurantes</string>
@@ -35,5 +36,9 @@
     <string name="botao_contactos_aeroporto">Contactos Aeroporto</string>
     <string name="botao_perdidos_achados">Perdidos e Achados</string>
     <string name="botao_posto_socorro">Posto de Socorro</string>
+    <string name="botao_WC">WCs</string>
+    <string name="botao_zona_fumadores">Zona Fumadores</string>
+    <string name="botao_apoio_cliente">Apoio ao Cliente</string>
+    <string name="botao_parking">Parking</string>
 
 </resources>

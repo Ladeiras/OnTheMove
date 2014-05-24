@@ -1,19 +1,15 @@
 package com.moksie.onthemove.activities;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
 
-public class ServicesActivity extends FragmentActivity {
+public class OtherServicesActivity extends FragmentActivity {
 
     private boolean movemeFlag = false;
 
@@ -22,23 +18,10 @@ public class ServicesActivity extends FragmentActivity {
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_servicos);
+        setContentView(R.layout.activity_other_services);
 
         if(isPackageInstalled("com.moveme", this))
             movemeFlag = true;
-
-        //Botao Calculo Rota
-        final Button othServButton = (Button) findViewById(R.id.services_botao_outrosservicos);
-        othServButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ServicesActivity.this, OtherServicesActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                //intent.putExtra("aeroporto", aeroporto);
-                ServicesActivity.this.startActivity(intent);
-            }
-        });
-
     }
 
     @Override

@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Large"
-                android:text="@string/calculo_de_rota"
+                android:text="@string/botao_outros_servicos"
                 android:id="@+id/textView" />
         </LinearLayout>
 
@@ -42,9 +42,9 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/transportes_coletivos"
-            android:id="@+id/moveme_button2"
-            android:drawableLeft="@drawable/ic_icon_sobre"
+            android:text="@string/botao_WC"
+            android:id="@+id/services_WC"
+            android:drawableLeft="@drawable/ic_launcher"
             android:drawablePadding="20dp"
             android:typeface="normal"
             android:gravity="center|left"
@@ -54,9 +54,33 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/taxis"
-            android:id="@+id/taxis_button"
-            android:drawableLeft="@drawable/ic_icon_taxis"
+            android:text="@string/botao_zona_fumadores"
+            android:id="@+id/services_zona_fumadores"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="20dp"
+            android:typeface="normal"
+            android:gravity="center|left"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/botao_apoio_cliente"
+            android:id="@+id/services_apoio_cliente"
+            android:drawableLeft="@drawable/ic_launcher"
+            android:drawablePadding="20dp"
+            android:typeface="normal"
+            android:gravity="center|left"
+            android:textAppearance="@android:style/TextAppearance.Large" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:text="@string/botao_parking"
+            android:id="@+id/services_botao_parking"
+            android:drawableLeft="@drawable/ic_launcher"
             android:drawablePadding="20dp"
             android:typeface="normal"
             android:gravity="center|left"

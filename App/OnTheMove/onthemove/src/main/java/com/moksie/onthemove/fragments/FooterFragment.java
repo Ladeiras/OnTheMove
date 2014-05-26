@@ -83,6 +83,10 @@ public class FooterFragment extends Fragment
         TextView TempoEstimado = (TextView) a.findViewById(R.id.tempo_estimado_textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.applyPattern("dd/MM hh:mm");
-        TempoEstimado.setText(sdf.format(voo.getPartidatempoestimado()));
+
+        if(voo.isPartida())
+            TempoEstimado.setText(sdf.format(voo.getPartidatempoestimado()));
+        else
+            TempoEstimado.setText(sdf.format(voo.getChegadatempoestimado()));
     }
 }

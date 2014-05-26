@@ -1,5 +1,6 @@
 package com.moksie.onthemove.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -41,12 +42,14 @@ public class VoosActivity extends FragmentActivity {
     private static final String CODIGOCOMPANHIA = "CodigoCompanhia";
     private static final String PARTIDACIDADE = "PartidaCidade";
     private static final String CHEGADACIDADE = "ChegadaCidade";
+    private static final String PARTIDAAEROPORTOID = "PartidaAeroportoId";
+    private static final String CHEGADAAEROPORTOID = "ChegadaAeroportoId";
     private static final String PARTIDATEMPOESTIMADO = "PartidaTempoEstimado";
     private static final String CHEGADATEMPOESTIMADO = "ChegadaTempoEstimado";
     private static final String PARTIDATEMPOREAL = "PartidaTempoReal";
     private static final String CHEGADATEMPOREAL = "ChegadaTempoReal";
     //private static final String VOO_API_URL = "http://onthemove.no-ip.org:3000/api/aeroportos";
-    private static String FILE_VOO = "voo.txt";
+    //private static String FILE_VOO = "voo";
 
     String PARTIDA_API_URL;
     String CHEGADA_API_URL;
@@ -62,16 +65,26 @@ public class VoosActivity extends FragmentActivity {
     ArrayList<Voo> partidas = new ArrayList<Voo>();
     ArrayList<Voo> chegadas = new ArrayList<Voo>();
 
+    ProgressDialog loadingDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        loadingDialog = ProgressDialog.show(VoosActivity.this, "",
+                "Loading. Please wait...", true);
+
         setContentView(R.layout.activity_voos);
 
         Intent intent = getIntent();
         aeroporto = (Aeroporto) intent.getParcelableExtra("aeroporto");
+    }
 
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
         PARTIDA_API_URL = "http://onthemove.no-ip.org:3000/api/partidas/"+aeroporto.getId();
         CHEGADA_API_URL = "http://onthemove.no-ip.org:3000/api/chegadas/"+aeroporto.getId();
 
@@ -90,97 +103,95 @@ public class VoosActivity extends FragmentActivity {
         //chegadasList.setAdapter(new ArrayAdapter(this, android.R.layout.simple_expandable_list_item_1, tempList2));
 
         //Listas de Voos
-        try {
-            buildPartidasList();
-            buildChegadasList();
-        } catch (ParseException e) {
-            Log.e("FLAG", "Erro na criacao das listas!");
-            e.printStackTrace();
+        if(partidas.isEmpty() && chegadas.isEmpty())
+        {
+            try {
+                buildPartidasList();
+                buildChegadasList();
+            } catch (ParseException e) {
+                Log.e("FLAG", "Erro na criacao das listas!");
+                e.printStackTrace();
+            }
+
+            //Exemplo listner
+            /*partidasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView parent, View view, int position, long id)
+                {
+                    String item = (String) partidasList.getAdapter().getItem(position);
+                    if(item != null)
+                    {
+                        //Do stuff with item
+                        setFooterVisibility(true);
+                        updateFooter();
+                    }
+                }
+            });*/
+
+            partidasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int i, long l) {
+                    Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Voo voo = (Voo) partidasList.getAdapter().getItem(i);
+                    Log.w("FLAG", voo.getPartidacidade());
+                    intent.putExtra("voo", voo);
+                    VoosActivity.this.startActivity(intent);
+                }
+            });
+
+            chegadasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int i, long l) {
+                    Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Voo voo = (Voo) chegadasList.getAdapter().getItem(i);
+                    Log.w("FLAG", voo.getPartidacidade());
+                    intent.putExtra("voo", voo);
+                    VoosActivity.this.startActivity(intent);
+                }
+            });
+
+            mTabHost = (TabHost) findViewById(R.id.tabHost);
+            mTabHost.setup();
+
+            //Tabs
+            TabHost.TabSpec tabPartidas = mTabHost.newTabSpec("Partidas");
+            TabHost.TabSpec tabChegadas = mTabHost.newTabSpec("Chegadas");
+
+            //Tab Indicators
+            View tabPartidasIndicator = LayoutInflater.from(this).inflate(R.layout.onthemovetheme_tab_indicator_holo, mTabHost.getTabWidget(), false);
+            TextView titlePartidas = (TextView) tabPartidasIndicator.findViewById(android.R.id.title);
+            titlePartidas.setText("PARTIDAS");
+            tabPartidas.setIndicator(tabPartidasIndicator);
+
+            View tabChegadasIndicator = LayoutInflater.from(this).inflate(R.layout.onthemovetheme_tab_indicator_holo, mTabHost.getTabWidget(), false);
+            TextView titleChegadas = (TextView) tabChegadasIndicator.findViewById(android.R.id.title);
+            titleChegadas.setText("CHEGADAS");
+            tabChegadas.setIndicator(tabChegadasIndicator);
+
+            //Tabs Views
+            tabPartidas.setContent(new TabHost.TabContentFactory() {
+
+                public View createTabContent(String tag) {
+                    return partidasList;
+                }
+            });
+
+            tabChegadas.setContent(new TabHost.TabContentFactory() {
+
+                public View createTabContent(String tag) {
+                    return chegadasList;
+                }
+            });
+
+            mTabHost.addTab(tabPartidas);
+            mTabHost.addTab(tabChegadas);
+
+            mTabHost.setCurrentTab(0);
         }
 
-        //Exemplo listner
-        /*partidasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View view, int position, long id)
-            {
-                String item = (String) partidasList.getAdapter().getItem(position);
-                if(item != null)
-                {
-                    //Do stuff with item
-                    setFooterVisibility(true);
-                    updateFooter();
-                }
-            }
-        });*/
-
-        partidasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int i, long l) {
-                Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                Voo voo = (Voo) partidasList.getAdapter().getItem(i);
-                Log.w("FLAG", voo.getPartidacidade());
-                intent.putExtra("voo", voo);
-                VoosActivity.this.startActivity(intent);
-            }
-        });
-
-        chegadasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int i, long l) {
-                Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                Voo voo = (Voo) chegadasList.getAdapter().getItem(i);
-                Log.w("FLAG", voo.getPartidacidade());
-                intent.putExtra("voo", voo);
-                VoosActivity.this.startActivity(intent);
-            }
-        });
-
-        mTabHost = (TabHost) findViewById(R.id.tabHost);
-        mTabHost.setup();
-
-        //Tabs
-        TabHost.TabSpec tabPartidas = mTabHost.newTabSpec("Partidas");
-        TabHost.TabSpec tabChegadas = mTabHost.newTabSpec("Chegadas");
-
-        //Tab Indicators
-        View tabPartidasIndicator = LayoutInflater.from(this).inflate(R.layout.onthemovetheme_tab_indicator_holo, mTabHost.getTabWidget(), false);
-        TextView titlePartidas = (TextView) tabPartidasIndicator.findViewById(android.R.id.title);
-        titlePartidas.setText("PARTIDAS");
-        tabPartidas.setIndicator(tabPartidasIndicator);
-
-        View tabChegadasIndicator = LayoutInflater.from(this).inflate(R.layout.onthemovetheme_tab_indicator_holo, mTabHost.getTabWidget(), false);
-        TextView titleChegadas = (TextView) tabChegadasIndicator.findViewById(android.R.id.title);
-        titleChegadas.setText("CHEGADAS");
-        tabChegadas.setIndicator(tabChegadasIndicator);
-
-        //Tabs Views
-        tabPartidas.setContent(new TabHost.TabContentFactory() {
-
-            public View createTabContent(String tag) {
-                return partidasList;
-            }
-        });
-
-        tabChegadas.setContent(new TabHost.TabContentFactory() {
-
-            public View createTabContent(String tag) {
-                return chegadasList;
-            }
-        });
-
-        mTabHost.addTab(tabPartidas);
-        mTabHost.addTab(tabChegadas);
-
-        mTabHost.setCurrentTab(0);
-
         updateFragments();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        updateFragments();
+        loadingDialog.hide();
     }
 
     @Override
@@ -241,6 +252,8 @@ public class VoosActivity extends FragmentActivity {
                 String CodigoCompanhia = a.getString(CODIGOCOMPANHIA);
                 String PartidaCidade = a.getString(PARTIDACIDADE);
                 String ChegadaCidade = a.getString(CHEGADACIDADE);
+                long PartidaAeroportoId = a.getLong(PARTIDAAEROPORTOID);
+                long ChegadaAeroportoId = a.getLong(CHEGADAAEROPORTOID);
                 String PartidaTempoEstimadoStr = a.getString(PARTIDATEMPOESTIMADO);
                 String ChegadaTempoEstimadoStr = a.getString(CHEGADATEMPOESTIMADO);
                 String PartidaTempoRealStr = a.getString(PARTIDATEMPOREAL);
@@ -254,8 +267,8 @@ public class VoosActivity extends FragmentActivity {
                 Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
 
                 partidas.add(new Voo(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
-                        ChegadaCidade,PartidaTempoEstimado,ChegadaTempoEstimado,
-                        PartidaTempoReal,ChegadaTempoReal,true));
+                        ChegadaCidade,PartidaAeroportoId,ChegadaAeroportoId,PartidaTempoEstimado,
+                        ChegadaTempoEstimado,PartidaTempoReal,ChegadaTempoReal,true));
 
                 VooAdapter partidasAdapter = new VooAdapter(this, android.R.layout.simple_expandable_list_item_1, partidas);
                 partidasList = (ListView) findViewById(R.id.listView_partidas);
@@ -292,6 +305,8 @@ public class VoosActivity extends FragmentActivity {
                 String CodigoCompanhia = a.getString(CODIGOCOMPANHIA);
                 String PartidaCidade = a.getString(PARTIDACIDADE);
                 String ChegadaCidade = a.getString(CHEGADACIDADE);
+                long PartidaAeroportoId = a.getLong(PARTIDAAEROPORTOID);
+                long ChegadaAeroportoId = a.getLong(CHEGADAAEROPORTOID);
                 String PartidaTempoEstimadoStr = a.getString(PARTIDATEMPOESTIMADO);
                 String ChegadaTempoEstimadoStr = a.getString(CHEGADATEMPOESTIMADO);
                 String PartidaTempoRealStr = a.getString(PARTIDATEMPOREAL);
@@ -305,8 +320,8 @@ public class VoosActivity extends FragmentActivity {
                 Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
 
                 chegadas.add(new Voo(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
-                        ChegadaCidade,PartidaTempoEstimado,ChegadaTempoEstimado,
-                        PartidaTempoReal,ChegadaTempoReal,false));
+                        ChegadaCidade,PartidaAeroportoId,ChegadaAeroportoId,PartidaTempoEstimado,
+                        ChegadaTempoEstimado,PartidaTempoReal,ChegadaTempoReal,false));
 
                 VooAdapter chegadasAdapter = new VooAdapter(this, android.R.layout.simple_expandable_list_item_1, chegadas);
                 chegadasList = (ListView) findViewById(R.id.listView_chegadas);
@@ -327,13 +342,11 @@ public class VoosActivity extends FragmentActivity {
 
     public boolean parseVooFile()
     {
-        if(FileIO.fileExists(FILE_VOO, this))
+        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
         {
             //Ler voo do ficheiro
-            String temp = FileIO.readFromFile(FILE_VOO, this);
-            String list[] = temp.split(",");
-            vooASeguir = new Voo(temp);
-
+            //String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
+            vooASeguir = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
             return true;
         }
 

@@ -70,7 +70,18 @@ public class MenuActivity extends FragmentActivity {
             }
         });
 
-        //Fragments
+        //Botao Servicos
+        final Button serviceButton = (Button) findViewById(R.id.services_button);
+        serviceButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, ServicesActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("aeroporto", aeroporto);
+                MenuActivity.this.startActivity(intent);
+            }
+        });
+
+		//Fragments
         updateFragments();
 
         ScheduledExecutorService scheduler =
@@ -82,6 +93,7 @@ public class MenuActivity extends FragmentActivity {
                         //Toast.makeText(ctx,"TOSTA",3000).show();
                     }
                 }, 5, 5, TimeUnit.SECONDS);
+				
 
     }
 

@@ -25,6 +25,11 @@
     <string name="title_activity_tab_partidas">TabPartidasActivity</string>
     <string name="title_activity_tab_chegadas">TabChegadasActivity</string>
     <string name="title_activity_voo_info">VooInfoActivity</string>
+    <string name="title_activity_services">ServicesActivity</string>
     <string name="title_activity_footer">FooterActivity</string>
+    <string name="botao_mapa_aeroporto">Mapa Aeroporto</string>
+    <string name="botao_lojas">Lojas</string>
+    <string name="botao_restaurantes">Restaurantes</string>
+    <string name="botao_outros_servicos">Outros Serviços</string>
 
 </resources>

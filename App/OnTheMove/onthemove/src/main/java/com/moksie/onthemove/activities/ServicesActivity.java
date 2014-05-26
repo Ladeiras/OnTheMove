@@ -15,8 +15,6 @@ import com.moksie.onthemove.fragments.FooterFragment;
 
 public class ServicesActivity extends FragmentActivity {
 
-    private boolean movemeFlag = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -24,9 +22,6 @@ public class ServicesActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_servicos);
-
-        if(isPackageInstalled("com.moveme", this))
-            movemeFlag = true;
 
         //Botao Calculo Rota
         final Button othServButton = (Button) findViewById(R.id.services_botao_outrosservicos);

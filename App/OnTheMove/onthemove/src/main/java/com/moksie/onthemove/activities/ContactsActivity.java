@@ -11,17 +11,12 @@ import com.moksie.onthemove.fragments.FooterFragment;
 
 public class ContactsActivity extends FragmentActivity {
 
-    private boolean movemeFlag = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
-
-        if(isPackageInstalled("com.moveme", this))
-            movemeFlag = true;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.moksie.onthemove.activities;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -41,11 +42,11 @@ public class MenuActivity extends FragmentActivity {
 
         setContentView(R.layout.activity_menu);
 
-        //Fragments
-        updateFragments();
-
         Intent intent = getIntent();
         aeroporto = (Aeroporto) intent.getParcelableExtra("aeroporto");
+
+        //Verificar se o voo a seguir pertence ao aeroporto escolhido
+        parseVooFile();
 
         //Botao Voos
         final Button voosButton = (Button) findViewById(R.id.voos_button);
@@ -69,6 +70,9 @@ public class MenuActivity extends FragmentActivity {
             }
         });
 
+        //Fragments
+        updateFragments();
+
         ScheduledExecutorService scheduler =
                 Executors.newSingleThreadScheduledExecutor();
 
@@ -78,6 +82,7 @@ public class MenuActivity extends FragmentActivity {
                         //Toast.makeText(ctx,"TOSTA",3000).show();
                     }
                 }, 5, 5, TimeUnit.SECONDS);
+
     }
 
     @Override
@@ -112,8 +117,9 @@ public class MenuActivity extends FragmentActivity {
         if(FileIO.fileExists(MainActivity.FILE_VOO, this))
         {
             //Ler voo do ficheiro
-            String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
-            Voo tempVoo = new Voo(temp);
+            //String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
+            //Voo tempVoo = new Voo(temp);
+            Voo tempVoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
 
             FooterFragment.setVisibility(true);
             FooterFragment.setVoo(tempVoo);
@@ -139,5 +145,30 @@ public class MenuActivity extends FragmentActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0, 0);
+    }
+
+    public boolean parseVooFile()
+    {
+        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
+        {
+            //Ler voo do ficheiro
+            //String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
+            //Voo voo = new Voo(temp);
+
+            Voo voo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
+
+            if((voo.getPartidaaeroportoid() != aeroporto.getId() && voo.isPartida())||
+                (voo.getChegadaaeroportoid() != aeroporto.getId() && voo.isChegada()))
+            {
+                FileIO.removeFile(MainActivity.FILE_VOO, this);
+                NotificationManager nm =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                nm.cancel(01);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

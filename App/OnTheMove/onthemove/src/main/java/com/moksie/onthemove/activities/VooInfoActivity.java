@@ -97,8 +97,9 @@ public class VooInfoActivity extends FragmentActivity
         if(FileIO.fileExists(MainActivity.FILE_VOO, this))
         {
             //Ler voo do ficheiro
-            String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
-            Voo tempvoo = new Voo(temp);
+            //String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
+            //Voo tempvoo = new Voo(temp);
+            Voo tempvoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
 
             if(tempvoo.getId() == voo.getId())
             {
@@ -136,8 +137,9 @@ public class VooInfoActivity extends FragmentActivity
         if(FileIO.fileExists(MainActivity.FILE_VOO, this))
         {
             //Ler voo do ficheiro
-            String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
-            Voo tempVoo = new Voo(temp);
+            //String temp = FileIO.readFromFile(MainActivity.FILE_VOO, this);
+            //Voo tempVoo = new Voo(temp);
+            Voo tempVoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
 
             FooterFragment.setVisibility(true);
             FooterFragment.setVoo(tempVoo);
@@ -186,7 +188,8 @@ public class VooInfoActivity extends FragmentActivity
             estado = SEGUIR_ATUAL;
             updateSeguir(estado);
             FileIO.removeFile(MainActivity.FILE_VOO, this);
-            FileIO.writeToFile(MainActivity.FILE_VOO, voo.toString(), this);
+            //FileIO.writeToFile(MainActivity.FILE_VOO, voo.toString(), this);
+            FileIO.serializeObject(MainActivity.FILE_VOO, voo.toSerializable(), this);
             Log.w("FLAG", "Escreveu? vooID: "+voo.getId());
 
             //Footer
@@ -212,6 +215,7 @@ public class VooInfoActivity extends FragmentActivity
         notificationManager.cancel(01);
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     private void createNotification()
     {
         Bitmap bm = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_icon_sobre),

@@ -39,7 +39,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity {
 
-    public static String FILE_VOO = "voo.txt";
+    public static String FILE_VOO = "voo";
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     private static final String ID = "Id";

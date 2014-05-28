@@ -137,12 +137,12 @@ public class VoosActivity extends FragmentActivity {
             //Tab Indicators
             View tabPartidasIndicator = LayoutInflater.from(this).inflate(R.layout.onthemovetheme_tab_indicator_holo, mTabHost.getTabWidget(), false);
             TextView titlePartidas = (TextView) tabPartidasIndicator.findViewById(android.R.id.title);
-            titlePartidas.setText("PARTIDAS");
+            titlePartidas.setText("Partidas");
             tabPartidas.setIndicator(tabPartidasIndicator);
 
             View tabChegadasIndicator = LayoutInflater.from(this).inflate(R.layout.onthemovetheme_tab_indicator_holo, mTabHost.getTabWidget(), false);
             TextView titleChegadas = (TextView) tabChegadasIndicator.findViewById(android.R.id.title);
-            titleChegadas.setText("CHEGADAS");
+            titleChegadas.setText("Chegadas");
             tabChegadas.setIndicator(tabChegadasIndicator);
 
             //Tabs Views
@@ -168,9 +168,26 @@ public class VoosActivity extends FragmentActivity {
             mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
                 @Override
                 public void onTabChanged(String s) {
-                    mTabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.tab_active);
-                    mTabHost.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.tab_active);
-                    mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).setBackgroundResource(R.drawable.tab_inactive);
+
+                    TextView title0 = (TextView) mTabHost.getTabWidget().getChildAt(0).findViewById(android.R.id.title);
+                    TextView title1 = (TextView) mTabHost.getTabWidget().getChildAt(1).findViewById(android.R.id.title);
+                    title0.setTextSize(25);
+                    title1.setTextSize(25);
+
+                    if(mTabHost.getCurrentTab() == 0)
+                    {
+                        mTabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.tab_active);
+                        mTabHost.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.tab_inactive);
+                        title0.setTextColor(getResources().getColor(R.color.active_tab_color));
+                        title1.setTextColor(getResources().getColor(R.color.inactive_tab_color));
+                    }
+                    else
+                    {
+                        mTabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.tab_inactive);
+                        mTabHost.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.tab_active);
+                        title0.setTextColor(getResources().getColor(R.color.inactive_tab_color));
+                        title1.setTextColor(getResources().getColor(R.color.active_tab_color));
+                    }
                 }
             });
 

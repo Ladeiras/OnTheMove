@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="onthemovetheme_color">#fe6402</color>
+    <color name="inactive_tab_color">#ff3e3e40</color>
+    <color name="active_tab_color">#ffffffff</color>
 </resources>

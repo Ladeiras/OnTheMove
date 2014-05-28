@@ -46,6 +46,10 @@ public class AeroportoAdapter extends ArrayAdapter<Aeroporto> {
             TextView AeroportoCidade = (TextView) row.findViewById(R.id.item_cidade);
             TextView AeroportoNome = (TextView) row.findViewById(R.id.item_nome);
 
+            AeroportoPais.setTextSize(20);
+            AeroportoCidade.setTextSize(20);
+            AeroportoNome.setTextSize(20);
+
             if (AeroportoPais != null) {
                 AeroportoPais.setText(item.getPais());
             }
@@ -74,6 +78,10 @@ public class AeroportoAdapter extends ArrayAdapter<Aeroporto> {
             TextView AeroportoPais = (TextView) row.findViewById(R.id.item_pais);
             TextView AeroportoCidade = (TextView) row.findViewById(R.id.item_cidade);
             TextView AeroportoNome = (TextView) row.findViewById(R.id.item_nome);
+
+            AeroportoPais.setTextSize(20);
+            AeroportoCidade.setTextSize(20);
+            AeroportoNome.setTextSize(20);
 
             if (AeroportoPais != null) {
                 AeroportoPais.setText(item.getPais());

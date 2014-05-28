@@ -127,30 +127,6 @@ public class VoosActivity extends FragmentActivity {
                 }
             });*/
 
-            partidasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView parent, View view, int i, long l) {
-                    Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    Voo voo = (Voo) partidasList.getAdapter().getItem(i);
-                    Log.w("FLAG", voo.getPartidacidade());
-                    intent.putExtra("voo", voo);
-                    VoosActivity.this.startActivity(intent);
-                }
-            });
-
-            chegadasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView parent, View view, int i, long l) {
-                    Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    Voo voo = (Voo) chegadasList.getAdapter().getItem(i);
-                    Log.w("FLAG", voo.getPartidacidade());
-                    intent.putExtra("voo", voo);
-                    VoosActivity.this.startActivity(intent);
-                }
-            });
-
             mTabHost = (TabHost) findViewById(R.id.tabHost);
             mTabHost.setup();
 
@@ -184,11 +160,49 @@ public class VoosActivity extends FragmentActivity {
                 }
             });
 
+
             mTabHost.addTab(tabPartidas);
             mTabHost.addTab(tabChegadas);
 
+            //Tab colors
+            mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+                @Override
+                public void onTabChanged(String s) {
+                    mTabHost.getTabWidget().getChildAt(0).setBackgroundResource(R.drawable.tab_active);
+                    mTabHost.getTabWidget().getChildAt(1).setBackgroundResource(R.drawable.tab_active);
+                    mTabHost.getTabWidget().getChildAt(mTabHost.getCurrentTab()).setBackgroundResource(R.drawable.tab_inactive);
+                }
+            });
+
+           //Tabs refresh
+            mTabHost.setCurrentTab(1);
             mTabHost.setCurrentTab(0);
+
+            partidasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int i, long l) {
+                    Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Voo voo = (Voo) partidasList.getAdapter().getItem(i);
+                    Log.w("FLAG", voo.getPartidacidade());
+                    intent.putExtra("voo", voo);
+                    VoosActivity.this.startActivity(intent);
+                }
+            });
+
+            chegadasList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int i, long l) {
+                    Intent intent = new Intent(VoosActivity.this, VooInfoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Voo voo = (Voo) chegadasList.getAdapter().getItem(i);
+                    Log.w("FLAG", voo.getPartidacidade());
+                    intent.putExtra("voo", voo);
+                    VoosActivity.this.startActivity(intent);
+                }
+            });
         }
+
 
         updateFragments();
         loadingDialog.hide();

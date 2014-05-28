@@ -22,20 +22,21 @@
         android:layout_weight="10">
 
         <TabHost
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:id="@+id/tabHost">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
                 android:orientation="vertical">
 
                 <TabWidget
                     android:id="@android:id/tabs"
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/vertical_gradient1"></TabWidget>
+                    android:background="@drawable/vertical_gradient1"
+                    android:focusable="false"></TabWidget>
 
 
                 <EditText
@@ -46,8 +47,8 @@
 
                 <FrameLayout
                     android:id="@android:id/tabcontent"
-                    android:layout_height="match_parent"
-                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_width="fill_parent"
                     android:layout_above="@android:id/tabs">
 
                     <LinearLayout
@@ -59,7 +60,9 @@
                         <ListView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/listView_partidas" />
+                            android:id="@+id/listView_partidas"
+                            android:divider="@color/onthemovetheme_color"
+                            android:dividerHeight="1dp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -71,7 +74,9 @@
                         <ListView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/listView_chegadas" />
+                            android:id="@+id/listView_chegadas"
+                            android:divider="@color/onthemovetheme_color"
+                            android:dividerHeight="1dp"/>
                     </LinearLayout>
                 </FrameLayout>
             </LinearLayout>

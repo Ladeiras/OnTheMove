@@ -100,7 +100,7 @@
                     android:layout_weight="2"
                     android:gravity="right"
                     android:id="@+id/imageView"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/ic_icon_notifi_terminal" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -126,7 +126,7 @@
                     android:layout_weight="2"
                     android:gravity="right"
                     android:id="@+id/imageView"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/ic_icon_notifi_check_in" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -156,7 +156,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:id="@+id/imageView"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_icon_notifi_embarque" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -182,7 +182,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:id="@+id/imageView3"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_icon_notifi_time" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -213,7 +213,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:id="@+id/imageView"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_icon_notifi_bagagem" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -239,7 +239,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:id="@+id/imageView3"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_icon_notifi_time" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -270,7 +270,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:id="@+id/imageView"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_icon_notifi_desembarque" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -296,7 +296,7 @@
                         android:layout_weight="2"
                         android:gravity="right"
                         android:id="@+id/imageView3"
-                        android:src="@drawable/ic_launcher" />
+                        android:src="@drawable/ic_icon_notifi_time" />
 
                     <TextView
                         android:layout_width="0dp"

@@ -13,7 +13,7 @@
         android:text="New Button"
         android:id="@+id/seguir_button"
         android:background="@drawable/vertical_gradient1"
-        android:drawableLeft="@drawable/onthemovetheme_rate_star_big_off_holo_light"
+        android:drawableLeft="@drawable/ic_icon_seguirvoo_inativo"
         android:drawablePadding="20dp"
         android:paddingLeft="50dp"
         android:typeface="normal"

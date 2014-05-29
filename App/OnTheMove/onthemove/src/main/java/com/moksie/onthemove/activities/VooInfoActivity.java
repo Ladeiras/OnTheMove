@@ -24,6 +24,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
@@ -37,6 +38,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -66,6 +68,24 @@ public class VooInfoActivity extends FragmentActivity
 
         parseVooFile();
         updateFragments(estado);
+
+        TextView CodigoVoo = (TextView) this.findViewById(R.id.top_codigo_voo_textView);
+        CodigoVoo.setText(String.valueOf(voo.getCodigovoo()));
+
+        TextView OrigemDestino = (TextView) this.findViewById(R.id.top_origem_destino_textView);
+        OrigemDestino.setText(voo.getPartidacidade()+" - "+voo.getChegadacidade());
+
+        TextView Companhia = (TextView) this.findViewById(R.id.top_companhia_textView);
+        Companhia.setText(voo.getCodigocompanhia());
+
+        TextView TempoEstimado = (TextView) this.findViewById(R.id.top_tempo_estimado_textView);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        sdf.applyPattern("HH:mm");
+
+        if(voo.isPartida())
+            TempoEstimado.setText(sdf.format(voo.getPartidatempoestimado()));
+        else
+            TempoEstimado.setText(sdf.format(voo.getChegadatempoestimado()));
     }
 
     @Override

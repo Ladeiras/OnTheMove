@@ -19,9 +19,12 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.objects.Voo;
+import com.moksie.onthemove.utilities.FileIO;
 
 public class MoveMeActivity extends FragmentActivity {
 
@@ -64,24 +67,26 @@ public class MoveMeActivity extends FragmentActivity {
             }
         });
 
+        updateFragments();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        updateFooter();
+        updateFragments();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        updateFooter();
+        updateFragments();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        updateFooter();
+        updateFragments();
     }
 
     @Override
@@ -90,10 +95,30 @@ public class MoveMeActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    public void updateFragments()
+    {
+        updateFooter();
+    }
+
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.move_me_footer);
+
+        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
+        {
+            //Ler voo do ficheiro
+            Voo tempVoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
+
+            FooterFragment.setVisibility(true);
+            FooterFragment.setVoo(tempVoo);
+            FooterFragment.updateVoo(this);
+            FooterFragment.setVisibility(true);
+        }
+        else
+        {
+            FooterFragment.setVisibility(false);
+        }
 
         footer.updateVisibility();
     }

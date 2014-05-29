@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="28374"
-            android:id="@+id/textView3"
+            android:id="@+id/top_codigo_voo_textView"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
             android:textColor="@color/onthemovetheme_color" />
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Porto - Lisboa"
-            android:id="@+id/textView"
+            android:id="@+id/top_origem_destino_textView"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
             android:textColor="@color/onthemovetheme_color"/>
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TAP"
-            android:id="@+id/textView2"
+            android:id="@+id/top_companhia_textView"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
             android:textColor="@color/onthemovetheme_color"/>
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="17:45"
-            android:id="@+id/textView2"
+            android:id="@+id/top_tempo_estimado_textView"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
             android:textColor="@color/onthemovetheme_color"/>

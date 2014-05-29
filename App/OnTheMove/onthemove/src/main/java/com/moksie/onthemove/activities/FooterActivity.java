@@ -28,7 +28,7 @@ public class FooterActivity extends FragmentActivity {
 
         TextView TempoEstimado = (TextView) this.findViewById(R.id.tempo_estimado_textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        sdf.applyPattern("dd/MM hh:mm");
+        sdf.applyPattern("dd/MM HH:mm");
 
         if(FooterFragment.voo.isPartida())
             TempoEstimado.setText(sdf.format(FooterFragment.voo.getPartidatempoestimado()));

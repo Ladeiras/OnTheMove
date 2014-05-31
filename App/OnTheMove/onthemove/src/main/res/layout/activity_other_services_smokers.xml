@@ -34,7 +34,7 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="9"
         android:id="@+id/scrollView">
 
         <LinearLayout
@@ -59,14 +59,48 @@
                     android:paddingLeft="20dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
-                    android:id="@+id/medtext" />
+                    android:id="@+id/text1" />
 
                 <ImageButton
                     android:layout_width="0dp"
                     android:paddingRight="20dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/map_button"
+                    android:id="@+id/map_button1"
+                    android:typeface="normal"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:adjustViewBounds="false"
+                    android:src="@drawable/ic_icon_mapa_inative" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="7"
+                android:background="@drawable/vertical_gradient3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingLeft="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/text2" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:paddingRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/map_button2"
                     android:typeface="normal"
                     android:background="@android:color/transparent"
                     android:focusable="false"
@@ -94,14 +128,14 @@
                     android:paddingLeft="20dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:text="Medium Text"
-                    android:id="@+id/textView" />
+                    android:id="@+id/text3" />
 
                 <ImageButton
                     android:layout_width="0dp"
                     android:paddingRight="20dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/map_button"
+                    android:id="@+id/map_button3"
                     android:typeface="normal"
                     android:background="@android:color/transparent"
                     android:focusable="false"
@@ -109,49 +143,16 @@
                     android:gravity="center"
                     android:adjustViewBounds="false"
                     android:src="@drawable/ic_icon_mapa_inative" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:weightSum="7"
-                android:background="@drawable/vertical_gradient3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
-
-                <ImageButton
-                    android:layout_width="0dp"
-                    android:paddingRight="20dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/map_button"
-                    android:typeface="normal"
-                    android:background="@android:color/transparent"
-                    android:focusable="false"
-                    android:enabled="false"
-                    android:gravity="center"
-                    android:adjustViewBounds="false"
-                    android:src="@drawable/ic_icon_mapa_inative" />
-
             </LinearLayout>
         </LinearLayout>
-
-
-
-
-
     </ScrollView>
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.FooterFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_footer"
+        android:id="@+id/other_services_smokers_footer"/>
 
 </LinearLayout>

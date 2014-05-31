@@ -1,16 +1,13 @@
 package com.moksie.onthemove.activities;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.objects.Voo;
+import com.moksie.onthemove.utilities.FileIO;
 
 public class SmokersAreaActivity extends FragmentActivity {
 
@@ -21,21 +18,26 @@ public class SmokersAreaActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_other_services_smokers);
+
+        updateFragments();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        updateFragments();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        updateFragments();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        updateFragments();
     }
 
     @Override
@@ -44,13 +46,31 @@ public class SmokersAreaActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
-    private boolean isPackageInstalled(String packagename, Context context) {
-        PackageManager pm = context.getPackageManager();
-        try {
-            pm.getPackageInfo(packagename, PackageManager.GET_ACTIVITIES);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
+    public void updateFragments()
+    {
+        updateFooter();
+    }
+
+    public void updateFooter()
+    {
+        FooterFragment footer = (FooterFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.other_services_smokers_footer);
+
+        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
+        {
+            //Ler voo do ficheiro
+            Voo tempVoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
+
+            FooterFragment.setVisibility(true);
+            FooterFragment.setVoo(tempVoo);
+            FooterFragment.updateVoo(this);
+            FooterFragment.setVisibility(true);
         }
+        else
+        {
+            FooterFragment.setVisibility(false);
+        }
+
+        footer.updateVisibility();
     }
 }

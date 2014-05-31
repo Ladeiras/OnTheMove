@@ -21,6 +21,11 @@ public class VooSerializable implements Serializable
     private Date chegadatemporeal;
     private boolean tipovoo;
 
+    private boolean airport = false;
+    private boolean checkin = false;
+    private boolean security = false;
+    private boolean boarding = false;
+
     public VooSerializable(long id, long codigovoo, String codigocompanhia, String partidacidade,
                            String chegadacidade, long partidaaeroportoid, long chegadaaeroportoid,
                            Date partidatempoestimado, Date chegadatempoestimado,
@@ -45,5 +50,37 @@ public class VooSerializable implements Serializable
                 this.partidacidade, this.chegadacidade, this.partidaaeroportoid,
                 this.chegadaaeroportoid, this.partidatempoestimado, this.chegadatempoestimado,
                 this.partidatemporeal, this.chegadatemporeal, this.tipovoo);
+    }
+
+    public void setAirport(boolean airport) {
+        this.airport = airport;
+    }
+
+    public void setCheckin(boolean checkin) {
+        this.checkin = checkin;
+    }
+
+    public void setSecurity(boolean security) {
+        this.security = security;
+    }
+
+    public void setBoarding(boolean boarding) {
+        this.boarding = boarding;
+    }
+
+    public boolean isAirport() {
+        return airport;
+    }
+
+    public boolean isCheckin() {
+        return checkin;
+    }
+
+    public boolean isSecurity() {
+        return security;
+    }
+
+    public boolean isBoarding() {
+        return boarding;
     }
 }

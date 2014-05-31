@@ -150,14 +150,14 @@ public class MenuActivity extends FragmentActivity {
             FooterFragment.setVisibility(true);
 
             layout.setLayoutParams(
-                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,8f)
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,10f)
             );
         }
         else
         {
             FooterFragment.setVisibility(false);
             layout.setLayoutParams(
-                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,11f)
             );
         }
 

@@ -28,12 +28,13 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:background="@drawable/vertical_gradient1">
+            android:background="@drawable/title_header">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/header_text_color"
                 android:text="@string/calculo_de_rota"
                 android:id="@+id/textView" />
         </LinearLayout>
@@ -43,7 +44,7 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:text="@string/transportes_coletivos"
-            android:id="@+id/moveme_button2"
+            android:id="@+id/moveme_button"
             android:drawableLeft="@drawable/ic_icon_sobre"
             android:drawablePadding="20dp"
             android:typeface="normal"

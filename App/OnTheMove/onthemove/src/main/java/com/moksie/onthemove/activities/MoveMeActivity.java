@@ -19,9 +19,12 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.objects.Voo;
+import com.moksie.onthemove.utilities.FileIO;
 
 public class MoveMeActivity extends FragmentActivity {
 
@@ -37,8 +40,8 @@ public class MoveMeActivity extends FragmentActivity {
         if(isPackageInstalled("com.moveme", this))
             movemeFlag = true;
 
-        final Button button = (Button) findViewById(R.id.moveme_button2);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button moveMeButton = (Button) findViewById(R.id.moveme_button);
+        moveMeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!movemeFlag)
                 {
@@ -64,24 +67,37 @@ public class MoveMeActivity extends FragmentActivity {
             }
         });
 
+        final Button taxisButton = (Button) findViewById(R.id.taxis_button);
+        taxisButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MoveMeActivity.this, TaxisActivity.class);
+                //TODO mandar aeroporto pra actividade
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                //intent.putExtra("aeroporto", aeroporto);
+                MoveMeActivity.this.startActivity(intent);
+            }
+        });
+
+        updateFragments();
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        updateFooter();
+        updateFragments();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        updateFooter();
+        updateFragments();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        updateFooter();
+        updateFragments();
     }
 
     @Override
@@ -90,10 +106,30 @@ public class MoveMeActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    public void updateFragments()
+    {
+        updateFooter();
+    }
+
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.move_me_footer);
+
+        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
+        {
+            //Ler voo do ficheiro
+            Voo tempVoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
+
+            FooterFragment.setVisibility(true);
+            FooterFragment.setVoo(tempVoo);
+            FooterFragment.updateVoo(this);
+            FooterFragment.setVisibility(true);
+        }
+        else
+        {
+            FooterFragment.setVisibility(false);
+        }
 
         footer.updateVisibility();
     }

@@ -21,7 +21,6 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="2"
-            android:id="@+id/help_button"
             android:typeface="normal"
             android:background="@android:color/transparent"
             android:focusable="false"

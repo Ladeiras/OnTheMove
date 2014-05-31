@@ -1,0 +1,70 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="12">
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.HeaderFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_header"
+        android:id="@+id/move_me_header" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:weightSum="10">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="@drawable/title_header">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Large"
+                android:textColor="@color/header_text_color"
+                android:text="@string/mapa"
+                android:id="@+id/textView" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:gesture-image="http://schemas.polites.com/android"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9">
+
+            <com.polites.android.GestureImageView
+                android:id="@+id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/map1"
+                android:scaleType="center"
+                gesture-image:min-scale="0.1"
+                gesture-image:max-scale="10.0"
+                gesture-image:strict="false"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.FooterFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_footer"
+        android:id="@+id/move_me_footer"/>
+
+</LinearLayout>

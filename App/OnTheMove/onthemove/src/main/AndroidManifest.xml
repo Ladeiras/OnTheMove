@@ -29,6 +29,14 @@
             android:label="@string/title_activity_move_me" >
         </activity>
         <activity
+            android:name="com.moksie.onthemove.activities.TaxisActivity"
+            android:label="@string/title_activity_taxis" >
+        </activity>
+        <activity
+            android:name="com.moksie.onthemove.activities.MapActivity"
+            android:label="@string/title_activity_map" >
+        </activity>
+        <activity
             android:name="com.moksie.onthemove.activities.VoosActivity"
             android:label="@string/title_activity_voos" >
         </activity>

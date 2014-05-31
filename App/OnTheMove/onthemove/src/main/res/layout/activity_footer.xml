@@ -21,20 +21,20 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:background="@drawable/vertical_gradient1">
+        android:background="@drawable/title_header">
 
         <ImageButton
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:id="@+id/help_button"
+            android:id="@+id/drawer_button"
             android:typeface="normal"
             android:background="@android:color/transparent"
             android:focusable="false"
             android:enabled="false"
             android:gravity="center"
             android:adjustViewBounds="false"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_onthemovetheme_ic_navigation_drawer" />
 
         <TextView
             android:layout_width="0dp"
@@ -74,157 +74,122 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent"
+            android:weightSum="10">
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:weightSum="7"
+                android:paddingStart="10dp"
                 android:background="@drawable/vertical_gradient3">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
-
                 <CheckBox
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:onClick="onCheckboxClicked"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Estou no Aeroporto"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="20dp"
                     android:layout_weight="1"
-                    android:id="@+id/checkBox" />
+                    android:id="@+id/airport_checkBox" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:weightSum="7"
+                android:paddingStart="10dp"
                 android:background="@drawable/vertical_gradient3">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
-
                 <CheckBox
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:onClick="onCheckboxClicked"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Fiz o Check-In"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="20dp"
                     android:layout_weight="1"
-                    android:id="@+id/checkBox" />
+                    android:id="@+id/checkin_checkBox" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:weightSum="7"
+                android:paddingStart="10dp"
                 android:background="@drawable/vertical_gradient3">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
-
                 <CheckBox
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:onClick="onCheckboxClicked"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Passei a Segurança"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="20dp"
                     android:layout_weight="1"
-                    android:id="@+id/checkBox" />
+                    android:id="@+id/security_checkBox" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
-                android:weightSum="7"
+                android:paddingStart="10dp"
                 android:background="@drawable/vertical_gradient3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="6"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
 
                 <CheckBox
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:onClick="onCheckboxClicked"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Entrei no Embarque"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:textSize="20dp"
                     android:layout_weight="1"
-                    android:id="@+id/checkBox" />
+                    android:id="@+id/boarding_checkBox" />
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <Button
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:weightSum="7"
-                android:background="@drawable/vertical_gradient3">
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:textSize="20dp"
+                android:background="@drawable/button_selector"
+                android:text="Consultar Voo Seguido"
+                android:id="@+id/voo_seguido_button" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
+            <Button
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:weightSum="7"
-                android:background="@drawable/vertical_gradient3">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="7"
-                    android:paddingLeft="20dp"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
-                    android:id="@+id/textView" />
-
-            </LinearLayout>
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:textSize="20dp"
+                android:background="@drawable/button_selector"
+                android:text="Consultar Promoções das Lojas"
+                android:id="@+id/promotions_button" />
 
         </LinearLayout>
 

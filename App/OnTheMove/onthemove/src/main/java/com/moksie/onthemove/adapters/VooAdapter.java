@@ -57,7 +57,7 @@ public class VooAdapter extends ArrayAdapter<Voo> {
 
             if (TempoEstimado != null) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                sdf.applyPattern("dd/MM hh:mm");
+                sdf.applyPattern("dd/MM HH:mm");
                 TempoEstimado.setText(sdf.format(item.getPartidatempoestimado()));
             }
         }

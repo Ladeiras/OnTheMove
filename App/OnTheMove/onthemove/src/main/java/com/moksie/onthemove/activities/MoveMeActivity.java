@@ -40,8 +40,8 @@ public class MoveMeActivity extends FragmentActivity {
         if(isPackageInstalled("com.moveme", this))
             movemeFlag = true;
 
-        final Button button = (Button) findViewById(R.id.moveme_button2);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button moveMeButton = (Button) findViewById(R.id.moveme_button);
+        moveMeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!movemeFlag)
                 {
@@ -64,6 +64,17 @@ public class MoveMeActivity extends FragmentActivity {
                     }
                 }
 
+            }
+        });
+
+        final Button taxisButton = (Button) findViewById(R.id.taxis_button);
+        taxisButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MoveMeActivity.this, TaxisActivity.class);
+                //TODO mandar aeroporto pra actividade
+                //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                //intent.putExtra("aeroporto", aeroporto);
+                MoveMeActivity.this.startActivity(intent);
             }
         });
 

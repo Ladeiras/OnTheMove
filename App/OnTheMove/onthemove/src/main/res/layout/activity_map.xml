@@ -35,34 +35,28 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Large"
                 android:textColor="@color/header_text_color"
-                android:text="@string/calculo_de_rota"
+                android:text="@string/mapa"
                 android:id="@+id/textView" />
         </LinearLayout>
 
-        <Button
+
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:gesture-image="http://schemas.polites.com/android"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="@string/transportes_coletivos"
-            android:id="@+id/moveme_button"
-            android:drawableLeft="@drawable/ic_icon_sobre"
-            android:drawablePadding="20dp"
-            android:typeface="normal"
-            android:gravity="center|left"
-            android:textAppearance="@android:style/TextAppearance.Large" />
+            android:layout_weight="9">
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="@string/taxis"
-            android:id="@+id/taxis_button"
-            android:drawableLeft="@drawable/ic_icon_taxis"
-            android:drawablePadding="20dp"
-            android:typeface="normal"
-            android:gravity="center|left"
-            android:textAppearance="@android:style/TextAppearance.Large" />
-
+            <com.polites.android.GestureImageView
+                android:id="@+id/image"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/map1"
+                android:scaleType="center"
+                gesture-image:min-scale="0.1"
+                gesture-image:max-scale="10.0"
+                gesture-image:strict="false"/>
+        </LinearLayout>
     </LinearLayout>
 
     <fragment

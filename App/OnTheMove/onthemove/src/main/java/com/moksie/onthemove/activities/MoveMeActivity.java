@@ -71,6 +71,7 @@ public class MoveMeActivity extends FragmentActivity {
         taxisButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MoveMeActivity.this, TaxisActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 //TODO mandar aeroporto pra actividade
                 //intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 //intent.putExtra("aeroporto", aeroporto);

@@ -52,6 +52,10 @@
             android:name="com.moksie.onthemove.activities.FooterActivity"
             android:label="@string/title_activity_footer" >
         </activity>
+        <activity
+            android:name="com.moksie.onthemove.activities.SmokersAreaActivity"
+            android:label="@string/title_activity_smokers_area" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

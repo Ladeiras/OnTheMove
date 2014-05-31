@@ -29,6 +29,7 @@
     <string name="title_activity_services">ServicesActivity</string>
     <string name="title_activity_footer">FooterActivity</string>
     <string name="title_activity_other_services">OtherServicesActivity</string>
+    <string name="title_activity_smokers_area">SmokersAreaActivity</string>
     <string name="botao_mapa_aeroporto">Mapa Aeroporto</string>
     <string name="botao_lojas">Lojas</string>
     <string name="botao_restaurantes">Restaurantes</string>

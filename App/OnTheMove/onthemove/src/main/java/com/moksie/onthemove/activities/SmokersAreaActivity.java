@@ -3,7 +3,6 @@ package com.moksie.onthemove.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -13,7 +12,7 @@ import android.widget.Button;
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
 
-public class ServicesActivity extends FragmentActivity {
+public class SmokersAreaActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -21,51 +20,28 @@ public class ServicesActivity extends FragmentActivity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_servicos);
-
-        //Botao outros serviços
-        final Button othServButton = (Button) findViewById(R.id.services_botao_outrosservicos);
-        othServButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ServicesActivity.this, OtherServicesActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                //intent.putExtra("aeroporto", aeroporto);
-                ServicesActivity.this.startActivity(intent);
-            }
-        });
-
+        setContentView(R.layout.activity_other_services_smokers);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        updateFooter();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        updateFooter();
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        updateFooter();
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0, 0);
-    }
-
-    public void updateFooter()
-    {
-        FooterFragment footer = (FooterFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.move_me_footer);
-
-        footer.updateVisibility();
     }
 
     private boolean isPackageInstalled(String packagename, Context context) {

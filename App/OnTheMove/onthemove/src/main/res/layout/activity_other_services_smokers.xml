@@ -1,0 +1,157 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="12">
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.HeaderFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_header"
+        android:id="@+id/move_me_header" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/vertical_gradient1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:text="@string/botao_zona_fumadores"
+            android:id="@+id/zona_fumadores" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="7"
+                android:background="@drawable/vertical_gradient3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingLeft="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/medtext" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:paddingRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/map_button"
+                    android:typeface="normal"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:adjustViewBounds="false"
+                    android:src="@drawable/ic_icon_mapa_inative" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="7"
+                android:background="@drawable/vertical_gradient3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingLeft="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/textView" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:paddingRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/map_button"
+                    android:typeface="normal"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:adjustViewBounds="false"
+                    android:src="@drawable/ic_icon_mapa_inative" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:weightSum="7"
+                android:background="@drawable/vertical_gradient3">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:paddingLeft="20dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/textView" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:paddingRight="20dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/map_button"
+                    android:typeface="normal"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:adjustViewBounds="false"
+                    android:src="@drawable/ic_icon_mapa_inative" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
+
+</LinearLayout>

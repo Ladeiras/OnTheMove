@@ -58,7 +58,7 @@
                     android:layout_weight="6"
                     android:paddingLeft="20dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
+                    android:text="Edificio 1, Piso 2"
                     android:id="@+id/text1" />
 
                 <ImageButton
@@ -92,7 +92,7 @@
                     android:layout_weight="6"
                     android:paddingLeft="20dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
+                    android:text="Edificio 2, Piso 1"
                     android:id="@+id/text2" />
 
                 <ImageButton
@@ -127,7 +127,7 @@
                     android:layout_weight="6"
                     android:paddingLeft="20dp"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Medium Text"
+                    android:text="Edificio 1, Piso 0"
                     android:id="@+id/text3" />
 
                 <ImageButton

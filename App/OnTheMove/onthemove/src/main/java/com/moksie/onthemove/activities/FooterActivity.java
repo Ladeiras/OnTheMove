@@ -1,29 +1,26 @@
 package com.moksie.onthemove.activities;
 
-import android.app.NotificationManager;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
-import com.moksie.onthemove.objects.Voo;
-import com.moksie.onthemove.objects.VooSerializable;
+import com.moksie.onthemove.objects.FlightSerializable;
 import com.moksie.onthemove.utilities.FileIO;
 
 import java.text.SimpleDateFormat;
 
 public class FooterActivity extends FragmentActivity {
 
-    private VooSerializable voo;
+    private FlightSerializable voo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,37 +34,54 @@ public class FooterActivity extends FragmentActivity {
         parseVooFile();
 
         TextView CodigoVoo = (TextView) this.findViewById(R.id.codigo_voo_textView);
-        CodigoVoo.setText(String.valueOf(FooterFragment.voo.getCodigovoo()));
+        CodigoVoo.setText(String.valueOf(FooterFragment.flight.getCodigovoo()));
 
         TextView OrigemDestino = (TextView) this.findViewById(R.id.origem_destino_textView);
-        OrigemDestino.setText(FooterFragment.voo.getPartidacidade()+" - "+FooterFragment.voo.getChegadacidade());
+        OrigemDestino.setText(FooterFragment.flight.getPartidacidade()+" - "+FooterFragment.flight.getChegadacidade());
 
         TextView TempoEstimado = (TextView) this.findViewById(R.id.tempo_estimado_textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.applyPattern("dd/MM HH:mm");
 
-        if(FooterFragment.voo.isPartida())
-            TempoEstimado.setText(sdf.format(FooterFragment.voo.getPartidatempoestimado()));
+        if(FooterFragment.flight.isPartida())
+            TempoEstimado.setText(sdf.format(FooterFragment.flight.getPartidatempoestimado()));
         else
-            TempoEstimado.setText(sdf.format(FooterFragment.voo.getChegadatempoestimado()));
+            TempoEstimado.setText(sdf.format(FooterFragment.flight.getChegadatempoestimado()));
 
-        CheckBox airportCB = (CheckBox) findViewById(R.id.airport_checkBox);
-        if(voo.isCheckin() && !airportCB.isChecked()) {airportCB.toggle();}
 
-        CheckBox checkinCB = (CheckBox) findViewById(R.id.checkin_checkBox);
-        if(voo.isCheckin() && !checkinCB.isChecked()) {checkinCB.toggle();}
+        LinearLayout cbLL = (LinearLayout) this.findViewById(R.id.checkboxesLinearLayout);
+        if(FooterFragment.flight.isChegada()) {
+            cbLL.setVisibility(View.GONE);
+        }
+        else {
+            cbLL.setVisibility(View.VISIBLE);
 
-        CheckBox securityCB = (CheckBox) findViewById(R.id.security_checkBox);
-        if(voo.isSecurity() && !securityCB.isChecked()) {securityCB.toggle();}
+            CheckBox airportCB = (CheckBox) findViewById(R.id.airport_checkBox);
+            if (voo.isCheckin() && !airportCB.isChecked()) {
+                airportCB.toggle();
+            }
 
-        CheckBox boardingCB = (CheckBox) findViewById(R.id.boarding_checkBox);
-        if(voo.isBoarding() && !boardingCB.isChecked()) {boardingCB.toggle();}
+            CheckBox checkinCB = (CheckBox) findViewById(R.id.checkin_checkBox);
+            if (voo.isCheckin() && !checkinCB.isChecked()) {
+                checkinCB.toggle();
+            }
+
+            CheckBox securityCB = (CheckBox) findViewById(R.id.security_checkBox);
+            if (voo.isSecurity() && !securityCB.isChecked()) {
+                securityCB.toggle();
+            }
+
+            CheckBox boardingCB = (CheckBox) findViewById(R.id.boarding_checkBox);
+            if (voo.isBoarding() && !boardingCB.isChecked()) {
+                boardingCB.toggle();
+            }
+        }
 
         //Botao Ver Info Voo
         final Button vooButton = (Button) findViewById(R.id.voo_seguido_button);
         vooButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(FooterActivity.this, VooInfoActivity.class);
+                Intent intent = new Intent(FooterActivity.this, FlightInfoActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.putExtra("voo",voo.toParcelable());
                 FooterActivity.this.startActivity(intent);
@@ -156,16 +170,16 @@ public class FooterActivity extends FragmentActivity {
                 break;
         }
 
-        FileIO.removeFile(MainActivity.FILE_VOO, this);
-        FileIO.serializeObject(MainActivity.FILE_VOO, voo, this);
+        FileIO.removeFile(MainActivity.FILE_FLIGHT, this);
+        FileIO.serializeObject(MainActivity.FILE_FLIGHT, voo, this);
     }
 
     public boolean parseVooFile()
     {
-        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
+        if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this))
         {
             //Ler voo do ficheiro
-            this.voo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this);
+            this.voo = FileIO.deserializeVooObject(MainActivity.FILE_FLIGHT, this);
             return true;
         }
 

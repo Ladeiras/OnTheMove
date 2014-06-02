@@ -1,16 +1,12 @@
 package com.moksie.onthemove.activities;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,10 +16,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.moksie.onthemove.R;
-import com.moksie.onthemove.adapters.AeroportoAdapter;
+import com.moksie.onthemove.adapters.AirportAdapter;
 import com.moksie.onthemove.listners.MyLocationListener;
-import com.moksie.onthemove.objects.Aeroporto;
-import com.moksie.onthemove.tasks.BackGroundTask2;
+import com.moksie.onthemove.objects.Airport;
+import com.moksie.onthemove.tasks.BGTGetJSONArray;
 import com.moksie.onthemove.utilities.DistanceComparator;
 
 import org.apache.http.NameValuePair;
@@ -39,7 +35,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity {
 
-    public static String FILE_VOO = "voo";
+    public static String FILE_FLIGHT = "flight";
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
     private static final String ID = "Id";
@@ -49,10 +45,10 @@ public class MainActivity extends Activity {
     private static final String LATITUDE = "Latitude";
     private static final String LONGITUDE = "Longitude";
     private static final String AEROPORTO_API_URL = "http://onthemove.no-ip.org:3000/api/aeroportos";
-    private BackGroundTask2 bgt;
+    private BGTGetJSONArray bgt;
 
     Spinner aeroportoSpinner;
-    ArrayList<Aeroporto> aeroportos = new ArrayList<Aeroporto>();
+    ArrayList<Airport> airports = new ArrayList<Airport>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +70,14 @@ public class MainActivity extends Activity {
         super.onStart();
 
         //Construir lista de aeroportos + botao "OK"
-        if(aeroportos.isEmpty())
+        if(airports.isEmpty())
             buildAeroportoDropDown();
 
         final Button button = (Button) findViewById(R.id.okbutton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-                intent.putExtra("aeroporto", (Parcelable)aeroportos.get(aeroportoSpinner.getSelectedItemPosition()));
+                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
+                intent.putExtra("aeroporto", (Parcelable) airports.get(aeroportoSpinner.getSelectedItemPosition()));
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -110,7 +106,7 @@ public class MainActivity extends Activity {
     public void buildAeroportoDropDown()
     {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
-        bgt = new BackGroundTask2(AEROPORTO_API_URL, "GET", apiParams);
+        bgt = new BGTGetJSONArray(AEROPORTO_API_URL, "GET", apiParams);
 
         try {
             JSONArray apJSON = bgt.execute().get();
@@ -126,11 +122,11 @@ public class MainActivity extends Activity {
                 double latitude = a.getDouble(LATITUDE);
                 double longitude = a.getDouble(LONGITUDE);
 
-                aeroportos.add(new Aeroporto(id,pais,cidade,nome,latitude,longitude));
+                airports.add(new Airport(id,pais,cidade,nome,latitude,longitude));
 
-                sortData(aeroportos);
+                sortData(airports);
 
-                AeroportoAdapter aAdapter = new AeroportoAdapter(this, android.R.layout.simple_spinner_item, aeroportos);
+                AirportAdapter aAdapter = new AirportAdapter(this, android.R.layout.simple_spinner_item, airports);
                 aeroportoSpinner = (Spinner) findViewById(R.id.aeroportos);
 
                 aeroportoSpinner.setAdapter(aAdapter);
@@ -160,7 +156,7 @@ public class MainActivity extends Activity {
 
     }
 
-    public ArrayList<Aeroporto> sortData(ArrayList<Aeroporto> data)
+    public ArrayList<Airport> sortData(ArrayList<Airport> data)
     {
         LocationManager mlocManager=null;
         LocationListener mlocListener;

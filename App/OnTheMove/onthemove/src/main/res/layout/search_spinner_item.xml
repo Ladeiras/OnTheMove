@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="10"
-    android:background="@drawable/vertical_gradient3">
+    android:background="@drawable/vertical_gradient_grey">
 
 
     <ImageView

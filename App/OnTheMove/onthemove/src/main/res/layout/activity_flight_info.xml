@@ -1,0 +1,322 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="12">
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.HeaderFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_header"
+        android:id="@+id/move_me_header" />
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="#f0f1f1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="28374"
+            android:id="@+id/top_codigo_voo_textView"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
+            android:textColor="@color/onthemovetheme_color" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Porto - Lisboa"
+            android:id="@+id/top_origem_destino_textView"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
+            android:textColor="@color/onthemovetheme_color"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TAP"
+            android:id="@+id/top_companhia_textView"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
+            android:textColor="@color/onthemovetheme_color"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="17:45"
+            android:id="@+id/top_tempo_estimado_textView"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
+            android:textColor="@color/onthemovetheme_color"/>
+
+    </LinearLayout>
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.FollowFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/voo_info_seguir"
+        tools:layout="@layout/fragment_seguir" />
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:id="@+id/voo_info_resizable"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingTop="30dp"
+                android:paddingBottom="20dp"
+                android:weightSum="7">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:id="@+id/imageView"
+                    android:src="@drawable/ic_icon_notifi_terminal" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Terminal - 1"
+                    android:id="@+id/textView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:paddingBottom="20dp"
+                android:weightSum="7">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:id="@+id/imageView"
+                    android:src="@drawable/ic_icon_notifi_check_in" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Check-In - 14:00 às 16:30"
+                    android:id="@+id/textView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingBottom="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="7"
+                    android:paddingBottom="5dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:id="@+id/imageView"
+                        android:src="@drawable/ic_icon_notifi_embarque" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Embarque - 13"
+                        android:id="@+id/textView" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="7"
+                    android:id="@+id/linearLayout">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:id="@+id/imageView3"
+                        android:src="@drawable/ic_icon_notifi_time" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Hora Prevista: 16:15"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingBottom="20dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="7"
+                    android:paddingBottom="5dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:id="@+id/imageView"
+                        android:src="@drawable/ic_icon_notifi_bagagem" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Bagagem - Tapete 10"
+                        android:id="@+id/textView" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="7"
+                    android:id="@+id/linearLayout">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:id="@+id/imageView3"
+                        android:src="@drawable/ic_icon_notifi_time" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Hora Prevista: 17:40"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingBottom="30dp">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="7"
+                    android:paddingBottom="5dp">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:id="@+id/imageView"
+                        android:src="@drawable/ic_icon_notifi_desembarque" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Desembarque - 08"
+                        android:id="@+id/textView" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:weightSum="7"
+                    android:id="@+id/linearLayout">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="2"
+                        android:gravity="right"
+                        android:id="@+id/imageView3"
+                        android:src="@drawable/ic_icon_notifi_time" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Hora Previta: 17:30"
+                        android:id="@+id/textView2" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.FooterFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_footer"
+        android:id="@+id/voo_info_footer"/>
+
+</LinearLayout>

@@ -44,5 +44,7 @@
     <string name="botao_parking">Parking</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="mapa">Mapa</string>
+    <string name="title_activity_service">ServiceActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
 
 </resources>

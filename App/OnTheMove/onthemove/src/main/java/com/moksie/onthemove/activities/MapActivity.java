@@ -1,22 +1,34 @@
 package com.moksie.onthemove.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.PackageManager;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
+import android.util.Log;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
-import com.moksie.onthemove.objects.Voo;
+import com.moksie.onthemove.objects.Airport;
+import com.moksie.onthemove.objects.Flight;
+import com.moksie.onthemove.tasks.BGTGetImage;
+import com.moksie.onthemove.tasks.BGTGetJSONArray;
 import com.moksie.onthemove.utilities.FileIO;
+
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
 
 public class MapActivity extends FragmentActivity {
 
     private boolean mapClick = false;
+    private Bitmap image;
+    private ProgressDialog pd;
 
     @Override
     public Context getApplicationContext() {
@@ -30,10 +42,20 @@ public class MapActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
+        pd = new ProgressDialog(this);
+        pd.setMessage("A carregar a Imagem");
 
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("title");
+        String url = intent.getStringExtra("url");
+
+        TextView tv = (TextView) findViewById(R.id.title_textView);
+        tv.setText(title);
+
+        ImageView iv = (ImageView) findViewById(R.id.map_imageView);
+        new BGTGetMapImage(iv).execute(url);
 
         updateFragments();
-
     }
 
     @Override
@@ -68,16 +90,16 @@ public class MapActivity extends FragmentActivity {
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.move_me_footer);
+                .findFragmentById(R.id.map_footer);
 
-        if(FileIO.fileExists(MainActivity.FILE_VOO, this))
+        if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this))
         {
             //Ler voo do ficheiro
-            Voo tempVoo = FileIO.deserializeVooObject(MainActivity.FILE_VOO, this).toParcelable();
+            Flight tempFlight = FileIO.deserializeVooObject(MainActivity.FILE_FLIGHT, this).toParcelable();
 
             FooterFragment.setVisibility(true);
-            FooterFragment.setVoo(tempVoo);
-            FooterFragment.updateVoo(this);
+            FooterFragment.setFlight(tempFlight);
+            FooterFragment.updateFlight(this);
             FooterFragment.setVisibility(true);
         }
         else
@@ -86,5 +108,40 @@ public class MapActivity extends FragmentActivity {
         }
 
         footer.updateVisibility();
+    }
+
+    class BGTGetMapImage extends AsyncTask<String, Void, Bitmap> {
+        private String url;
+        private ImageView bmImage;
+
+        public BGTGetMapImage(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd.show();
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap image = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                image = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return image;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            super.onPostExecute(result);
+            bmImage.setImageBitmap(result);
+            pd.dismiss();
+        }
     }
 }

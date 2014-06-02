@@ -78,99 +78,108 @@
             android:weightSum="10">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:id="@+id/checkboxesLinearLayout"
+                android:orientation="vertical"
                 android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="10dp"
-                android:background="@drawable/vertical_gradient3">
+                android:layout_height="fill_parent"
+                android:layout_weight="10"
+                android:weightSum="10">
 
-                <CheckBox
-                    android:onClick="onCheckboxClicked"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Estou no Aeroporto"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:id="@+id/airport_checkBox" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:background="@drawable/vertical_gradient_grey">
 
-            </LinearLayout>
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Estou no Aeroporto"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:id="@+id/airport_checkBox" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="10dp"
-                android:background="@drawable/vertical_gradient3">
+                </LinearLayout>
 
-                <CheckBox
-                    android:onClick="onCheckboxClicked"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Fiz o Check-In"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:id="@+id/checkin_checkBox" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:background="@drawable/vertical_gradient_grey">
 
-            </LinearLayout>
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Fiz o Check-In"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:id="@+id/checkin_checkBox" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="10dp"
-                android:background="@drawable/vertical_gradient3">
+                </LinearLayout>
 
-                <CheckBox
-                    android:onClick="onCheckboxClicked"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Passei a Segurança"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:id="@+id/security_checkBox" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:background="@drawable/vertical_gradient_grey">
 
-            </LinearLayout>
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Passei a Segurança"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:id="@+id/security_checkBox" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1.5"
-                android:gravity="center"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingStart="10dp"
-                android:background="@drawable/vertical_gradient3">
+                </LinearLayout>
 
-                <CheckBox
-                    android:onClick="onCheckboxClicked"
+                <LinearLayout
+                    android:orientation="horizontal"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Entrei no Embarque"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:id="@+id/boarding_checkBox" />
+                    android:layout_height="0dp"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingStart="10dp"
+                    android:background="@drawable/vertical_gradient_grey">
 
+                    <CheckBox
+                        android:onClick="onCheckboxClicked"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:text="Entrei no Embarque"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:textSize="20dp"
+                        android:layout_weight="1"
+                        android:id="@+id/boarding_checkBox" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <Button

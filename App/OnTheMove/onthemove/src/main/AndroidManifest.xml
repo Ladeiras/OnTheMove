@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.MenuActivity"
+            android:name=".activities.MainMenuActivity"
             android:label="@string/title_activity_menu" >
         </activity>
         <activity
@@ -25,11 +25,11 @@
             android:label="@string/title_activity_gpsalert" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.MoveMeActivity"
+            android:name=".activities.RoutesMenuActivity"
             android:label="@string/title_activity_move_me" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.TaxisActivity"
+            android:name=".activities.ContactActivity"
             android:label="@string/title_activity_taxis" >
         </activity>
         <activity
@@ -37,33 +37,39 @@
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.VoosActivity"
+            android:name=".activities.FlightsActivity"
             android:label="@string/title_activity_voos" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.ServicesActivity"
+            android:name=".activities.ServicesMenuActivity"
             android:label="@string/title_activity_services" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.OtherServicesActivity"
+            android:name=".activities.OtherServicesMenuActivity"
             android:label="@string/title_activity_other_services" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.ContactsActivity"
+            android:name=".activities.ContactsMenuActivity"
             android:label="@string/title_activity_contacts" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.VooInfoActivity"
-            android:label="@string/title_activity_voo_info" >
+            android:name=".activities.FlightInfoActivity"
+            android:label="@string/title_activity_voo_info">
         </activity>
         <activity
             android:name="com.moksie.onthemove.activities.FooterActivity"
-            android:label="@string/title_activity_footer" >
+            android:label="@string/title_activity_footer"
+            android:noHistory="true">
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.SmokersAreaActivity"
-            android:label="@string/title_activity_smokers_area" >
+            android:name=".activities.ServiceActivity"
+            android:label="@string/title_activity_service">
         </activity>
+        <activity
+            android:name=".activities.AboutActivity"
+            android:label="@string/title_activity_about">
+        </activity>
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

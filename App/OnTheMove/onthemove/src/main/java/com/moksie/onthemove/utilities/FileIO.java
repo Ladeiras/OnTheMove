@@ -1,20 +1,11 @@
 package com.moksie.onthemove.utilities;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.location.Location;
-import android.os.Build;
-import android.os.Environment;
 import android.util.Log;
 
-import com.moksie.onthemove.objects.Aeroporto;
-import com.moksie.onthemove.objects.Voo;
-import com.moksie.onthemove.objects.VooSerializable;
+import com.moksie.onthemove.objects.FlightSerializable;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,15 +13,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OptionalDataException;
-import java.io.OutputStreamWriter;
 import java.io.StreamCorruptedException;
-import java.util.Comparator;
 
 /**
  * Created by belh0 on 30-04-2014.
@@ -119,10 +106,10 @@ public class FileIO
         }
     }
 
-    public static VooSerializable deserializeVooObject(String file, Context c)
+    public static FlightSerializable deserializeVooObject(String file, Context c)
     {
         FileInputStream fis = null;
-        VooSerializable vooSerializable = null;
+        FlightSerializable flightSerializable = null;
         String filename = c.getExternalFilesDir("")+ "/" + file;
 
         try
@@ -130,7 +117,7 @@ public class FileIO
             //fis = c.openFileInput(filename);
             fis = new FileInputStream (new File(filename));
             ObjectInputStream is = new ObjectInputStream(fis);
-            vooSerializable = (VooSerializable) is.readObject();
+            flightSerializable = (FlightSerializable) is.readObject();
             is.close();
         }
         catch (FileNotFoundException e)
@@ -154,6 +141,6 @@ public class FileIO
             Log.e("ERROR", "Can not read file: " + e.toString());
         }
 
-        return vooSerializable;
+        return flightSerializable;
     }
 }

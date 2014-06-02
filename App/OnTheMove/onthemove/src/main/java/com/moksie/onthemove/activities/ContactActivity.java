@@ -1,7 +1,9 @@
 package com.moksie.onthemove.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -21,12 +23,25 @@ import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.tasks.BGTGetJSONObject;
 import com.moksie.onthemove.utilities.FileIO;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +62,7 @@ public class ContactActivity extends FragmentActivity {
     private BGTGetJSONObject bgt;
 
     private Contact contact;
+    private ProgressDialog pd;
 
     @Override
     public Context getApplicationContext() {
@@ -63,6 +79,9 @@ public class ContactActivity extends FragmentActivity {
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
         contactName = intent.getStringExtra("contact");
+
+        pd = new ProgressDialog(this);
+        pd.setMessage("A carregar "+contactName);
 
         try {
             buildContactList();
@@ -196,6 +215,93 @@ public class ContactActivity extends FragmentActivity {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    class BGTGetJSONObject extends AsyncTask<String, String, JSONObject> {
+
+        List<NameValuePair> postparams = new ArrayList<NameValuePair>();
+        String URL = null;
+        String method = null;
+        InputStream is = null;
+        JSONObject jObj = null;
+        String json = "";
+
+        public BGTGetJSONObject(String url, String method, List<NameValuePair> params) {
+            this.URL = url;
+            this.postparams = params;
+            this.method = method;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pd.show();
+        }
+
+        @Override
+        protected JSONObject doInBackground(String... params) {
+            // Making HTTP request
+            try {
+                // Making HTTP request
+                // check for request method
+
+                if (method.equals("POST")) {
+                    // request method is POST
+                    DefaultHttpClient httpClient = new DefaultHttpClient();
+                    HttpPost httpPost = new HttpPost(URL);
+                    httpPost.setEntity(new UrlEncodedFormEntity(postparams));
+
+                    HttpResponse httpResponse = httpClient.execute(httpPost);
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    is = httpEntity.getContent();
+
+                } else if (method == "GET") {
+                    // request method is GET
+                    DefaultHttpClient httpClient = new DefaultHttpClient();
+                    String paramString = URLEncodedUtils
+                            .format(postparams, "utf-8");
+                    URL += "?" + paramString;
+                    HttpGet httpGet = new HttpGet(URL);
+
+                    HttpResponse httpResponse = httpClient.execute(httpGet);
+                    HttpEntity httpEntity = httpResponse.getEntity();
+                    is = httpEntity.getContent();
+                }
+
+                // read input stream returned by request into a string using StringBuilder
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "utf-8"), 8);
+                StringBuilder sb = new StringBuilder();
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                is.close();
+                json = sb.toString();
+
+                // create a JSONObject from the json string
+                jObj = new JSONObject(json);
+
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                Log.e("JSON Parser", "Error parsing data " + e.toString());
+            } catch (Exception e) {
+                Log.e("Buffer Error", "Error converting result " + e.toString());
+            }
+
+            // return JSONObject (this is a class variable and null is returned if something went bad)
+            return jObj;
+        }
+
+        @Override
+        protected void onPostExecute(JSONObject result) {
+            super.onPostExecute(result);
+            pd.dismiss();
         }
     }
 }

@@ -43,7 +43,6 @@ public class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 
     @Override
     protected JSONArray doInBackground(String... params) {
-        // TODO Auto-generated method stub
         // Making HTTP request
         try {
             // Making HTTP request

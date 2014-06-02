@@ -70,7 +70,7 @@ public class AboutActivity extends FragmentActivity {
             }
         });
 
-        webview.loadUrl("http://moksie.pt/pages/about.html");
+        webview.loadUrl("http://moksie.pt/pages/projects.html#OnTheMove");
 
         updateFragments();
     }

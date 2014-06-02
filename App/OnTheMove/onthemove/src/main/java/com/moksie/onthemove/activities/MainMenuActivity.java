@@ -36,7 +36,7 @@ public class MainMenuActivity extends FragmentActivity {
         setContentView(R.layout.activity_main_menu);
 
         Intent intent = getIntent();
-        airport = (Airport) intent.getParcelableExtra("aeroporto");
+        airport = (Airport) intent.getParcelableExtra("airport");
 
         //Verificar se o voo a seguir pertence ao aeroporto escolhido
         parseVooFile();
@@ -47,7 +47,7 @@ public class MainMenuActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, FlightsActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("aeroporto", airport);
+                intent.putExtra("airport", airport);
                 MainMenuActivity.this.startActivity(intent);
             }
         });
@@ -58,7 +58,7 @@ public class MainMenuActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, RoutesMenuActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("aeroporto", airport);
+                intent.putExtra("airport", airport);
                 MainMenuActivity.this.startActivity(intent);
             }
         });
@@ -69,7 +69,7 @@ public class MainMenuActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, ServicesMenuActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("aeroporto", airport);
+                intent.putExtra("airport", airport);
                 MainMenuActivity.this.startActivity(intent);
             }
         });
@@ -80,7 +80,7 @@ public class MainMenuActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, ContactsMenuActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("aeroporto", airport);
+                intent.putExtra("airport", airport);
                 MainMenuActivity.this.startActivity(intent);
             }
         });

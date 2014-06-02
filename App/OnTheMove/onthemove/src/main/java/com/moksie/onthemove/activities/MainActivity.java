@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
-                intent.putExtra("aeroporto", (Parcelable) airports.get(aeroportoSpinner.getSelectedItemPosition()));
+                intent.putExtra("airport", (Parcelable) airports.get(aeroportoSpinner.getSelectedItemPosition()));
                 MainActivity.this.startActivity(intent);
             }
         });

@@ -29,7 +29,7 @@ public class RoutesMenuActivity extends FragmentActivity {
         setContentView(R.layout.activity_routes_menu);
 
         Intent intent = getIntent();
-        airport = (Airport) intent.getParcelableExtra("aeroporto");
+        airport = (Airport) intent.getParcelableExtra("airport");
 
         if(isPackageInstalled("com.moveme", this))
             movemeFlag = true;

@@ -20,7 +20,7 @@ import java.text.SimpleDateFormat;
 
 public class FooterActivity extends FragmentActivity {
 
-    private FlightSerializable voo;
+    private FlightSerializable flight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,7 +30,7 @@ public class FooterActivity extends FragmentActivity {
         overridePendingTransition( R.anim.abc_slide_in_bottom, R.anim.abc_fade_out);
         setContentView(R.layout.activity_footer);
 
-        //Ler voo do ficheiro
+        //Ler flight do ficheiro
         parseVooFile();
 
         TextView CodigoVoo = (TextView) this.findViewById(R.id.codigo_voo_textView);
@@ -57,22 +57,22 @@ public class FooterActivity extends FragmentActivity {
             cbLL.setVisibility(View.VISIBLE);
 
             CheckBox airportCB = (CheckBox) findViewById(R.id.airport_checkBox);
-            if (voo.isCheckin() && !airportCB.isChecked()) {
+            if (flight.isCheckin() && !airportCB.isChecked()) {
                 airportCB.toggle();
             }
 
             CheckBox checkinCB = (CheckBox) findViewById(R.id.checkin_checkBox);
-            if (voo.isCheckin() && !checkinCB.isChecked()) {
+            if (flight.isCheckin() && !checkinCB.isChecked()) {
                 checkinCB.toggle();
             }
 
             CheckBox securityCB = (CheckBox) findViewById(R.id.security_checkBox);
-            if (voo.isSecurity() && !securityCB.isChecked()) {
+            if (flight.isSecurity() && !securityCB.isChecked()) {
                 securityCB.toggle();
             }
 
             CheckBox boardingCB = (CheckBox) findViewById(R.id.boarding_checkBox);
-            if (voo.isBoarding() && !boardingCB.isChecked()) {
+            if (flight.isBoarding() && !boardingCB.isChecked()) {
                 boardingCB.toggle();
             }
         }
@@ -83,7 +83,7 @@ public class FooterActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FooterActivity.this, FlightInfoActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("voo",voo.toParcelable());
+                intent.putExtra("flight", flight.toParcelable());
                 FooterActivity.this.startActivity(intent);
             }
         });
@@ -105,13 +105,13 @@ public class FooterActivity extends FragmentActivity {
         switch(view.getId()) {
             case R.id.airport_checkBox:
                 if (checked)
-                    this.voo.setAirport(true);
+                    this.flight.setAirport(true);
                 else
                 {
-                    this.voo.setAirport(false);
-                    this.voo.setCheckin(false);
-                    this.voo.setSecurity(false);
-                    this.voo.setBoarding(false);
+                    this.flight.setAirport(false);
+                    this.flight.setCheckin(false);
+                    this.flight.setSecurity(false);
+                    this.flight.setBoarding(false);
 
                     CheckBox checkin = (CheckBox) findViewById(R.id.checkin_checkBox);
                     if(checkin.isChecked()) {checkin.toggle();}
@@ -125,15 +125,15 @@ public class FooterActivity extends FragmentActivity {
                 break;
             case R.id.checkin_checkBox:
                 if (checked) {
-                    if(!this.voo.isAirport())
+                    if(!this.flight.isAirport())
                         ((CheckBox) view).toggle();
-                    else this.voo.setCheckin(true);
+                    else this.flight.setCheckin(true);
                 }
                 else
                 {
-                    this.voo.setCheckin(false);
-                    this.voo.setSecurity(false);
-                    this.voo.setBoarding(false);
+                    this.flight.setCheckin(false);
+                    this.flight.setSecurity(false);
+                    this.flight.setBoarding(false);
 
                     CheckBox security = (CheckBox) findViewById(R.id.security_checkBox);
                     if(security.isChecked()) {security.toggle();}
@@ -144,14 +144,14 @@ public class FooterActivity extends FragmentActivity {
                 break;
             case R.id.security_checkBox:
                 if(checked) {
-                    if(!this.voo.isCheckin())
+                    if(!this.flight.isCheckin())
                         ((CheckBox) view).toggle();
-                    else this.voo.setSecurity(true);
+                    else this.flight.setSecurity(true);
                 }
                 else
                 {
-                    this.voo.setSecurity(false);
-                    this.voo.setBoarding(false);
+                    this.flight.setSecurity(false);
+                    this.flight.setBoarding(false);
 
                     CheckBox boarding = (CheckBox) findViewById(R.id.boarding_checkBox);
                     if(boarding.isChecked()) {boarding.toggle();}
@@ -159,27 +159,27 @@ public class FooterActivity extends FragmentActivity {
                 break;
             case R.id.boarding_checkBox:
                 if(checked) {
-                    if(!this.voo.isSecurity())
+                    if(!this.flight.isSecurity())
                         ((CheckBox) view).toggle();
-                    else this.voo.setBoarding(true);
+                    else this.flight.setBoarding(true);
                 }
                 else
                 {
-                    this.voo.setBoarding(false);
+                    this.flight.setBoarding(false);
                 }
                 break;
         }
 
         FileIO.removeFile(MainActivity.FILE_FLIGHT, this);
-        FileIO.serializeObject(MainActivity.FILE_FLIGHT, voo, this);
+        FileIO.serializeObject(MainActivity.FILE_FLIGHT, flight, this);
     }
 
     public boolean parseVooFile()
     {
         if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this))
         {
-            //Ler voo do ficheiro
-            this.voo = FileIO.deserializeVooObject(MainActivity.FILE_FLIGHT, this);
+            //Ler flight do ficheiro
+            this.flight = FileIO.deserializeVooObject(MainActivity.FILE_FLIGHT, this);
             return true;
         }
 

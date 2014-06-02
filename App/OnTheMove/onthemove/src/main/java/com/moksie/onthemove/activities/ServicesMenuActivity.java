@@ -26,7 +26,7 @@ public class ServicesMenuActivity extends FragmentActivity {
         setContentView(R.layout.activity_services_menu);
 
         Intent intent = getIntent();
-        airport = (Airport) intent.getParcelableExtra("aeroporto");
+        airport = (Airport) intent.getParcelableExtra("airport");
 
         //Botao outros serviços
         final Button othServButton = (Button) findViewById(R.id.services_botao_outrosservicos);

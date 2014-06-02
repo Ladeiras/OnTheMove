@@ -53,7 +53,7 @@ public class FlightInfoActivity extends FragmentActivity
         setContentView(R.layout.activity_flight_info);
 
         Bundle data = getIntent().getExtras();
-        flight = (Flight) data.getParcelable("voo");
+        flight = (Flight) data.getParcelable("flight");
 
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

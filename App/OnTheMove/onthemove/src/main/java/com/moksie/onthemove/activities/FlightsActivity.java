@@ -72,20 +72,16 @@ public class FlightsActivity extends FragmentActivity {
     String CHEGADA_API_URL;
 
     private Airport airport;
-    private boolean movemeFlag = false;
     private TabHost mTabHost;
     private BGTGetJSONArray bgt;
     private ListView partidasList;
     private ListView chegadasList;
     private Flight flightASeguir;
 
-    protected boolean inhibit_spinner = true;
-
     ArrayList<Flight> partidas = new ArrayList<Flight>();
     ArrayList<Flight> chegadas = new ArrayList<Flight>();
     final ArrayList<String> options = new ArrayList(Arrays.asList(OPTION_NUMERO_VOO_VALUE,
             OPTION_ORIGEM_DESTINO_VALUE_DESTINO, OPTION_COMPANHIA_VALUE, OPTION_SHOW_ALL_VALUE, OPTION_DEFAULT_VALUE));
-    boolean startSpinner = true;
 
     ProgressDialog loadingDialog;
 
@@ -100,7 +96,7 @@ public class FlightsActivity extends FragmentActivity {
         setContentView(R.layout.activity_flights);
 
         Intent intent = getIntent();
-        airport = (Airport) intent.getParcelableExtra("aeroporto");
+        airport = (Airport) intent.getParcelableExtra("airport");
     }
 
     @Override
@@ -223,7 +219,7 @@ public class FlightsActivity extends FragmentActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     Flight flight = (Flight) partidasList.getAdapter().getItem(i);
                     Log.w("FLAG", flight.getPartidacidade());
-                    intent.putExtra("voo", flight);
+                    intent.putExtra("flight", flight);
                     FlightsActivity.this.startActivity(intent);
                 }
             });
@@ -235,7 +231,7 @@ public class FlightsActivity extends FragmentActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     Flight flight = (Flight) chegadasList.getAdapter().getItem(i);
                     Log.w("FLAG", flight.getPartidacidade());
-                    intent.putExtra("voo", flight);
+                    intent.putExtra("flight", flight);
                     FlightsActivity.this.startActivity(intent);
                 }
             });

@@ -9,8 +9,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.moksie.onthemove.R;
@@ -89,6 +91,7 @@ public class MapActivity extends FragmentActivity {
 
     public void updateFooter()
     {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.map_LinearLayout);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map_footer);
 
@@ -101,10 +104,17 @@ public class MapActivity extends FragmentActivity {
             FooterFragment.setFlight(tempFlight);
             FooterFragment.updateFlight(this);
             FooterFragment.setVisibility(true);
+
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+            );
         }
         else
         {
             FooterFragment.setVisibility(false);
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,10f)
+            );
         }
 
         footer.updateVisibility();

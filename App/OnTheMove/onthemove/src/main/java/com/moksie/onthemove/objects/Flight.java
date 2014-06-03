@@ -23,12 +23,25 @@ public class Flight implements Parcelable
     private Date chegadatempoestimado;
     private Date partidatemporeal;
     private Date chegadatemporeal;
+
+    private long terminal;
+    private Date checkininicio;
+    private Date checkinfim;
+    private long portaembarque;
+    private Date embarque;
+    private long tapetebagagem;
+    private Date bagagem;
+    private long portadesembarque;
+    private Date desembarque;
+
     private boolean tipovoo;
 
     public Flight(long id, long codigovoo, String codigocompanhia, String partidacidade,
                   String chegadacidade, long partidaaeroportoid, long chegadaaeroportoid,
                   Date partidatempoestimado, Date chegadatempoestimado, Date partidatemporeal,
-                  Date chegadatemporeal, boolean tipovoo) {
+                  Date chegadatemporeal, long terminal, Date checkininicio, Date checkinfim,
+                  long portaembarque, Date embarque, long tapetebagagem, Date bagagem,
+                  long portadesembarque, Date desembarque, boolean tipovoo) {
         this.id = id;
         this.codigovoo = codigovoo;
         this.codigocompanhia = codigocompanhia;
@@ -40,6 +53,15 @@ public class Flight implements Parcelable
         this.chegadatempoestimado = chegadatempoestimado;
         this.partidatemporeal = partidatemporeal;
         this.chegadatemporeal = chegadatemporeal;
+        this.terminal = terminal;
+        this.checkininicio = checkininicio;
+        this.checkinfim = checkinfim;
+        this.portaembarque = portaembarque;
+        this.embarque = embarque;
+        this.tapetebagagem = tapetebagagem;
+        this.bagagem = bagagem;
+        this.portadesembarque = portadesembarque;
+        this.desembarque = desembarque;
         this.tipovoo = tipovoo;
     }
 
@@ -60,11 +82,21 @@ public class Flight implements Parcelable
             this.chegadatempoestimado = sdf.parse(list[8]);
             this.partidatemporeal = sdf.parse(list[9]);
             this.chegadatemporeal = sdf.parse(list[10]);
+            this.checkininicio = sdf.parse(list[12]);
+            this.checkinfim = sdf.parse(list[13]);
+            this.embarque = sdf.parse(list[15]);
+            this.bagagem = sdf.parse(list[17]);
+            this.desembarque = sdf.parse(list[19]);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
-        this.tipovoo = Boolean.parseBoolean(list[11]);
+        this.terminal = Long.parseLong(list[11]);
+        this.portaembarque = Long.parseLong(list[14]);
+        this.tapetebagagem = Long.parseLong(list[16]);
+        this.portadesembarque = Long.parseLong(list[18]);
+
+        this.tipovoo = Boolean.parseBoolean(list[20]);
     }
 
     public Flight(Parcel in) {
@@ -79,6 +111,17 @@ public class Flight implements Parcelable
         this.chegadatempoestimado = new Date(in.readLong());
         this.partidatemporeal = new Date(in.readLong());
         this.chegadatemporeal = new Date(in.readLong());
+
+        this.terminal = in.readLong();
+        this.checkininicio = new Date(in.readLong());
+        this.checkinfim = new Date(in.readLong());
+        this.portaembarque = in.readLong();
+        this.embarque = new Date(in.readLong());
+        this.tapetebagagem = in.readLong();
+        this.bagagem = new Date(in.readLong());
+        this.portadesembarque = in.readLong();
+        this.desembarque = new Date(in.readLong());
+
         this.tipovoo = new Boolean(in.readString());
     }
 
@@ -126,6 +169,42 @@ public class Flight implements Parcelable
         return chegadatemporeal;
     }
 
+    public long getTerminal() {
+        return terminal;
+    }
+
+    public Date getCheckininicio() {
+        return checkininicio;
+    }
+
+    public Date getCheckinfim() {
+        return checkinfim;
+    }
+
+    public long getPortaembarque() {
+        return portaembarque;
+    }
+
+    public Date getEmbarque() {
+        return embarque;
+    }
+
+    public long getTapetebagagem() {
+        return tapetebagagem;
+    }
+
+    public Date getBagagem() {
+        return bagagem;
+    }
+
+    public long getPortadesembarque() {
+        return portadesembarque;
+    }
+
+    public Date getDesembarque() {
+        return desembarque;
+    }
+
     public boolean isPartida() {
         if(tipovoo) return true;
         return false;
@@ -154,6 +233,17 @@ public class Flight implements Parcelable
         parcel.writeLong(chegadatempoestimado.getTime());
         parcel.writeLong(partidatemporeal.getTime());
         parcel.writeLong(chegadatemporeal.getTime());
+
+        parcel.writeLong(terminal);
+        parcel.writeLong(checkininicio.getTime());
+        parcel.writeLong(checkinfim.getTime());
+        parcel.writeLong(portaembarque);
+        parcel.writeLong(embarque.getTime());
+        parcel.writeLong(tapetebagagem);
+        parcel.writeLong(bagagem.getTime());
+        parcel.writeLong(portadesembarque);
+        parcel.writeLong(desembarque.getTime());
+
         parcel.writeString(String.valueOf(tipovoo));
     }
 
@@ -183,6 +273,17 @@ public class Flight implements Parcelable
                 sdf.format(this.getChegadatempoestimado())+","+
                 sdf.format(this.getPartidatemporeal())+","+
                 sdf.format(this.getChegadatemporeal())+","+
+
+                this.getTerminal()+","+
+                sdf.format(this.getCheckininicio())+","+
+                sdf.format(this.getCheckinfim())+","+
+                this.getPortaembarque()+","+
+                sdf.format(this.getEmbarque())+","+
+                this.getTapetebagagem()+","+
+                sdf.format(this.getBagagem())+","+
+                this.getPortadesembarque()+","+
+                sdf.format(this.getDesembarque())+","+
+
                 this.tipovoo;
     }
 
@@ -191,6 +292,8 @@ public class Flight implements Parcelable
         return new FlightSerializable(this.id, this.codigovoo, this.codigocompanhia,
                 this.partidacidade, this.chegadacidade, this.partidaaeroportoid,
                 this.chegadaaeroportoid, this.partidatempoestimado, this.chegadatempoestimado,
-                this.partidatemporeal, this.chegadatemporeal, this.tipovoo);
+                this.partidatemporeal, this.chegadatemporeal, this.terminal, this.checkininicio,
+                this.checkinfim, this.portaembarque, this.embarque, this.tapetebagagem, this.bagagem,
+                this.portadesembarque, this.desembarque, this.tipovoo);
     }
 }

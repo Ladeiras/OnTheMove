@@ -32,7 +32,16 @@ create table otm_voo(
   partidatempoestimado date,
   chegadatempoestimado date,
   partidatemporeal date,
-  chegadatemporeal date
+  chegadatemporeal date,
+  terminal number,
+  checkininicio date,
+  checkinfim date,
+  portaembarque number,
+  embarque date,
+  tapetebagagem number,
+  bagagem date,
+  portadesembarque number,
+  desembarque date
 	);
   
 create table otm_contacto(
@@ -68,12 +77,13 @@ create table otm_mapa(
 insert into otm_aeroporto(pais,cidade,nome,latitude,longitude) values('Portugal', 'Porto', 'Francisco Sá Carneiro', 41.248100, -8.681389);
 insert into otm_aeroporto(pais,cidade,nome,latitude,longitude) values('Portugal', 'Lisboa', 'Portela', -12.808899, 15.7605);
 
-insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10001, 'TAP', 1, 2, 'Porto', 'Lisboa', to_date('2014/05/04:13:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:13:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:30', 'yyyy/mm/dd:hh24:mi'));
+insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal,terminal,checkininicio,checkinfim,portaembarque,embarque,tapetebagagem,bagagem,portadesembarque,desembarque) values(10001, 'TAP', 1, 2, 'Porto', 'Lisboa', to_date('2014/05/04:13:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:13:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:30', 'yyyy/mm/dd:hh24:mi'),2, to_date('2014/05/04:12:45', 'yyyy/mm/dd:hh24:mi'),to_date('2014/05/04:13:20', 'yyyy/mm/dd:hh24:mi'),2,to_date('2014/05/04:13:15', 'yyyy/mm/dd:hh24:mi'),5,to_date('2014/05/04:14:45', 'yyyy/mm/dd:hh24:mi'),1,to_date('2014/05/04:13:40', 'yyyy/mm/dd:hh24:mi'));
+/*insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10001, 'TAP', 1, 2, 'Porto', 'Lisboa', to_date('2014/05/04:13:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:13:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:30', 'yyyy/mm/dd:hh24:mi'));
 insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10002, 'TAP', 1, 2, 'Porto', 'Lisboa', to_date('2014/05/04:14:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:30', 'yyyy/mm/dd:hh24:mi'));
 insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10003, 'TAP', 2, 1, 'Lisboa', 'Porto', to_date('2014/05/04:14:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:30', 'yyyy/mm/dd:hh24:mi'));
 insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10004, 'TAP', 2, 1, 'Lisboa', 'Porto', to_date('2014/05/04:15:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:16:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:16:30', 'yyyy/mm/dd:hh24:mi'));
 insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10005, 'TAP', 3, 1, 'Madrid', 'Porto', to_date('2014/05/04:14:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:14:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:30', 'yyyy/mm/dd:hh24:mi'));
-insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10006, 'TAP', 3, 1, 'Madrid', 'Porto', to_date('2014/05/04:15:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:16:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:16:30', 'yyyy/mm/dd:hh24:mi'));
+insert into otm_voo(codigovoo,codigocompanhia,partidaaeroportoid,chegadaaeroportoid,partidacidade,chegadacidade,partidatempoestimado,chegadatempoestimado,partidatemporeal,chegadatemporeal) values(10006, 'TAP', 3, 1, 'Madrid', 'Porto', to_date('2014/05/04:15:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:16:35', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:15:30', 'yyyy/mm/dd:hh24:mi'), to_date('2014/05/04:16:30', 'yyyy/mm/dd:hh24:mi'));*/
 
 insert into otm_contacto(idaeroporto,nome,titulo,mapaurl,website,descricao) values(1,'taxis','Táxis','http://i.imgur.com/o4QFmdH.png','www.taxisporto.com','Táxis do Porto');
 insert into otm_contacto(idaeroporto,nome,titulo,mapaurl,website,descricao) values(2,'taxis','Táxis','http://i.imgur.com/o4QFmdH.png','www.taxislisboa.com','Táxis do Porto');

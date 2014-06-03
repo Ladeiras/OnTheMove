@@ -10,11 +10,13 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,6 +108,7 @@ public class AboutActivity extends FragmentActivity {
 
     public void updateFooter()
     {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.about_LinearLayout);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.about_footer);
 
@@ -118,10 +121,17 @@ public class AboutActivity extends FragmentActivity {
             FooterFragment.setFlight(tempFlight);
             FooterFragment.updateFlight(this);
             FooterFragment.setVisibility(true);
+
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+            );
         }
         else
         {
             FooterFragment.setVisibility(false);
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,10f)
+            );
         }
 
         footer.updateVisibility();

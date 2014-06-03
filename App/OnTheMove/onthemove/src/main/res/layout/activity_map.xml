@@ -14,48 +14,40 @@
         tools:layout="@layout/fragment_header"
         android:id="@+id/move_me_header" />
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:weightSum="10">
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/title_header">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/header_text_color"
+            android:text="@string/mapa"
+            android:id="@+id/title_textView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:gesture-image="http://schemas.polites.com/android"
+        android:id="@+id/map_LinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <com.polites.android.GestureImageView
+            android:id="@+id/map_imageView"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/title_header">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.Large"
-                android:textColor="@color/header_text_color"
-                android:text="@string/mapa"
-                android:id="@+id/title_textView" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:gesture-image="http://schemas.polites.com/android"
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9">
-
-            <com.polites.android.GestureImageView
-                android:id="@+id/map_imageView"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:scaleType="center"
-                gesture-image:min-scale="0.1"
-                gesture-image:max-scale="10.0"
-                gesture-image:strict="false"/>
-        </LinearLayout>
+            android:layout_height="fill_parent"
+            android:scaleType="center"
+            gesture-image:min-scale="0.1"
+            gesture-image:max-scale="10.0"
+            gesture-image:strict="false"/>
     </LinearLayout>
 
     <fragment

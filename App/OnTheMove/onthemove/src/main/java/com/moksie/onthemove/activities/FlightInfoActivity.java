@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
@@ -73,10 +74,45 @@ public class FlightInfoActivity extends FragmentActivity
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.applyPattern("HH:mm");
 
-        if(flight.isPartida())
+        LinearLayout llp = (LinearLayout) findViewById(R.id.partida_info_LinearLayout);
+        LinearLayout llc = (LinearLayout) findViewById(R.id.chegada_info_LinearLayout);
+
+        if(flight.isPartida()) {
             TempoEstimado.setText(sdf.format(flight.getPartidatempoestimado()));
-        else
+
+            TextView terminal = (TextView) findViewById(R.id.terminal);
+            terminal.setText("Terminal - "+String.valueOf(flight.getTerminal()));
+
+            TextView checkin = (TextView) findViewById(R.id.checkin);
+            checkin.setText("Check-In - "+sdf.format(flight.getCheckininicio())+" às "+sdf.format(flight.getCheckinfim()));
+
+            TextView portaEmbarque = (TextView) findViewById(R.id.porta_embarque);
+            portaEmbarque.setText("Embarque - "+String.valueOf(flight.getPortaembarque()));
+
+            TextView embarque = (TextView) findViewById(R.id.embarque);
+            embarque.setText("Hora Prevista: "+sdf.format(flight.getEmbarque()));
+
+            llp.setVisibility(ViewGroup.VISIBLE);
+            llc.setVisibility(ViewGroup.GONE);
+        }
+        else {
             TempoEstimado.setText(sdf.format(flight.getChegadatempoestimado()));
+
+            TextView tapeteBagagem = (TextView) findViewById(R.id.tapete_bagagem);
+            tapeteBagagem.setText("Bagagem - Tapete "+String.valueOf(flight.getTapetebagagem()));
+
+            TextView bagagem = (TextView) findViewById(R.id.bagagem_textView);
+            bagagem.setText("Hora Prevista: "+sdf.format(flight.getBagagem()));
+
+            TextView portaDesembarque = (TextView) findViewById(R.id.porta_desembarque);
+            portaDesembarque.setText("Desembarque - "+String.valueOf(flight.getPortadesembarque()));
+
+            TextView desembarque = (TextView) findViewById(R.id.desembarque);
+            desembarque.setText("Hora Prevista: "+sdf.format(flight.getDesembarque()));
+
+            llp.setVisibility(ViewGroup.GONE);
+            llc.setVisibility(ViewGroup.VISIBLE);
+        }
     }
 
     @Override

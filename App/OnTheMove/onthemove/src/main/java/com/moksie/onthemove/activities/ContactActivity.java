@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -106,6 +107,9 @@ public class ContactActivity extends FragmentActivity {
             }
         });
 
+        TextView description = (TextView) findViewById(R.id.contact_description);
+        description.setText(contact.getDescricao());
+
         restartButtons();
         updateFragments();
     }
@@ -144,6 +148,7 @@ public class ContactActivity extends FragmentActivity {
 
     public void updateFooter()
     {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.contact_LinearLayout);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.move_me_footer);
 
@@ -156,10 +161,17 @@ public class ContactActivity extends FragmentActivity {
             FooterFragment.setFlight(tempFlight);
             FooterFragment.updateFlight(this);
             FooterFragment.setVisibility(true);
+
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+            );
         }
         else
         {
             FooterFragment.setVisibility(false);
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,10f)
+            );
         }
 
         footer.updateVisibility();

@@ -67,6 +67,16 @@ public class FlightsActivity extends FragmentActivity {
     private static final String PARTIDATEMPOREAL = "PartidaTempoReal";
     private static final String CHEGADATEMPOREAL = "ChegadaTempoReal";
 
+    private static final String TERMINAL = "Terminal";
+    private static final String CHECKININICIO = "CheckinInicio";
+    private static final String CHECKINFIM = "CheckinFim";
+    private static final String PORTAEMBARQUE = "PortaEmbarque";
+    private static final String EMBARQUE = "Embarque";
+    private static final String TAPETEBAGAGEM = "TapeteBagagem";
+    private static final String BAGAGEM = "Bagagem";
+    private static final String PORTADESEMBARQUE = "PortaDesembarque";
+    private static final String DESEMBARQUE = "Desembarque";
+
     private static final int TAB_TEXT_SIZE = 25;
     private static final int TAB_PARTIDAS = 0;
     private static final int TAB_CHEGADAS = 1;
@@ -472,16 +482,31 @@ public class FlightsActivity extends FragmentActivity {
                 String PartidaTempoRealStr = a.getString(PARTIDATEMPOREAL);
                 String ChegadaTempoRealStr = a.getString(CHEGADATEMPOREAL);
 
-                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                long Terminal = a.getLong(TERMINAL);
+                String CheckinInicioStr = a.getString(CHECKININICIO);
+                String CheckinFimStr = a.getString(CHECKINFIM);
+                long PortaEmbarque = a.getLong(PORTAEMBARQUE);
+                String EmbarqueStr = a.getString(EMBARQUE);
+                long TapeteBagagem = a.getLong(TAPETEBAGAGEM);
+                String BagagemStr = a.getString(BAGAGEM);
+                long PortaDesembarque = a.getLong(PORTADESEMBARQUE);
+                String DesembarqueStr = a.getString(DESEMBARQUE);
 
                 Date PartidaTempoEstimado = MainActivity.sdf.parse(PartidaTempoEstimadoStr);
                 Date ChegadaTempoEstimado = MainActivity.sdf.parse(ChegadaTempoEstimadoStr);
                 Date PartidaTempoReal = MainActivity.sdf.parse(PartidaTempoRealStr);
                 Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
+                Date CheckinInicio = MainActivity.sdf.parse(CheckinInicioStr);
+                Date CheckinFim = MainActivity.sdf.parse(CheckinFimStr);
+                Date Embarque = MainActivity.sdf.parse(CheckinInicioStr);
+                Date Bagagem = MainActivity.sdf.parse(CheckinInicioStr);
+                Date Desembarque = MainActivity.sdf.parse(CheckinInicioStr);
 
                 partidas.add(new Flight(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaAeroportoId,ChegadaAeroportoId,PartidaTempoEstimado,
-                        ChegadaTempoEstimado,PartidaTempoReal,ChegadaTempoReal,true));
+                        ChegadaTempoEstimado,PartidaTempoReal,ChegadaTempoReal,
+                        Terminal,CheckinInicio,CheckinFim,PortaEmbarque,Embarque,TapeteBagagem,
+                        Bagagem,PortaDesembarque,Desembarque,true));
 
                 FlightAdapter partidasAdapter = new FlightAdapter(this, android.R.layout.simple_expandable_list_item_1, partidas);
                 partidasList = (ListView) findViewById(R.id.listView_partidas);
@@ -525,16 +550,31 @@ public class FlightsActivity extends FragmentActivity {
                 String PartidaTempoRealStr = a.getString(PARTIDATEMPOREAL);
                 String ChegadaTempoRealStr = a.getString(CHEGADATEMPOREAL);
 
-                //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                long Terminal = a.getLong(TERMINAL);
+                String CheckinInicioStr = a.getString(CHECKININICIO);
+                String CheckinFimStr = a.getString(CHECKINFIM);
+                long PortaEmbarque = a.getLong(PORTAEMBARQUE);
+                String EmbarqueStr = a.getString(EMBARQUE);
+                long TapeteBagagem = a.getLong(TAPETEBAGAGEM);
+                String BagagemStr = a.getString(BAGAGEM);
+                long PortaDesembarque = a.getLong(PORTADESEMBARQUE);
+                String DesembarqueStr = a.getString(DESEMBARQUE);
 
                 Date PartidaTempoEstimado = MainActivity.sdf.parse(PartidaTempoEstimadoStr);
                 Date ChegadaTempoEstimado = MainActivity.sdf.parse(ChegadaTempoEstimadoStr);
                 Date PartidaTempoReal = MainActivity.sdf.parse(PartidaTempoRealStr);
                 Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
+                Date CheckinInicio = MainActivity.sdf.parse(CheckinInicioStr);
+                Date CheckinFim = MainActivity.sdf.parse(CheckinFimStr);
+                Date Embarque = MainActivity.sdf.parse(CheckinInicioStr);
+                Date Bagagem = MainActivity.sdf.parse(CheckinInicioStr);
+                Date Desembarque = MainActivity.sdf.parse(CheckinInicioStr);
 
                 chegadas.add(new Flight(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaAeroportoId,ChegadaAeroportoId,PartidaTempoEstimado,
-                        ChegadaTempoEstimado,PartidaTempoReal,ChegadaTempoReal,false));
+                        ChegadaTempoEstimado,PartidaTempoReal,ChegadaTempoReal,
+                        Terminal,CheckinInicio,CheckinFim,PortaEmbarque,Embarque,TapeteBagagem,
+                        Bagagem,PortaDesembarque,Desembarque,false));
 
                 FlightAdapter chegadasAdapter = new FlightAdapter(this, android.R.layout.simple_expandable_list_item_1, chegadas);
                 chegadasList = (ListView) findViewById(R.id.listView_chegadas);

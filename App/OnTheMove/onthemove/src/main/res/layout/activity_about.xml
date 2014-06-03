@@ -19,47 +19,41 @@
         android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
-        android:weightSum="10">
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/title_header">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/header_text_color"
+            android:text="Sobre"
+            android:id="@+id/title_textView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:gesture-image="http://schemas.polites.com/android"
+        android:id="@+id/about_LinearLayout"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+
+        <ProgressBar android:id="@+id/progressbar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/title_header">
+            android:layout_height="3px"
+            android:max="100"
+            android:visibility="gone"
+        />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.Large"
-                android:textColor="@color/header_text_color"
-                android:text="Sobre"
-                android:id="@+id/title_textView" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:gesture-image="http://schemas.polites.com/android"
+        <WebView
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="9">
-
-            <ProgressBar android:id="@+id/progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="3px"
-                android:max="100"
-                android:visibility="gone"
-            />
-
-            <WebView
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:id="@+id/webView" />
-        </LinearLayout>
+            android:layout_height="fill_parent"
+            android:id="@+id/webView" />
     </LinearLayout>
 
     <fragment

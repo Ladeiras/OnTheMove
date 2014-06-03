@@ -19,6 +19,17 @@ public class FlightSerializable implements Serializable
     private Date chegadatempoestimado;
     private Date partidatemporeal;
     private Date chegadatemporeal;
+
+    private long terminal;
+    private Date checkininicio;
+    private Date checkinfim;
+    private long portaembarque;
+    private Date embarque;
+    private long tapetebagagem;
+    private Date bagagem;
+    private long portadesembarque;
+    private Date desembarque;
+
     private boolean tipovoo;
 
     private boolean airport = false;
@@ -28,8 +39,10 @@ public class FlightSerializable implements Serializable
 
     public FlightSerializable(long id, long codigovoo, String codigocompanhia, String partidacidade,
                               String chegadacidade, long partidaaeroportoid, long chegadaaeroportoid,
-                              Date partidatempoestimado, Date chegadatempoestimado,
-                              Date partidatemporeal, Date chegadatemporeal, boolean tipovoo) {
+                              Date partidatempoestimado, Date chegadatempoestimado, Date partidatemporeal,
+                              Date chegadatemporeal, long terminal, Date checkininicio, Date checkinfim,
+                              long portaembarque, Date embarque, long tapetebagagem, Date bagagem,
+                              long portadesembarque, Date desembarque, boolean tipovoo) {
         this.id = id;
         this.codigovoo = codigovoo;
         this.codigocompanhia = codigocompanhia;
@@ -41,6 +54,15 @@ public class FlightSerializable implements Serializable
         this.chegadatempoestimado = chegadatempoestimado;
         this.partidatemporeal = partidatemporeal;
         this.chegadatemporeal = chegadatemporeal;
+        this.terminal = terminal;
+        this.checkininicio = checkininicio;
+        this.checkinfim = checkinfim;
+        this.portaembarque = portaembarque;
+        this.embarque = embarque;
+        this.tapetebagagem = tapetebagagem;
+        this.bagagem = bagagem;
+        this.portadesembarque = portadesembarque;
+        this.desembarque = desembarque;
         this.tipovoo = tipovoo;
     }
 
@@ -49,7 +71,9 @@ public class FlightSerializable implements Serializable
         return new Flight(this.id, this.codigovoo, this.codigocompanhia,
                 this.partidacidade, this.chegadacidade, this.partidaaeroportoid,
                 this.chegadaaeroportoid, this.partidatempoestimado, this.chegadatempoestimado,
-                this.partidatemporeal, this.chegadatemporeal, this.tipovoo);
+                this.partidatemporeal, this.chegadatemporeal, this.terminal, this.checkininicio,
+                this.checkinfim, this.portaembarque, this.embarque, this.tapetebagagem, this.bagagem,
+                this.portadesembarque, this.desembarque, this.tipovoo);
     }
 
     public void setAirport(boolean airport) {

@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -135,6 +137,7 @@ public class ServiceActivity extends FragmentActivity {
 
     public void updateFooter()
     {
+        ListView layout = (ListView) findViewById(R.id.service_maps_listView);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.service_footer);
 
@@ -147,10 +150,17 @@ public class ServiceActivity extends FragmentActivity {
             FooterFragment.setFlight(tempFlight);
             FooterFragment.updateFlight(this);
             FooterFragment.setVisibility(true);
+
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,9f)
+            );
         }
         else
         {
             FooterFragment.setVisibility(false);
+            layout.setLayoutParams(
+                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0,10f)
+            );
         }
 
         footer.updateVisibility();

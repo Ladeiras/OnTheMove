@@ -71,7 +71,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/voo_info_seguir"
-        tools:layout="@layout/fragment_seguir" />
+        tools:layout="@layout/fragment_follow" />
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -81,6 +81,12 @@
         >
 
         <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/partida_info_LinearLayout"
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
@@ -99,7 +105,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="2"
                     android:gravity="right"
-                    android:id="@+id/imageView"
+                    android:id="@+id/terminal_imageView"
                     android:src="@drawable/ic_icon_notifi_terminal" />
 
                 <TextView
@@ -108,7 +114,7 @@
                     android:layout_weight="5"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Terminal - 1"
-                    android:id="@+id/textView" />
+                    android:id="@+id/terminal" />
             </LinearLayout>
 
             <LinearLayout
@@ -124,7 +130,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="2"
                     android:gravity="right"
-                    android:id="@+id/imageView"
+                    android:id="@+id/checkin_imageView"
                     android:src="@drawable/ic_icon_notifi_check_in" />
 
                 <TextView
@@ -133,7 +139,7 @@
                     android:layout_weight="5"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Check-In - 14:00 às 16:30"
-                    android:id="@+id/textView" />
+                    android:id="@+id/checkin" />
             </LinearLayout>
 
             <LinearLayout
@@ -155,7 +161,7 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:id="@+id/imageView"
+                        android:id="@+id/embarque_imageView"
                         android:src="@drawable/ic_icon_notifi_embarque" />
 
                     <TextView
@@ -164,7 +170,7 @@
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Embarque - 13"
-                        android:id="@+id/textView" />
+                        android:id="@+id/porta_embarque" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -172,15 +178,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:weightSum="7"
-                    android:id="@+id/linearLayout">
+                    android:weightSum="7">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:id="@+id/imageView3"
+                        android:id="@+id/embarque_hora_imageView"
                         android:src="@drawable/ic_icon_notifi_time" />
 
                     <TextView
@@ -189,14 +194,23 @@
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Hora Prevista: 16:15"
-                        android:id="@+id/textView2" />
+                        android:id="@+id/embarque" />
                 </LinearLayout>
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chegada_info_LinearLayout"
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:paddingTop="30dp"
                 android:paddingBottom="20dp">
 
                 <LinearLayout
@@ -212,7 +226,7 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:id="@+id/imageView"
+                        android:id="@+id/tapete_bagagem_imageView"
                         android:src="@drawable/ic_icon_notifi_bagagem" />
 
                     <TextView
@@ -221,7 +235,7 @@
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Bagagem - Tapete 10"
-                        android:id="@+id/textView" />
+                        android:id="@+id/tapete_bagagem" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -229,15 +243,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:weightSum="7"
-                    android:id="@+id/linearLayout">
+                    android:weightSum="7">
 
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="fill_parent"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:id="@+id/imageView3"
+                        android:id="@+id/bagagem_imageView"
                         android:src="@drawable/ic_icon_notifi_time" />
 
                     <TextView
@@ -246,7 +259,7 @@
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Hora Prevista: 17:40"
-                        android:id="@+id/textView2" />
+                        android:id="@+id/bagagem_textView" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -269,7 +282,7 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:id="@+id/imageView"
+                        android:id="@+id/porta_desembarque_imageView"
                         android:src="@drawable/ic_icon_notifi_desembarque" />
 
                     <TextView
@@ -278,7 +291,7 @@
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Desembarque - 08"
-                        android:id="@+id/textView" />
+                        android:id="@+id/porta_desembarque" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -294,7 +307,7 @@
                         android:layout_height="fill_parent"
                         android:layout_weight="2"
                         android:gravity="right"
-                        android:id="@+id/imageView3"
+                        android:id="@+id/desembarque_imageView"
                         android:src="@drawable/ic_icon_notifi_time" />
 
                     <TextView
@@ -303,9 +316,10 @@
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Hora Previta: 17:30"
-                        android:id="@+id/textView2" />
+                        android:id="@+id/desembarque" />
                 </LinearLayout>
             </LinearLayout>
+        </LinearLayout>
 
         </LinearLayout>
 

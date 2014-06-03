@@ -72,5 +72,59 @@ namespace OnTheMove.Lib.Model
             get;
             set;
         }
+
+        public Decimal Terminal
+        {
+            get;
+            set;
+        }
+
+        public DateTime CheckinInicio
+        {
+            get;
+            set;
+        }
+
+        public DateTime CheckinFim
+        {
+            get;
+            set;
+        }
+
+        public Decimal PortaEmbarque
+        {
+            get;
+            set;
+        }
+
+        public DateTime Embarque
+        {
+            get;
+            set;
+        }
+
+        public Decimal TapeteBagagem
+        {
+            get;
+            set;
+        }
+
+        public DateTime Bagagem
+        {
+            get;
+            set;
+        }
+
+        public Decimal PortaDesembarque
+        {
+            get;
+            set;
+        }
+
+        public DateTime Desembarque
+        {
+            get;
+            set;
+        }
     }
 }

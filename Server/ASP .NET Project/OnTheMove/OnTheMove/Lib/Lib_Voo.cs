@@ -76,6 +76,16 @@ namespace OnTheMove.Lib
                 voo.PartidaTempoReal = (DateTime)dr.GetValue(9);
                 voo.ChegadaTempoReal = (DateTime)dr.GetValue(10);
 
+                voo.Terminal = (Decimal)dr.GetValue(11);
+                voo.CheckinInicio = (DateTime)dr.GetValue(12);
+                voo.CheckinFim = (DateTime)dr.GetValue(13);
+                voo.PortaEmbarque = (Decimal)dr.GetValue(14);
+                voo.Embarque = (DateTime)dr.GetValue(15);
+                voo.TapeteBagagem = (Decimal)dr.GetValue(16);
+                voo.Bagagem = (DateTime)dr.GetValue(17);
+                voo.PortaDesembarque = (Decimal)dr.GetValue(18);
+                voo.Desembarque = (DateTime)dr.GetValue(19);
+
                 listVoos.Add(voo);
             }
             conn.Dispose();
@@ -113,6 +123,16 @@ namespace OnTheMove.Lib
                 voo.ChegadaTempoEstimado = (DateTime)dr.GetValue(8);
                 voo.PartidaTempoReal = (DateTime)dr.GetValue(9);
                 voo.ChegadaTempoReal = (DateTime)dr.GetValue(10);
+
+                voo.Terminal = (Decimal)dr.GetValue(11);
+                voo.CheckinInicio = (DateTime)dr.GetValue(12);
+                voo.CheckinFim = (DateTime)dr.GetValue(13);
+                voo.PortaEmbarque = (Decimal)dr.GetValue(14);
+                voo.Embarque = (DateTime)dr.GetValue(15);
+                voo.TapeteBagagem = (Decimal)dr.GetValue(16);
+                voo.Bagagem = (DateTime)dr.GetValue(17);
+                voo.PortaDesembarque = (Decimal)dr.GetValue(18);
+                voo.Desembarque = (DateTime)dr.GetValue(19);
 
                 listVoos.Add(voo);
             }

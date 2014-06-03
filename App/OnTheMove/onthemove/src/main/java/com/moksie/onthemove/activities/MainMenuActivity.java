@@ -90,6 +90,7 @@ public class MainMenuActivity extends FragmentActivity {
         aboutButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, AboutActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 MainMenuActivity.this.startActivity(intent);
             }
         });

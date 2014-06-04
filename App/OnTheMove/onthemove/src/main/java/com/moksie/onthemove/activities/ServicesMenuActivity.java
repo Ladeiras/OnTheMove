@@ -28,6 +28,17 @@ public class ServicesMenuActivity extends FragmentActivity {
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
 
+        //Botao lojas
+        final Button storesButton = (Button) findViewById(R.id.services_botao_lojas);
+        storesButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ServicesMenuActivity.this, StoresActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("airport", airport);
+                ServicesMenuActivity.this.startActivity(intent);
+            }
+        });
+
         //Botao outros serviços
         final Button othServButton = (Button) findViewById(R.id.services_botao_outrosservicos);
         othServButton.setOnClickListener(new View.OnClickListener() {

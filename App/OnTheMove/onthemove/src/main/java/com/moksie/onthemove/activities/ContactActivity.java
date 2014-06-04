@@ -107,8 +107,8 @@ public class ContactActivity extends FragmentActivity {
             }
         });
 
-        TextView description = (TextView) findViewById(R.id.contact_description);
-        description.setText(contact.getDescricao());
+        /*TextView description = (TextView) findViewById(R.id.contact_description);
+        description.setText(contact.getDescricao());*/
 
         restartButtons();
         updateFragments();

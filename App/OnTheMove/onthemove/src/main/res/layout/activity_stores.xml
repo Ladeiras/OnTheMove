@@ -14,7 +14,6 @@
         tools:layout="@layout/fragment_header"
         android:id="@+id/move_me_header" />
 
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
@@ -27,17 +26,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Large"
-            android:text="Large Text"
-            android:id="@+id/service_name" />
+            android:textColor="@color/header_text_color"
+            android:text="@string/lojas"
+            android:id="@+id/textView" />
     </LinearLayout>
 
-    <ListView
+    <LinearLayout
         android:layout_width="fill_parent"
+        android:orientation="vertical"
         android:layout_height="0dp"
         android:layout_weight="9"
-        android:id="@+id/service_maps_listView">
+        android:weightSum="9">
 
-    </ListView>
+        <Spinner
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:id="@+id/search_spinner"/>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7.5"
+            android:id="@+id/stores_listView"
+            android:divider="@color/onthemovetheme_color"
+            android:dividerHeight="1dp">
+
+        </ListView>
+
+    </LinearLayout>
 
     <fragment
         android:name="com.moksie.onthemove.fragments.FooterFragment"
@@ -45,6 +62,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:layout="@layout/fragment_footer"
-        android:id="@+id/service_footer"/>
+        android:id="@+id/stores_footer"/>
 
 </LinearLayout>

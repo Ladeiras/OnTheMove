@@ -133,7 +133,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AeroportosController.cs" />
     <Compile Include="Controllers\ChegadasController.cs" />
-    <Compile Include="Controllers\LojasController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\PartidasController.cs" />
@@ -143,13 +142,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lib\Lib_Loja.cs" />
     <Compile Include="Lib\Lib_Servico.cs" />
     <Compile Include="Lib\Lib_Contacto.cs" />
     <Compile Include="Lib\Lib_Voo.cs" />
     <Compile Include="Lib\Lib_Aeroporto.cs" />
     <Compile Include="Lib\Model\Aeroporto.cs" />
-    <Compile Include="Lib\Model\Loja.cs" />
     <Compile Include="Lib\Model\Mapa.cs" />
     <Compile Include="Lib\Model\Servico.cs" />
     <Compile Include="Lib\Model\Contacto.cs" />

@@ -52,8 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="2"
-                android:duplicateParentState="true"
-                android:src="@drawable/btn_map"
+                android:src="@drawable/ic_icon_mapa_inative"
                 android:id="@+id/mapa_icon_imageView" />
 
             <TextView
@@ -87,8 +86,7 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_weight="2"
-                android:duplicateParentState="true"
-                android:src="@drawable/btn_website"
+                android:src="@drawable/ic_icon_site_inactive"
                 android:id="@+id/site_icon_imageView" />
 
         </LinearLayout>

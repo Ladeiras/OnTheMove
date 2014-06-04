@@ -46,8 +46,5 @@
     <string name="mapa">Mapa</string>
     <string name="title_activity_service">ServiceActivity</string>
     <string name="title_activity_about">AboutActivity</string>
-    <string name="title_activity_stores">StoresActivity</string>
-    <string name="lojas">Lojas</string>
-    <string name="title_activity_store">StoreActivity</string>
 
 </resources>

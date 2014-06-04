@@ -66,14 +66,6 @@
             android:label="@string/title_activity_service">
         </activity>
         <activity
-            android:name=".activities.StoresActivity"
-            android:label="@string/title_activity_stores">
-        </activity>
-        <activity
-            android:name=".activities.StoreActivity"
-            android:label="@string/title_activity_store">
-        </activity>
-        <activity
             android:name=".activities.AboutActivity"
             android:label="@string/title_activity_about">
         </activity>

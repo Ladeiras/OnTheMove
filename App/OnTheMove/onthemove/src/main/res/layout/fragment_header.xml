@@ -43,8 +43,9 @@
             android:id="@+id/help_button"
             android:typeface="normal"
             android:background="@android:color/transparent"
-            android:focusable="false"
-            android:enabled="false"
+            android:focusable="true"
+            android:enabled="true"
+            android:clickable="true"
             android:src="@drawable/ic_help_" />
     </LinearLayout>
 

@@ -64,11 +64,10 @@ public class RoutesMenuActivity extends FragmentActivity {
         final Button taxisButton = (Button) findViewById(R.id.taxis_button);
         taxisButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(RoutesMenuActivity.this, ContactActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                Intent intent = new Intent(RoutesMenuActivity.this, ServiceActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 intent.putExtra("airport", airport);
-                intent.putExtra("contact", "taxis");
+                intent.putExtra("service", "taxis");
                 RoutesMenuActivity.this.startActivity(intent);
             }
         });

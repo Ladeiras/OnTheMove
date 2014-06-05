@@ -44,7 +44,7 @@ public class FlightInfoActivity extends FragmentActivity
     private int estado = NAO_SEGUIR;
     private Flight flight;
 
-    private NotificationManager notificationManager;
+    //private NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,7 +56,7 @@ public class FlightInfoActivity extends FragmentActivity
         Bundle data = getIntent().getExtras();
         flight = (Flight) data.getParcelable("flight");
 
-        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        //notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         parseVooFile();
         updateFragments(estado);
@@ -238,7 +238,7 @@ public class FlightInfoActivity extends FragmentActivity
             updateFooter();
         }
 
-        createNotification();
+        //createNotification();
     }
 
     public void onClickNaoSeguir()
@@ -254,11 +254,10 @@ public class FlightInfoActivity extends FragmentActivity
             updateFooter();
         }
 
-        notificationManager.cancel(01);
+        //notificationManager.cancel(01);
     }
 
-    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    private void createNotification()
+    /*private void createNotification()
     {
         Bitmap bm = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getResources(), R.drawable.ic_icon_sobre),
                 getResources().getDimensionPixelSize(android.R.dimen.notification_large_icon_width),
@@ -279,7 +278,7 @@ public class FlightInfoActivity extends FragmentActivity
         Date currentDate = c.getTime();
         long diff = getDateDiff(flight.getPartidatempoestimado(),currentDate,TimeUnit.MILLISECONDS);
         if(diff < 3600000)
-            builder.setSubText("Tem "+TimeUnit.MINUTES.convert(diff,TimeUnit.MILLISECONDS)+" minutos para o check-in");
+            builder.setSubText("Tem "+TimeUnit.MILLISECONDS.convert(diff,TimeUnit.MILLISECONDS)+" minutos para o check-in");
         //builder.setNumber(101);
         builder.setTicker("Está agora a seguir um voo");
         builder.setSmallIcon(R.drawable.ic_icon_sobre);
@@ -298,5 +297,5 @@ public class FlightInfoActivity extends FragmentActivity
     {
         long diffInMillies = date2.getTime() - date1.getTime();
         return timeUnit.convert(diffInMillies,TimeUnit.MILLISECONDS);
-    }
+    }*/
 }

@@ -19,6 +19,24 @@ namespace OnTheMove.Lib.Model
             set;
         }
 
+        public String Titulo
+        {
+            get;
+            set;
+        }
+
+        public String Website
+        {
+            get;
+            set;
+        }
+
+        public String Webmail
+        {
+            get;
+            set;
+        }
+
         public String Descricao
         {
             get;
@@ -26,6 +44,12 @@ namespace OnTheMove.Lib.Model
         }
 
         public List<Mapa> Mapas
+        {
+            get;
+            set;
+        }
+
+        public List<Decimal> Telefones
         {
             get;
             set;

@@ -14,9 +14,9 @@ namespace OnTheMove.Controllers
         //
         // GET: /Voos/
 
-        public IEnumerable<Voo> Get()
+        public Voo Get(string id)
         {
-            return Lib_Voo.ListVoos();
+            return Lib_Voo.GetVoo(id);
         }
 
     }

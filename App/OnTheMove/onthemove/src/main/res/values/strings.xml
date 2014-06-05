@@ -49,5 +49,6 @@
     <string name="title_activity_stores">StoresActivity</string>
     <string name="lojas">Lojas</string>
     <string name="title_activity_store">StoreActivity</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

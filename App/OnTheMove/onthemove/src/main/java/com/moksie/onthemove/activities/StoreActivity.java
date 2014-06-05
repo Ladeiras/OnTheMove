@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -16,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.adapters.ContactsAdapter;
@@ -77,6 +79,43 @@ public class StoreActivity extends FragmentActivity {
                 intent.putExtra("url", store.getMapaurl());
                 intent.putExtra("title", store.getNome());
                 StoreActivity.this.startActivity(intent);
+            }
+        });
+
+        LinearLayout websiteLL = (LinearLayout) findViewById(R.id.store_website_LinearLayout);
+        websiteLL.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String url = store.getWebsite();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+            }
+        });
+
+        LinearLayout phoneLL = (LinearLayout) findViewById(R.id.store_phone_LinearLayout);
+        phoneLL.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String number = "00"+store.getTelefone();
+                String uri = "tel:" + number.trim() ;
+                Intent intent = new Intent(Intent.ACTION_CALL);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout webmailLL = (LinearLayout) findViewById(R.id.store_webmail_LinearLayout);
+        webmailLL.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{store.getWebmail()});
+                //i.putExtra(Intent.EXTRA_SUBJECT, "subject of email");
+                //i.putExtra(Intent.EXTRA_TEXT   , "body of email");
+                try {
+                    startActivity(Intent.createChooser(i, "Enviar mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(StoreActivity.this, "Não existem clientes de email instalados", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

@@ -27,13 +27,37 @@ public class ContactsMenuActivity extends FragmentActivity {
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
 
-        //Botao posto socorro
+        //Botao Contactos aeroporto
+        final Button CAButton = (Button) findViewById(R.id.contacts_aeroporto);
+        CAButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ContactsMenuActivity.this, ServiceActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("service", "aeroporto");
+                intent.putExtra("airport", airport);
+                ContactsMenuActivity.this.startActivity(intent);
+            }
+        });
+
+        //Botao Perdidos e Achados
+        final Button PAButton = (Button) findViewById(R.id.contacts_perdidos_achados);
+        PAButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(ContactsMenuActivity.this, ServiceActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                intent.putExtra("service", "perdidosachados");
+                intent.putExtra("airport", airport);
+                ContactsMenuActivity.this.startActivity(intent);
+            }
+        });
+
+        //Botao Posto Socorro
         final Button PSButton = (Button) findViewById(R.id.contacts_posto_socorro);
         PSButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(ContactsMenuActivity.this, ContactActivity.class);
+                Intent intent = new Intent(ContactsMenuActivity.this, ServiceActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("contact", "postosocorro");
+                intent.putExtra("service", "postosocorro");
                 intent.putExtra("airport", airport);
                 ContactsMenuActivity.this.startActivity(intent);
             }

@@ -11,18 +11,16 @@ namespace OnTheMove.Lib
 {
     public class Lib_Voo
     {
-        //Todos os voos
-        public static List<Model.Voo> ListVoos()
+        public static Voo GetVoo(string id)
         {
             Voo voo = null;
-            List<Model.Voo> listVoos = new List<Model.Voo>();
 
             string onthemove = "DATA SOURCE=" + OnTheMove.WebApiConfig.DBSERVER + ";PERSIST SECURITY INFO=True;USER ID=SYSTEM;PASSWORD=123456;";
             OracleConnection conn = new OracleConnection(onthemove);
             conn.Open();
             OracleCommand cmd = new OracleCommand();
             cmd.Connection = conn;
-            cmd.CommandText = "select * from otm_voo";
+            cmd.CommandText = "select * from otm_voo where idvoo = "+id;
             cmd.CommandType = CommandType.Text;
             OracleDataReader dr = cmd.ExecuteReader();
             
@@ -34,16 +32,27 @@ namespace OnTheMove.Lib
                 voo.CodigoCompanhia = (string)dr.GetValue(2);
                 voo.PartidaAeroportoId = (Decimal)dr.GetValue(3);
                 voo.ChegadaAeroportoId = (Decimal)dr.GetValue(4);
-                voo.PartidaTempoEstimado = (DateTime)dr.GetValue(5);
-                voo.ChegadaTempoEstimado = (DateTime)dr.GetValue(6);
-                voo.PartidaTempoReal = (DateTime)dr.GetValue(7);
-                voo.ChegadaTempoReal = (DateTime)dr.GetValue(8);
+                voo.PartidaCidade = (String)dr.GetValue(5);
+                voo.ChegadaCidade = (String)dr.GetValue(6);
+                voo.PartidaTempoEstimado = (DateTime)dr.GetValue(7);
+                voo.ChegadaTempoEstimado = (DateTime)dr.GetValue(8);
+                voo.PartidaTempoReal = (DateTime)dr.GetValue(9);
+                voo.ChegadaTempoReal = (DateTime)dr.GetValue(10);
 
-                listVoos.Add(voo);
+                voo.Terminal = (Decimal)dr.GetValue(11);
+                voo.CheckinInicio = (DateTime)dr.GetValue(12);
+                voo.CheckinFim = (DateTime)dr.GetValue(13);
+                voo.PortaEmbarque = (Decimal)dr.GetValue(14);
+                voo.Embarque = (DateTime)dr.GetValue(15);
+                voo.TapeteBagagem = (Decimal)dr.GetValue(16);
+                voo.Bagagem = (DateTime)dr.GetValue(17);
+                voo.PortaDesembarque = (Decimal)dr.GetValue(18);
+                voo.Desembarque = (DateTime)dr.GetValue(19);
+
             }
             conn.Dispose();
 
-            return listVoos;
+            return voo;
         }
 
         //Partidas

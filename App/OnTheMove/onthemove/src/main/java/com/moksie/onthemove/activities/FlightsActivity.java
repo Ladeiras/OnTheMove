@@ -498,9 +498,9 @@ public class FlightsActivity extends FragmentActivity {
                 Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
                 Date CheckinInicio = MainActivity.sdf.parse(CheckinInicioStr);
                 Date CheckinFim = MainActivity.sdf.parse(CheckinFimStr);
-                Date Embarque = MainActivity.sdf.parse(CheckinInicioStr);
-                Date Bagagem = MainActivity.sdf.parse(CheckinInicioStr);
-                Date Desembarque = MainActivity.sdf.parse(CheckinInicioStr);
+                Date Embarque = MainActivity.sdf.parse(EmbarqueStr);
+                Date Bagagem = MainActivity.sdf.parse(BagagemStr);
+                Date Desembarque = MainActivity.sdf.parse(DesembarqueStr);
 
                 partidas.add(new Flight(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaAeroportoId,ChegadaAeroportoId,PartidaTempoEstimado,
@@ -566,9 +566,9 @@ public class FlightsActivity extends FragmentActivity {
                 Date ChegadaTempoReal = MainActivity.sdf.parse(ChegadaTempoRealStr);
                 Date CheckinInicio = MainActivity.sdf.parse(CheckinInicioStr);
                 Date CheckinFim = MainActivity.sdf.parse(CheckinFimStr);
-                Date Embarque = MainActivity.sdf.parse(CheckinInicioStr);
-                Date Bagagem = MainActivity.sdf.parse(CheckinInicioStr);
-                Date Desembarque = MainActivity.sdf.parse(CheckinInicioStr);
+                Date Embarque = MainActivity.sdf.parse(EmbarqueStr);
+                Date Bagagem = MainActivity.sdf.parse(BagagemStr);
+                Date Desembarque = MainActivity.sdf.parse(DesembarqueStr);
 
                 chegadas.add(new Flight(id,CodigoVoo,CodigoCompanhia,PartidaCidade,
                         ChegadaCidade,PartidaAeroportoId,ChegadaAeroportoId,PartidaTempoEstimado,

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textColor="@color/header_text_color"
-            android:text="Loja X"
+            android:text="Loja"
             android:id="@+id/title_textView" />
     </LinearLayout>
 
@@ -69,6 +69,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/store_website_LinearLayout"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -96,6 +97,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/store_phone_LinearLayout"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
@@ -123,6 +125,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/store_webmail_LinearLayout"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="0dp"

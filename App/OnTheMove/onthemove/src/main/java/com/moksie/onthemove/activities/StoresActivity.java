@@ -181,16 +181,23 @@ public class StoresActivity extends FragmentActivity {
         });
 
         //Lojas
-        storesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView parent, View view, int i, long l) {
-                Intent intent = new Intent(StoresActivity.this, StoreActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                Store store = (Store) storesList.getAdapter().getItem(i);
-                intent.putExtra("store", store);
-                StoresActivity.this.startActivity(intent);
-            }
-        });
+        if(!stores.isEmpty()) {
+            storesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView parent, View view, int i, long l) {
+                    Intent intent = new Intent(StoresActivity.this, StoreActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    Store store = (Store) storesList.getAdapter().getItem(i);
+                    intent.putExtra("store", store);
+                    StoresActivity.this.startActivity(intent);
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(this, "Ocorreu um erro", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
 
         updateFragments();
     }

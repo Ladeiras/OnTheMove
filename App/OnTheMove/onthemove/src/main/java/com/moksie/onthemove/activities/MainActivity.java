@@ -27,9 +27,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -37,6 +39,9 @@ public class MainActivity extends Activity {
 
     public static String FILE_FLIGHT = "flight";
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+    //TODO usado somente para testes
+    public static Date currentTime;
 
     private static final String ID = "Id";
     private static final String PAIS = "Pais";
@@ -55,6 +60,13 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+
+        //TODO usado somente para testes
+        try {
+            currentTime = sdf.parse("2014-05-04T12:44:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         //Verificar se o GPS esta ligado
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);

@@ -16,6 +16,7 @@ namespace OnTheMove.Lib
             Servico servico = null;
             Mapa mapa = null;
             List<Mapa> mapas = new List<Mapa>();
+            List<Decimal> telefones = new List<Decimal>();
 
             string onthemove = "DATA SOURCE=" + OnTheMove.WebApiConfig.DBSERVER + ";PERSIST SECURITY INFO=True;USER ID=SYSTEM;PASSWORD=123456;";
             OracleConnection conn = new OracleConnection(onthemove);
@@ -32,7 +33,22 @@ namespace OnTheMove.Lib
                 servico = new Servico();
                 servico.Id = (Decimal)dr.GetValue(0);
                 servico.Nome = (string)dr.GetValue(2);
-                servico.Descricao = (string)dr.GetValue(3);
+                servico.Titulo = (string)dr.GetValue(3);
+
+                if (dr.GetValue(4) == DBNull.Value)
+                    servico.Website = "";
+                else
+                    servico.Website = (string)dr.GetValue(4);
+
+                if (dr.GetValue(5) == DBNull.Value)
+                    servico.Webmail = "";
+                else
+                    servico.Webmail = (string)dr.GetValue(5);
+
+                if (dr.GetValue(6) == DBNull.Value)
+                    servico.Descricao = "";
+                else
+                    servico.Descricao = (string)dr.GetValue(6);
             }
             //conn.Dispose();
 
@@ -54,6 +70,19 @@ namespace OnTheMove.Lib
                 }
 
                 servico.Mapas = mapas;
+
+                OracleCommand cmd3 = new OracleCommand();
+                cmd3.Connection = conn;
+                cmd3.CommandText = "select * from otm_servico_telefone where idservico = " + servico.Id;
+                cmd3.CommandType = CommandType.Text;
+                OracleDataReader dr3 = cmd3.ExecuteReader();
+
+                while (dr3.Read())
+                {
+                    telefones.Add((Decimal)dr3.GetValue(2));
+                }
+
+                servico.Telefones = telefones;
             }
 
             conn.Dispose();

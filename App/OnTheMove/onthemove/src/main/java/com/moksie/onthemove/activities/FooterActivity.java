@@ -57,7 +57,7 @@ public class FooterActivity extends FragmentActivity {
             cbLL.setVisibility(View.VISIBLE);
 
             CheckBox airportCB = (CheckBox) findViewById(R.id.airport_checkBox);
-            if (flight.isCheckin() && !airportCB.isChecked()) {
+            if (flight.isAirport() && !airportCB.isChecked()) {
                 airportCB.toggle();
             }
 

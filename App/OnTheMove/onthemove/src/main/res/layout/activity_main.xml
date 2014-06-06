@@ -40,7 +40,8 @@
                 android:layout_weight="1"
                 android:text="OK"
                 android:typeface="normal"
-                android:id="@+id/okbutton"/>
+                android:id="@+id/okbutton"
+                android:textColor="@drawable/btn_text_color"/>
 
         </LinearLayout>
 

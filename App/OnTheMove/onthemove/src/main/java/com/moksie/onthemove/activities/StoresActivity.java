@@ -27,6 +27,7 @@ import com.moksie.onthemove.adapters.FlightAdapter;
 import com.moksie.onthemove.adapters.SearchAdapter;
 import com.moksie.onthemove.adapters.StoreAdapter;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Contact;
 import com.moksie.onthemove.objects.Flight;
@@ -90,7 +91,8 @@ public class StoresActivity extends FragmentActivity {
             OPTION_CATEGORIA_VALUE, OPTION_LOJA_COM_PROMOCOES_VALUE, OPTION_SHOW_ALL_VALUE, OPTION_DEFAULT_VALUE));
 
     private static String LOJAS_API_URL = "http://onthemove.no-ip.org:3000/api/lojas/";
-    private Airport airport;
+    private long idAirport;
+    private String startOption;
     private BGTGetJSONArray bgt;
 
     private Contact contact;
@@ -112,7 +114,8 @@ public class StoresActivity extends FragmentActivity {
         setContentView(R.layout.activity_stores);
 
         Intent intent = getIntent();
-        airport = (Airport) intent.getParcelableExtra("airport");
+        idAirport = intent.getLongExtra("airport",0);
+        startOption = (String) intent.getStringExtra("option");
 
         pd = new ProgressDialog(this);
         pd.setMessage("A carregar lojas");
@@ -130,7 +133,10 @@ public class StoresActivity extends FragmentActivity {
         SearchAdapter adapter = new SearchAdapter(this, android.R.layout.simple_spinner_item, options);
 
         searchStoresSpinner.setAdapter(adapter);
-        searchStoresSpinner.setSelection(OPTION_DEFAULT);
+
+        if(startOption.equals("promo"))
+            searchStoresSpinner.setSelection(OPTION_LOJA_COM_PROMOCOES);
+        else searchStoresSpinner.setSelection(OPTION_DEFAULT);
 
         searchStoresSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -205,6 +211,10 @@ public class StoresActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste ecrã poderá consultar uma lista das lojas existentes no aeroporto. Poderá ainda usar os filtros de pesquisa.");
+
         updateFragments();
     }
 
@@ -305,7 +315,7 @@ public class StoresActivity extends FragmentActivity {
 
     public void buildStoresList() throws ParseException {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
-        bgt = new BGTGetJSONArray(LOJAS_API_URL+airport.getId(), "GET", apiParams);
+        bgt = new BGTGetJSONArray(LOJAS_API_URL+idAirport, "GET", apiParams);
 
         try {
             JSONArray apJSON = bgt.execute().get();

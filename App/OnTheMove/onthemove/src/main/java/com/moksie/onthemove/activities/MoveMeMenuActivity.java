@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -17,7 +17,7 @@ import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
 
-public class RoutesMenuActivity extends FragmentActivity {
+public class MoveMeMenuActivity extends FragmentActivity {
 
     private Airport airport;
 
@@ -26,31 +26,59 @@ public class RoutesMenuActivity extends FragmentActivity {
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_routes_menu);
+        setContentView(R.layout.activity_moveme_menu);
 
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
 
-        final Button moveMeButton = (Button) findViewById(R.id.moveme_button);
-        moveMeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(RoutesMenuActivity.this, MoveMeMenuActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("airport", airport);
-                RoutesMenuActivity.this.startActivity(intent);
-            }
-        });
+        if(!isPackageInstalled("com.moveme", this))
+        {
+            Intent marketIntent = new Intent(Intent.ACTION_VIEW);
+            marketIntent.setData(Uri.parse("market://details?id=com.moveme"));
+            startActivity(intent);
+            MoveMeMenuActivity.this.finish();
+        }
+        else
+        {
+            final Button aPartirButton = (Button) findViewById(R.id.apartir_button);
+            aPartirButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent movemeIntent = new Intent("com.optproject.RouteFinderScreen");
 
-        final Button taxisButton = (Button) findViewById(R.id.taxis_button);
-        taxisButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(RoutesMenuActivity.this, ServiceActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("airport", airport);
-                intent.putExtra("service", "taxis");
-                RoutesMenuActivity.this.startActivity(intent);
-            }
-        });
+                    movemeIntent.putExtra("type", 4);
+                    movemeIntent.putExtra("NameFrom", "Aeroporto");
+                    movemeIntent.putExtra("LatitudeTo", airport.getLatitude());
+                    movemeIntent.putExtra("LongitudeTo", airport.getLongitude());
+
+                    startActivity(movemeIntent);
+                }
+            });
+
+            final Button paraButton = (Button) findViewById(R.id.para_button);
+            paraButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent movemeIntent = new Intent("com.optproject.RouteFinderScreen");
+
+                    movemeIntent.putExtra("type", 5);
+                    movemeIntent.putExtra("NameTo", "Aeroporto");
+                    movemeIntent.putExtra("LatitudeTo", airport.getLatitude());
+                    movemeIntent.putExtra("LongitudeTo", airport.getLongitude());
+
+                    startActivity(movemeIntent);
+                }
+            });
+            /*Intent i;
+            PackageManager manager = getPackageManager();
+            try {
+                i = manager.getLaunchIntentForPackage("com.moveme");
+                if (i == null)
+                    throw new PackageManager.NameNotFoundException();
+                i.addCategory(Intent.CATEGORY_LAUNCHER);
+                startActivity(i);
+            } catch (PackageManager.NameNotFoundException e) {
+
+            }*/
+        }
 
         updateFragments();
 

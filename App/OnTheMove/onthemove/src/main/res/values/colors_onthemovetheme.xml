@@ -4,4 +4,6 @@
     <color name="header_text_color">#ff3e3e40</color>
     <color name="inactive_tab_color">#ff3e3e40</color>
     <color name="active_tab_color">#ffffffff</color>
+    <color name="active_list_item_color">#fe6402</color>
+    <color name="inactive_list_item_color">#f0f1f1</color>
 </resources>

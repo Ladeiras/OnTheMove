@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
@@ -22,7 +23,6 @@ public class ServicesMenuActivity extends FragmentActivity {
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_services_menu);
 
         Intent intent = getIntent();
@@ -46,7 +46,8 @@ public class ServicesMenuActivity extends FragmentActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ServicesMenuActivity.this, StoresActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                intent.putExtra("airport", airport);
+                intent.putExtra("airport", airport.getId());
+                intent.putExtra("option", "all");
                 ServicesMenuActivity.this.startActivity(intent);
             }
         });
@@ -80,6 +81,9 @@ public class ServicesMenuActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        HeaderFragment.setMsg("Neste ecrã poderá escolher uma das opções listadas.");
+
         updateFragments();
     }
 

@@ -23,6 +23,7 @@ import com.moksie.onthemove.R;
 import com.moksie.onthemove.adapters.FlightAdapter;
 import com.moksie.onthemove.adapters.SearchAdapter;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.tasks.BGTGetJSONArray;
@@ -116,11 +117,10 @@ public class FlightsActivity extends FragmentActivity {
     {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_flights);
 
         pd = new ProgressDialog(this);
         pd.setMessage("A carregar os Voos");
-
-        setContentView(R.layout.activity_flights);
 
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
@@ -130,6 +130,10 @@ public class FlightsActivity extends FragmentActivity {
     protected void onStart()
     {
         super.onStart();
+
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste ecrã pode selecionar os separadores para consultar os voos. Os voos estão divididos em partidas e chegadas. Clicando num voo pode consultar informações do mesmo. Poderá ainda usar os filtros de pesquisa.");
+
         PARTIDA_API_URL = "http://onthemove.no-ip.org:3000/api/partidas/"+ airport.getId();
         CHEGADA_API_URL = "http://onthemove.no-ip.org:3000/api/chegadas/"+ airport.getId();
 

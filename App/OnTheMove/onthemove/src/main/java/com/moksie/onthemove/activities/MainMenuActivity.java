@@ -129,9 +129,6 @@ public class MainMenuActivity extends FragmentActivity {
         //Verificar se o voo a seguir pertence ao aeroporto escolhido
         parseVooFile();
 
-        //Botao ajuda
-        HeaderFragment.setMsg("Neste menu pode escolher a opção a realizar através dos ícones presentes no painel.");
-
         //Botao Voos
         final Button voosButton = (Button) findViewById(R.id.voos_button);
         voosButton.setOnClickListener(new View.OnClickListener() {
@@ -211,8 +208,12 @@ public class MainMenuActivity extends FragmentActivity {
 
             //createNotification("Teste1", "Teste2", "Teste3");
             long diff;
+
             FlightSerializable followingFlight = getFlightSerializable();
             Flight updatedFlight = getFlight(FooterFragment.flight);
+            updateFlight(updatedFlight.toSerializable(), followingFlight);
+
+            Log.d("FLIGHTUPDATED", "true");
 
             long diffPartida = getDateDiff(MainActivity.currentTime,updatedFlight.getPartidatempoestimado(),TimeUnit.MILLISECONDS);
             long diffEmbarque = getDateDiff(MainActivity.currentTime,updatedFlight.getEmbarque(),TimeUnit.MILLISECONDS);
@@ -360,6 +361,17 @@ public class MainMenuActivity extends FragmentActivity {
         }
     }
 
+    private void updateFlight(FlightSerializable updatedFlight, FlightSerializable followingFlight)
+    {
+        updatedFlight.setAirport(followingFlight.isAirport());
+        updatedFlight.setCheckin(followingFlight.isCheckin());
+        updatedFlight.setSecurity(followingFlight.isSecurity());
+        updatedFlight.setBoarding(followingFlight.isBoarding());
+
+        FileIO.removeFile(MainActivity.FILE_FLIGHT, getApplicationContext());
+        FileIO.serializeObject(MainActivity.FILE_FLIGHT, updatedFlight, getApplicationContext());
+    }
+
     public Flight getFlight(Flight flight) throws ParseException {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
 
@@ -368,7 +380,6 @@ public class MainMenuActivity extends FragmentActivity {
 
         try {
             JSONObject flightJSON = bgt.execute().get();
-            JSONArray mapsJSON;
 
             long id = flightJSON.getLong(ID);
             long CodigoVoo = flightJSON.getLong(CODIGOVOO);
@@ -461,6 +472,10 @@ public class MainMenuActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste menu pode escolher a opção a realizar através dos ícones presentes no painel.");
+
         updateFragments();
     }
 

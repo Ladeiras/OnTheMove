@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Large"
                 android:textColor="@color/header_text_color"
-                android:text="@string/botao_serviços"
+                android:text="@string/transportes_coletivos"
                 android:id="@+id/textView" />
         </LinearLayout>
 
@@ -43,9 +43,9 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/botao_mapa_aeroporto"
-            android:id="@+id/services_mapa_aeroporto"
-            android:drawableLeft="@drawable/ic_icon_mapa_aeroporto"
+            android:text="@string/apartirdoaeroporto"
+            android:id="@+id/apartir_button"
+            android:drawableLeft="@drawable/ic_icon_sobre"
             android:drawablePadding="20dp"
             android:typeface="normal"
             android:gravity="center|left"
@@ -56,35 +56,9 @@
             android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/botao_lojas"
-            android:id="@+id/services_botao_lojas"
-            android:drawableLeft="@drawable/ic_icon_lojas"
-            android:drawablePadding="20dp"
-            android:typeface="normal"
-            android:gravity="center|left"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:textColor="@drawable/btn_text_color"/>
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="@string/botao_restaurantes"
-            android:id="@+id/services_botao_restaurantes"
-            android:drawableLeft="@drawable/ic_icon_restaurantes"
-            android:drawablePadding="20dp"
-            android:typeface="normal"
-            android:gravity="center|left"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:textColor="@drawable/btn_text_color"/>
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="@string/botao_outros_servicos"
-            android:id="@+id/services_botao_outrosservicos"
-            android:drawableLeft="@drawable/ic_icon_outros_servicos"
+            android:text="@string/paraoaeroporto"
+            android:id="@+id/para_button"
+            android:drawableLeft="@drawable/ic_icon_sobre"
             android:drawablePadding="20dp"
             android:typeface="normal"
             android:gravity="center|left"
@@ -99,6 +73,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:layout="@layout/fragment_footer"
-        android:id="@+id/services_footer"/>
+        android:id="@+id/move_me_footer"/>
 
 </LinearLayout>

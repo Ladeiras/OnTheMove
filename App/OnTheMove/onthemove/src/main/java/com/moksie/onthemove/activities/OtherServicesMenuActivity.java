@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
@@ -81,6 +82,10 @@ public class OtherServicesMenuActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Botao Ajuda
+        HeaderFragment.setMsg("Neste ecrã poderá escolher uma das opções listadas.");
+
         updateFragments();
     }
 

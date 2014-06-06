@@ -16,11 +16,13 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.adapters.MapsListAdapter;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.objects.Map;
 import com.moksie.onthemove.utilities.FileIO;
@@ -54,6 +56,9 @@ public class MapsActivity extends FragmentActivity {
 
         mapsList.setAdapter(mapsListAdapter);
 
+        TextView titleTV = (TextView) findViewById(R.id.service_name);
+        titleTV.setText(title);
+
         ListView list = (ListView) findViewById(R.id.service_maps_listView);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -73,6 +78,9 @@ public class MapsActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        HeaderFragment.setMsg("Neste ecrã pode escolher uma das plantas onde este serviço é disponibilizado");
+
         updateFragments();
     }
 

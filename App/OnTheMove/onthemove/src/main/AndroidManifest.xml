@@ -9,6 +9,7 @@
         android:theme="@style/OnTheMoveTheme" >
         <activity
             android:name="com.moksie.onthemove.activities.MainActivity"
+            android:screenOrientation="portrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,63 +19,83 @@
         </activity>
         <activity
             android:name=".activities.MainMenuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_menu" >
         </activity>
         <activity
             android:name="com.moksie.onthemove.activities.GPSAlertActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_gpsalert" >
         </activity>
         <activity
             android:name=".activities.RoutesMenuActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_routes" >
+        </activity>
+        <activity
+            android:name=".activities.MoveMeMenuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_move_me" >
         </activity>
         <activity
             android:name="com.moksie.onthemove.activities.MapsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
             android:name="com.moksie.onthemove.activities.MapActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_map" >
         </activity>
         <activity
             android:name=".activities.FlightsActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_voos" >
         </activity>
         <activity
             android:name=".activities.ServicesMenuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_services" >
         </activity>
         <activity
             android:name=".activities.OtherServicesMenuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_other_services" >
         </activity>
         <activity
             android:name=".activities.ContactsMenuActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_contacts" >
         </activity>
         <activity
             android:name=".activities.FlightInfoActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_voo_info">
         </activity>
         <activity
             android:name="com.moksie.onthemove.activities.FooterActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_footer"
             android:noHistory="true">
         </activity>
         <activity
             android:name=".activities.ServiceActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_service">
         </activity>
         <activity
             android:name=".activities.StoresActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_stores">
         </activity>
         <activity
             android:name=".activities.StoreActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_store">
         </activity>
         <activity
             android:name=".activities.AboutActivity"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_about">
         </activity>
 

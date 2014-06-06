@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.FlightSerializable;
 import com.moksie.onthemove.utilities.FileIO;
 
@@ -92,9 +93,26 @@ public class FooterActivity extends FragmentActivity {
         final Button promotionsButton = (Button) findViewById(R.id.promotions_button);
         promotionsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               //TODO
+                Intent intent = new Intent(FooterActivity.this, StoresActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+                long idAirport;
+                if(FooterFragment.flight.isPartida())
+                    idAirport = FooterFragment.flight.getPartidaaeroportoid();
+                else idAirport = FooterFragment.flight.getChegadaaeroportoid();
+
+                intent.putExtra("airport", idAirport);
+                intent.putExtra("option", "promo");
+                FooterActivity.this.startActivity(intent);
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste ecrã pode informar a aplicação dos passos que foram tomados até ao momento e receber notificações apropriadas para cada estado. Pode também a partir daqui consultar o voo seguido ou então as promoções existentes no aeroporto.");
     }
 
     public void onCheckboxClicked(View view) {

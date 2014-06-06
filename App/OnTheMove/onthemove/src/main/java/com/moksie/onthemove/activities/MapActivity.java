@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.tasks.BGTGetImage;
@@ -63,6 +64,9 @@ public class MapActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        HeaderFragment.setMsg("Neste ecrã pode consultar a planta do serviço seleccionado");
+
         updateFragments();
     }
 

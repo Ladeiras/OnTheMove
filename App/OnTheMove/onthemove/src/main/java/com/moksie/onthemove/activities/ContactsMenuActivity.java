@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
@@ -69,6 +70,10 @@ public class ContactsMenuActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste ecrã poderá escolher uma opção das listadas, para consultar contactos úteis.");
+
         updateFragments();
     }
 

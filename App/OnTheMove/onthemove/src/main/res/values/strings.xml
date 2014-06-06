@@ -50,5 +50,8 @@
     <string name="lojas">Lojas</string>
     <string name="title_activity_store">StoreActivity</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="paraoaeroporto">Para o Aeroporto</string>
+    <string name="apartirdoaeroporto">A Partir do Aeroporto</string>
+    <string name="title_activity_routes">RoutesMenuActivity</string>
 
 </resources>

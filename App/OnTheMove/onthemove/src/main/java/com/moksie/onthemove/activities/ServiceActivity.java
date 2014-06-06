@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.adapters.ContactsAdapter;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.objects.Map;
@@ -168,6 +169,15 @@ public class ServiceActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        if(service != null) {
+            //Botao ajuda
+            if (service.getNome().equals("taxis")) {
+                HeaderFragment.setMsg("Neste ecrã poderá consultar as informações para poder chamar um táxi. Ou então saber onde se encontram os táxis no aeroporto.");
+            } else
+                HeaderFragment.setMsg("Neste ecrã poderá consultar as informações sobre este serviço no Aeroporto");
+        }
+
         updateFragments();
     }
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:weightSum="5"
     android:gravity="center"
-    android:background="#f0f1f1">
+    android:background="@drawable/btn_flight">
 
 
     <TextView
@@ -14,7 +14,8 @@
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/codigoVoo"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@drawable/btn_text_color"/>
 
     <TextView
         android:layout_width="0dp"
@@ -22,7 +23,8 @@
         android:layout_weight="2"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/origemDestino"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@drawable/btn_text_color"/>
 
     <TextView
         android:layout_width="0dp"
@@ -30,7 +32,8 @@
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/companhia"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@drawable/btn_text_color"/>
 
     <TextView
         android:layout_width="0dp"
@@ -38,5 +41,6 @@
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tempoEstimado"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@drawable/btn_text_color"/>
 </LinearLayout>

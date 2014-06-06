@@ -101,8 +101,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text="Estou no Aeroporto"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:drawableLeft="@drawable/button_selector"
+                        android:drawablePadding="10dp"
                         android:textSize="20dp"
                         android:layout_weight="1"
                         android:id="@+id/airport_checkBox" />
@@ -125,8 +125,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text="Fiz o Check-In"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:drawableLeft="@drawable/button_selector"
+                        android:drawablePadding="10dp"
                         android:textSize="20dp"
                         android:layout_weight="1"
                         android:id="@+id/checkin_checkBox" />
@@ -149,8 +149,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text="Passei a Segurança"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:drawableLeft="@drawable/button_selector"
+                        android:drawablePadding="10dp"
                         android:textSize="20dp"
                         android:layout_weight="1"
                         android:id="@+id/security_checkBox" />
@@ -173,8 +173,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:text="Entrei no Embarque"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
+                        android:drawableLeft="@drawable/button_selector"
+                        android:drawablePadding="10dp"
                         android:textSize="20dp"
                         android:layout_weight="1"
                         android:id="@+id/boarding_checkBox" />
@@ -189,6 +189,7 @@
                 android:textSize="20dp"
                 android:background="@drawable/button_selector"
                 android:text="Consultar Voo Seguido"
+                android:textColor="@drawable/btn_text_color"
                 android:id="@+id/voo_seguido_button" />
 
             <Button
@@ -198,6 +199,7 @@
                 android:textSize="20dp"
                 android:background="@drawable/button_selector"
                 android:text="Consultar Promoções das Lojas"
+                android:textColor="@drawable/btn_text_color"
                 android:id="@+id/promotions_button" />
 
         </LinearLayout>

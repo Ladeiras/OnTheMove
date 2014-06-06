@@ -23,6 +23,7 @@ import com.moksie.onthemove.R;
 import com.moksie.onthemove.adapters.ContactsAdapter;
 import com.moksie.onthemove.adapters.StoreAdapter;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Contact;
 import com.moksie.onthemove.objects.Flight;
@@ -158,6 +159,10 @@ public class StoreActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste ecrã poderá consultar informações sobre a loja.");
+
         updateFragments();
     }
 

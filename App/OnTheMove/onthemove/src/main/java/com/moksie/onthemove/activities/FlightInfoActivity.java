@@ -26,6 +26,7 @@ import android.widget.TextView;
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FollowFragment;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.fragments.NotFollowFragment;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
@@ -118,6 +119,10 @@ public class FlightInfoActivity extends FragmentActivity
     @Override
     protected void onStart() {
         super.onStart();
+
+        //Botao ajuda
+        HeaderFragment.setMsg("Neste ecrã pode consultar as informações do voo. Pode também seguir o voo, clicando no botão 'Seguir Voo'.");
+
         updateFragments(estado);
     }
 

@@ -25,7 +25,7 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="2"
-            android:src="@drawable/ic_icon_phone_inactive"
+            android:src="@drawable/btn_phone"
             android:id="@+id/phone_icon_imageView" />
 
     </LinearLayout>

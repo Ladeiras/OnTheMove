@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
+import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
 
@@ -80,6 +81,9 @@ public class AboutActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        HeaderFragment.setMsg("Neste ecrã poderá consultar informações sobre a aplicação e a empresa");
+
         updateFragments();
     }
 

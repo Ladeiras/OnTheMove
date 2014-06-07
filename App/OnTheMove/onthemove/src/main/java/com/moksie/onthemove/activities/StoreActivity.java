@@ -121,7 +121,7 @@ public class StoreActivity extends FragmentActivity {
         });
 
         pd = new ProgressDialog(this);
-        pd.setMessage("A carregar a Imagem");
+        pd.setMessage("A carregar a imagem");
 
         Intent intent = getIntent();
         store = (Store) intent.getParcelableExtra("store");

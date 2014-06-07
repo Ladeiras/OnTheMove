@@ -2,24 +2,24 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="fill_parent"
     android:weightSum="4"
     android:gravity="center"
     android:background="@drawable/btn_flight">
 
     <ImageView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/store_item_height"
         android:layout_weight="1"
         android:padding="10dp"
         android:id="@+id/store_image"/>
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/store_item_height"
         android:layout_weight="2"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/store_name"
         android:textColor="@drawable/btn_text_color"/>
@@ -27,7 +27,7 @@
     <ImageView
         android:id="@+id/promo_icon"
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/store_item_height"
         android:layout_weight="1"
         android:src="@drawable/ic_icon_promocao"/>
 

@@ -10,7 +10,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/flight_item_height"
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/codigoVoo"
@@ -19,7 +19,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/flight_item_height"
         android:layout_weight="2"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/origemDestino"
@@ -28,7 +28,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/flight_item_height"
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/companhia"
@@ -37,7 +37,7 @@
 
     <TextView
         android:layout_width="0dp"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/flight_item_height"
         android:layout_weight="1"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/tempoEstimado"

@@ -74,7 +74,7 @@ public class StoreAdapter extends ArrayAdapter<Store> {
         public BGTGetMapImage(ImageView bmImage) {
 
             this.bmImage = bmImage;
-            pd.setMessage("A carregar os imagens");
+            pd.setMessage("A carregar as imagens");
         }
 
         @Override

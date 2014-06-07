@@ -71,7 +71,7 @@ create table otm_loja(
   idaeroporto number,
   categoria varchar(50),
   nome varchar(50),
-  imagemurl varchar(100),
+  imagemurl varchar(300),
   mapaurl varchar(50),
   webmail varchar(50),
   website varchar(50),
@@ -105,9 +105,9 @@ insert into otm_servico_telefone(idservico,contacto) values(1,351933544838);
 insert into otm_mapa(idservico,localizacao,url) values(1,'Chegadas','http://i.imgur.com/BEtZ2FX.png');
 
 insert into otm_servico(idaeroporto,nome,titulo) values(1,'mapa','Mapa do Aeroporto');
-insert into otm_mapa(idservico,localizacao,url) values(2,'Chegadas','http://i.imgur.com/ag6z4Jb.jpg');
-insert into otm_mapa(idservico,localizacao,url) values(2,'Partidas','http://i.imgur.com/WjeNs1n.jpg');
-insert into otm_mapa(idservico,localizacao,url) values(2,'Embarque','http://i.imgur.com/fSYqKMf.jpg');
+insert into otm_mapa(idservico,localizacao,url) values(2,'Chegadas','http://i.imgur.com/w0xpFJY.png');
+insert into otm_mapa(idservico,localizacao,url) values(2,'Partidas','http://i.imgur.com/4U9zchG.png');
+insert into otm_mapa(idservico,localizacao,url) values(2,'Embarque','http://i.imgur.com/K8XZxl3.png');
 
 insert into otm_servico(idaeroporto,nome,titulo) values(1,'restaurantes','Restaurantes');
 insert into otm_mapa(idservico,localizacao,url) values(3,'Chegadas','http://i.imgur.com/7uQq6wK.png');
@@ -142,8 +142,13 @@ insert into otm_mapa(idservico,localizacao,url) values(10,'Embarque','http://i.i
 
 --Lojas
 
-insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao) values(1,'roupa','Adolfo Dominguez','http://skin.adolfodominguez.com/skin/frontend/enterprise/adolfodominguez/images/adolfo-dominguez.png','http://i.imgur.com/1znrmtG.png','contact@adolfodominguez.com','http://www.adolfodominguez.com/en-po/',34902333717,'Horário: 7h00 às 22h00',0);
-insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao,promocao) values(1,'relogios','Boutique dos Relógios','http://www.boutiquedosrelogios.pt/cache/1000098.png','http://i.imgur.com/1znrmtG.png','info@boutiquedosrelogios.pt','http://www.boutiquedosrelogios.pt',351218311243,'Horário: 7h00 às 22h00',1,'Desconto de 5% em todos os relógios');
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao) values(1,'roupa','Adolfo Dominguez','http://skin.adolfodominguez.com/skin/frontend/enterprise/adolfodominguez/images/adolfo-dominguez.png','http://i.imgur.com/aXXRJMw.png','contact@adolfodominguez.com','http://www.adolfodominguez.com/en-po/',34902333717,'Horário: 7h00 às 22h00',0);
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao,promocao) values(1,'relogios','Boutique dos Relógios','http://www.boutiquedosrelogios.pt/cache/1000098.png','http://i.imgur.com/Bm5gMxP.png','info@boutiquedosrelogios.pt','http://www.boutiquedosrelogios.pt',351218311243,'Horário: 7h00 às 22h00',1,'Desconto de 5% em todos os relógios');
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao) values(1,'roupa','Bimba Y Lola','http://www.bimbaylola.com/img/logo_portada.jpg','http://i.imgur.com/3EAaEWt.png','contacto@bimbaylola.com','http://www.bimbaylola.com/',34986288401,'Horário: 7h00 às 22h00',0);
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao) values(1,'perfumes','Carolina Herrera','http://www.a-ora.com/apps/wbb2/clientes/hoykuRdVwL/24.jpg','http://i.imgur.com/BTaWB35.png','contacto@carolinaherrera.com','http://www.carolinaherrera.com/ch/pt/',34957241123,'Horário: 7h00 às 22h00',0);
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao,promocao) values(1,'roupaperfumesrelogios','El Corte Ingles','https://lh3.googleusercontent.com/--xhkCDXu_ak/UTmripLaR2I/AAAAAAAAEkE/lj1LL5ZhpEg/s250-no/covergoogle_ECI2.jpg','http://i.imgur.com/etLeW2n.png','servico_clientes@elcorteingles.pt','http://www.elcorteingles.pt/',351223781400,'Horário: 7h00 às 22h00',1,'5% desconto directo em todos os telemóveis livres');
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao) values(1,'joias','Pandora','http://www.hermanhiss.net/wp-content/uploads/2013/04/Pandora-Logo.jpg','http://i.imgur.com/IxmLhmN.png','geral@visaodotempo.pt','http://www.pandora.net/pt-pt',351214257200,'Horário: 8h00 às 21h00',0);
+insert into otm_loja(idaeroporto,categoria,nome,imagemurl,mapaurl,webmail,website,telefone,descricao,compromocao) values(1,'acessorios','Parfois','http://www.parfois.com/sysimages/logo.png','http://i.imgur.com/MVuaNPP.png','mail@parfois.com','http://www.parfois.com',351220900800,'Horário: 7h00 às 22h00',0);
 
 
 --select * from otm_aeroporto;

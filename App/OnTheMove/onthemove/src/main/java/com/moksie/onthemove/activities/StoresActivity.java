@@ -284,7 +284,7 @@ public class StoresActivity extends FragmentActivity {
 
     public void updateFooter()
     {
-        ListView layout = (ListView) findViewById(R.id.stores_listView);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.stores_LinearLayout);
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.stores_footer);
 

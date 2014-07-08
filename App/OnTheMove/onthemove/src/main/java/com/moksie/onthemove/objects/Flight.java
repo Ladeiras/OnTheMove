@@ -3,216 +3,253 @@ package com.moksie.onthemove.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.text.ParseException;
+import com.moksie.onthemove.activities.MainActivity;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
-/**
- * Created by belh0 on 14-04-2014.
- */
 public class Flight implements Parcelable
 {
-    private long id;
-    private long codigovoo;
-    private String codigocompanhia;
-    private String partidacidade;
-    private String chegadacidade;
-    private long partidaaeroportoid;
-    private long chegadaaeroportoid;
-    private Date partidatempoestimado;
-    private Date chegadatempoestimado;
-    private Date partidatemporeal;
-    private Date chegadatemporeal;
-
-    private long terminal;
-    private Date checkininicio;
-    private Date checkinfim;
-    private long portaembarque;
-    private Date embarque;
-    private long tapetebagagem;
-    private Date bagagem;
-    private long portadesembarque;
-    private Date desembarque;
+    private String airlinecode;
+    private String arrivalairportcode;
+    private String arrivalairportcity;
+    private String arrivalplannedtime;
+    private String arrivalrealtime;
+    private String boardingclosetime;
+    private String boardingdoorcode;
+    private long boardingduration;
+    private String boardingopentime;
+    private String checkincodes;
+    private String checkinclosetime;
+    private long checkinduration;
+    private String checkinopentime;
+    private String code;
+    private String departureairportcode;
+    private String departureairportcity;
+    private String departplannedtime;
+    private String departrealtime;
+    private String luggageclosetime;
+    private String luggageopentime;
+    private long luggagepickavgduration;
+    private String luggageplatforms;
+    private String status;
 
     private boolean tipovoo;
 
-    public Flight(long id, long codigovoo, String codigocompanhia, String partidacidade,
-                  String chegadacidade, long partidaaeroportoid, long chegadaaeroportoid,
-                  Date partidatempoestimado, Date chegadatempoestimado, Date partidatemporeal,
-                  Date chegadatemporeal, long terminal, Date checkininicio, Date checkinfim,
-                  long portaembarque, Date embarque, long tapetebagagem, Date bagagem,
-                  long portadesembarque, Date desembarque, boolean tipovoo) {
-        this.id = id;
-        this.codigovoo = codigovoo;
-        this.codigocompanhia = codigocompanhia;
-        this.partidacidade = partidacidade;
-        this.chegadacidade = chegadacidade;
-        this.partidaaeroportoid = partidaaeroportoid;
-        this.chegadaaeroportoid = chegadaaeroportoid;
-        this.partidatempoestimado = partidatempoestimado;
-        this.chegadatempoestimado = chegadatempoestimado;
-        this.partidatemporeal = partidatemporeal;
-        this.chegadatemporeal = chegadatemporeal;
-        this.terminal = terminal;
-        this.checkininicio = checkininicio;
-        this.checkinfim = checkinfim;
-        this.portaembarque = portaembarque;
-        this.embarque = embarque;
-        this.tapetebagagem = tapetebagagem;
-        this.bagagem = bagagem;
-        this.portadesembarque = portadesembarque;
-        this.desembarque = desembarque;
+    public Flight(String airlinecode, String arrivalairportcode, String arrivalairportcity,
+                  String arrivalplannedtime, String arrivalrealtime, String boardingclosetime,
+                  String boardingdoorcode, long boardingduration, String boardingopentime,
+                  String checkincodes, String checkinclosetime, long checkinduration,
+                  String checkinopentime, String code, String departureairportcode,
+                  String departureairportcity, String departplannedtime, String departrealtime,
+                  String luggageclosetime, String luggageopentime, long luggagepickavgduration,
+                  String luggageplatforms, String status, boolean tipovoo) {
+        this.airlinecode = airlinecode;
+        this.arrivalairportcode = arrivalairportcode;
+        this.arrivalairportcity = arrivalairportcity;
+        this.arrivalplannedtime = arrivalplannedtime;
+        this.arrivalrealtime = arrivalrealtime;
+        this.boardingclosetime = boardingclosetime;
+        this.boardingdoorcode = boardingdoorcode;
+        this.boardingduration = boardingduration;
+        this.boardingopentime = boardingopentime;
+        this.checkincodes = checkincodes;
+        this.checkinclosetime = checkinclosetime;
+        this.checkinduration = checkinduration;
+        this.checkinopentime = checkinopentime;
+        this.code = code;
+        this.departureairportcode = departureairportcode;
+        this.departureairportcity = departureairportcity;
+        this.departplannedtime = departplannedtime;
+        this.departrealtime = departrealtime;
+        this.luggageclosetime = luggageclosetime;
+        this.luggageopentime = luggageopentime;
+        this.luggagepickavgduration = luggagepickavgduration;
+        this.luggageplatforms = luggageplatforms;
+        this.status = status;
         this.tipovoo = tipovoo;
     }
 
-    public Flight(String str)
-    {
-        String list[] = str.split(",");
-        this.id = Long.parseLong(list[0]);
-        this.codigovoo = Long.parseLong(list[1]);
-        this.codigocompanhia = list[2];
-        this.partidacidade = list[3];
-        this.chegadacidade = list[4];
-        this.partidaaeroportoid = Long.parseLong(list[5]);
-        this.chegadaaeroportoid = Long.parseLong(list[6]);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        try {
-            this.partidatempoestimado = sdf.parse(list[7]);
-            this.chegadatempoestimado = sdf.parse(list[8]);
-            this.partidatemporeal = sdf.parse(list[9]);
-            this.chegadatemporeal = sdf.parse(list[10]);
-            this.checkininicio = sdf.parse(list[12]);
-            this.checkinfim = sdf.parse(list[13]);
-            this.embarque = sdf.parse(list[15]);
-            this.bagagem = sdf.parse(list[17]);
-            this.desembarque = sdf.parse(list[19]);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        this.terminal = Long.parseLong(list[11]);
-        this.portaembarque = Long.parseLong(list[14]);
-        this.tapetebagagem = Long.parseLong(list[16]);
-        this.portadesembarque = Long.parseLong(list[18]);
-
-        this.tipovoo = Boolean.parseBoolean(list[20]);
-    }
-
     public Flight(Parcel in) {
-        this.id = in.readLong();
-        this.codigovoo = in.readLong();
-        this.codigocompanhia = in.readString();
-        this.partidacidade = in.readString();
-        this.chegadacidade = in.readString();
-        this.partidaaeroportoid = in.readLong();
-        this.chegadaaeroportoid = in.readLong();
-        this.partidatempoestimado = new Date(in.readLong());
-        this.chegadatempoestimado = new Date(in.readLong());
-        this.partidatemporeal = new Date(in.readLong());
-        this.chegadatemporeal = new Date(in.readLong());
-
-        this.terminal = in.readLong();
-        this.checkininicio = new Date(in.readLong());
-        this.checkinfim = new Date(in.readLong());
-        this.portaembarque = in.readLong();
-        this.embarque = new Date(in.readLong());
-        this.tapetebagagem = in.readLong();
-        this.bagagem = new Date(in.readLong());
-        this.portadesembarque = in.readLong();
-        this.desembarque = new Date(in.readLong());
-
+        this.airlinecode = in.readString();
+        this.arrivalairportcode = in.readString();
+        this.arrivalairportcity = in.readString();
+        this.arrivalplannedtime = in.readString();
+        this.arrivalrealtime = in.readString();
+        this.boardingclosetime = in.readString();
+        this.boardingdoorcode = in.readString();
+        this.boardingduration = in.readLong();
+        this.boardingopentime = in.readString();
+        this.checkincodes = in.readString();
+        this.checkinclosetime = in.readString();
+        this.checkinduration = in.readLong();
+        this.checkinopentime = in.readString();
+        this.code = in.readString();
+        this.departureairportcode = in.readString();
+        this.departureairportcity = in.readString();
+        this.departplannedtime = in.readString();
+        this.departrealtime = in.readString();
+        this.luggageclosetime = in.readString();
+        this.luggageopentime = in.readString();
+        this.luggagepickavgduration = in.readLong();
+        this.luggageplatforms = in.readString();
+        this.status = in.readString();
         this.tipovoo = new Boolean(in.readString());
     }
 
-    public long getId() {
-        return id;
+    public String uTimeToString(String uTime)
+    {
+        String split1[] = uTime.split("\\(");
+        String split2[] = split1[1].split("\\+");
+        uTime = split2[0];
+
+        long time = Long.parseLong(uTime);
+        Date date = new Date(time);
+        SimpleDateFormat format = MainActivity.sdf;
+        format.setTimeZone(TimeZone.getDefault());
+
+        return format.format(date);
     }
 
-    public long getCodigovoo() {
-        return codigovoo;
+    public Date uTimeToDate(String uTime)
+    {
+        String split1[] = uTime.split("\\(");
+        String split2[] = split1[1].split("\\+");
+        uTime = split2[0];
+
+        long time = Long.parseLong(uTime);
+        Date date = new Date(time);
+
+        return date;
     }
 
-    public String getCodigocompanhia() {
-        return codigocompanhia;
+    public String getAirlinecode() {
+        return airlinecode;
     }
 
-    public String getPartidacidade() {
-        return partidacidade;
+    public String getArrivalairportcode() {
+        return arrivalairportcode;
     }
 
-    public String getChegadacidade() {
-        return chegadacidade;
+    public String getArrivalairportcity() {
+        return arrivalairportcity;
     }
 
-    public long getPartidaaeroportoid() {
-        return partidaaeroportoid;
+    public String getArrivalplannedtime() {
+        return arrivalplannedtime;
     }
 
-    public long getChegadaaeroportoid() {
-        return chegadaaeroportoid;
+    public String getArrivalplannedtimeStr() {
+        return uTimeToString(arrivalplannedtime);
     }
 
-    public Date getPartidatempoestimado() {
-        return partidatempoestimado;
+    public Date getArrivalplannedtimeDate() {
+        return uTimeToDate(arrivalplannedtime);
     }
 
-    public Date getChegadatempoestimado() {
-        return chegadatempoestimado;
+    public String getArrivalrealtime() {
+        return arrivalrealtime;
     }
 
-    public Date getPartidatemporeal() {
-        return partidatemporeal;
+    public String getBoardingclosetime() {
+        return boardingclosetime;
     }
 
-    public Date getChegadatemporeal() {
-        return chegadatemporeal;
+    public String getBoardingdoorcode() {
+        return boardingdoorcode;
     }
 
-    public long getTerminal() {
-        return terminal;
+    public long getBoardingduration() {
+        return boardingduration;
     }
 
-    public Date getCheckininicio() {
-        return checkininicio;
+    public String getBoardingopentime() {
+        return boardingopentime;
     }
 
-    public Date getCheckinfim() {
-        return checkinfim;
+    public Date getBoardingopentimeDate() {
+        return uTimeToDate(boardingopentime);
     }
 
-    public long getPortaembarque() {
-        return portaembarque;
+    public String getCheckincodes() {
+        return checkincodes;
     }
 
-    public Date getEmbarque() {
-        return embarque;
+    public String getCheckinclosetime() {
+        return checkinclosetime;
     }
 
-    public long getTapetebagagem() {
-        return tapetebagagem;
+    public Date getCheckinclosetimeDate() {
+        return uTimeToDate(checkinclosetime);
     }
 
-    public Date getBagagem() {
-        return bagagem;
+    public long getCheckinduration() {
+        return checkinduration;
     }
 
-    public long getPortadesembarque() {
-        return portadesembarque;
+    public String getCheckinopentime() {
+        return checkinopentime;
     }
 
-    public Date getDesembarque() {
-        return desembarque;
+    public Date getCheckinopentimeDate() {
+        return uTimeToDate(checkinopentime);
     }
 
-    public boolean isPartida() {
-        if(tipovoo) return true;
-        return false;
+    public String getCode() {
+        return code;
     }
 
-    public boolean isChegada() {
-        if(!tipovoo) return true;
-        return false;
+    public String getDepartureairportcode() {
+        return departureairportcode;
+    }
+
+    public String getDepartureairportcity() {
+        return departureairportcity;
+    }
+
+    public String getDepartplannedtime() {
+        return departplannedtime;
+    }
+
+    public String getDepartplannedtimeStr() {
+        return uTimeToString(departplannedtime);
+    }
+
+    public Date getDepartplannedtimeDate() {
+        return uTimeToDate(departplannedtime);
+    }
+
+    public String getDepartrealtime() {
+        return departrealtime;
+    }
+
+    public String getLuggageclosetime() {
+        return luggageclosetime;
+    }
+
+    public String getLuggageopentime() {
+        return luggageopentime;
+    }
+
+    public Date getLuggageopentimeDate() {
+        return uTimeToDate(luggageopentime);
+    }
+
+    public long getLuggagepickavgduration() {
+        return luggagepickavgduration;
+    }
+
+    public String getLuggageplatforms() {
+        return luggageplatforms;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public boolean isDeparture() {
+        return tipovoo;
     }
 
     @Override
@@ -222,32 +259,34 @@ public class Flight implements Parcelable
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeLong(id);
-        parcel.writeLong(codigovoo);
-        parcel.writeString(codigocompanhia);
-        parcel.writeString(partidacidade);
-        parcel.writeString(chegadacidade);
-        parcel.writeLong(partidaaeroportoid);
-        parcel.writeLong(chegadaaeroportoid);
-        parcel.writeLong(partidatempoestimado.getTime());
-        parcel.writeLong(chegadatempoestimado.getTime());
-        parcel.writeLong(partidatemporeal.getTime());
-        parcel.writeLong(chegadatemporeal.getTime());
-
-        parcel.writeLong(terminal);
-        parcel.writeLong(checkininicio.getTime());
-        parcel.writeLong(checkinfim.getTime());
-        parcel.writeLong(portaembarque);
-        parcel.writeLong(embarque.getTime());
-        parcel.writeLong(tapetebagagem);
-        parcel.writeLong(bagagem.getTime());
-        parcel.writeLong(portadesembarque);
-        parcel.writeLong(desembarque.getTime());
+        parcel.writeString(airlinecode);
+        parcel.writeString(arrivalairportcode);
+        parcel.writeString(arrivalairportcity);
+        parcel.writeString(arrivalplannedtime);
+        parcel.writeString(arrivalrealtime);
+        parcel.writeString(boardingclosetime);
+        parcel.writeString(boardingdoorcode);
+        parcel.writeLong(boardingduration);
+        parcel.writeString(boardingopentime);
+        parcel.writeString(checkincodes);
+        parcel.writeString(checkinclosetime);
+        parcel.writeLong(checkinduration);
+        parcel.writeString(checkinopentime);
+        parcel.writeString(code);
+        parcel.writeString(departureairportcode);
+        parcel.writeString(departureairportcity);
+        parcel.writeString(departplannedtime);
+        parcel.writeString(departrealtime);
+        parcel.writeString(luggageclosetime);
+        parcel.writeString(luggageopentime);
+        parcel.writeLong(luggagepickavgduration);
+        parcel.writeString(luggageplatforms);
+        parcel.writeString(status);
 
         parcel.writeString(String.valueOf(tipovoo));
     }
 
-    public static final Parcelable.Creator<Flight> CREATOR = new Parcelable.Creator<Flight>() {
+    public static final Creator<Flight> CREATOR = new Creator<Flight>() {
         public Flight createFromParcel(Parcel in) {
             return new Flight(in);
         }
@@ -257,43 +296,32 @@ public class Flight implements Parcelable
         }
     };
 
-    @Override
-    public String toString() {
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-
-        return this.getId()+","+
-                this.getCodigovoo()+","+
-                this.getCodigocompanhia()+","+
-                this.getPartidacidade()+","+
-                this.getChegadacidade()+","+
-                this.getPartidaaeroportoid()+","+
-                this.getChegadaaeroportoid()+","+
-                sdf.format(this.getPartidatempoestimado())+","+
-                sdf.format(this.getChegadatempoestimado())+","+
-                sdf.format(this.getPartidatemporeal())+","+
-                sdf.format(this.getChegadatemporeal())+","+
-
-                this.getTerminal()+","+
-                sdf.format(this.getCheckininicio())+","+
-                sdf.format(this.getCheckinfim())+","+
-                this.getPortaembarque()+","+
-                sdf.format(this.getEmbarque())+","+
-                this.getTapetebagagem()+","+
-                sdf.format(this.getBagagem())+","+
-                this.getPortadesembarque()+","+
-                sdf.format(this.getDesembarque())+","+
-
-                this.tipovoo;
-    }
-
     public FlightSerializable toSerializable()
     {
-        return new FlightSerializable(this.id, this.codigovoo, this.codigocompanhia,
-                this.partidacidade, this.chegadacidade, this.partidaaeroportoid,
-                this.chegadaaeroportoid, this.partidatempoestimado, this.chegadatempoestimado,
-                this.partidatemporeal, this.chegadatemporeal, this.terminal, this.checkininicio,
-                this.checkinfim, this.portaembarque, this.embarque, this.tapetebagagem, this.bagagem,
-                this.portadesembarque, this.desembarque, this.tipovoo);
+        return new FlightSerializable(
+            this.airlinecode,
+            this.arrivalairportcode,
+            this.arrivalairportcity,
+            this.arrivalplannedtime,
+            this.arrivalrealtime,
+            this.boardingclosetime,
+            this.boardingdoorcode,
+            this.boardingduration,
+            this.boardingopentime,
+            this.checkincodes,
+            this.checkinclosetime,
+            this.checkinduration,
+            this.checkinopentime,
+            this.code,
+            this.departureairportcode,
+            this.departureairportcity,
+            this.departplannedtime,
+            this.departrealtime,
+            this.luggageclosetime,
+            this.luggageopentime,
+            this.luggagepickavgduration,
+            this.luggageplatforms,
+            this.status,
+            this.tipovoo);
     }
 }

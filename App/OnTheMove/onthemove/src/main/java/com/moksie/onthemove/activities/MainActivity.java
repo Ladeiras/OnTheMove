@@ -21,6 +21,7 @@ import com.moksie.onthemove.listners.MyLocationListener;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.tasks.BGTGetJSONArray;
 import com.moksie.onthemove.utilities.DistanceComparator;
+import com.moksie.onthemove.utilities.ErrorManager;
 
 import org.apache.http.NameValuePair;
 import org.json.JSONArray;
@@ -37,6 +38,7 @@ import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity {
 
+    public static final String BASE_API_URL = "http://move-me.mobi:35004/OnTheMove/OnTheMoveService.svc/";
     public static String FILE_FLIGHT = "flight";
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -52,8 +54,31 @@ public class MainActivity extends Activity {
     private static final String AEROPORTO_API_URL = "http://onthemove.no-ip.org:3000/api/aeroportos";
     private BGTGetJSONArray bgt;
 
-    Spinner aeroportoSpinner;
+    Spinner OPTaeroportoSpinner;
     ArrayList<Airport> airports = new ArrayList<Airport>();
+
+    //OPT Airport
+    private static final String CODE = "Code";
+    private static final String CITY = "City";
+    private static final String COUNTRY = "Country";
+    private static final String EMAIL = "Email";
+    private static final String FACEBOOK = "Facebook";
+    private static final String FLIGHTADVISEDPREPARATIONTIME = "FlightAdvisedPreparationTime";
+    private static final String LAT = "Lat";
+    private static final String LEAVEDURATION = "LeaveDuration";
+    private static final String LON = "Lon";
+    private static final String NAME = "Name";
+    private static final String SAFETYCHECKAVERAGEDURATION = "SafetyCheckAverageDuration";
+    private static final String TELEF = "Telef";
+    private static final String TIMEZONE = "Timezone";
+    private static final String TOBOARDINGDURATION = "ToBoardingDuration";
+    private static final String TOCHECKINDURATION = "ToCheckinDuration";
+    private static final String TOLUGGAGEDURATION = "ToLuggageDuration";
+    private static final String TOSAFETYCHECKDURATION = "ToSafetyCheckDuration";
+    private static final String TWITTER = "Twitter";
+    private static final String WEBSITE = "Website";
+
+    private static final String GET_AIRPORTS_BY_TEXT = "getAirportsByText";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +88,7 @@ public class MainActivity extends Activity {
 
         //TODO usado somente para testes
         try {
-            currentTime = sdf.parse("2014-05-04T12:44:00");
+            currentTime = sdf.parse("2014-07-06T13:30:00");
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -82,14 +107,27 @@ public class MainActivity extends Activity {
         super.onStart();
 
         //Construir lista de aeroportos + botao "OK"
-        if(airports.isEmpty())
-            buildAeroportoDropDown();
+        /*if(airports.isEmpty())
+            buildAirportsDropDown();*/
 
-        final Button button = (Button) findViewById(R.id.okbutton);
+        if(airports.isEmpty())
+            buildOPTAirportsDropDown();
+
+
+        /*final Button button = (Button) findViewById(R.id.okbutton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
                 intent.putExtra("airport", (Parcelable) airports.get(aeroportoSpinner.getSelectedItemPosition()));
+                MainActivity.this.startActivity(intent);
+            }
+        });*/
+
+        final Button button = (Button) findViewById(R.id.okbutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MenuMainActivity.class);
+                intent.putExtra("airport", (Parcelable) airports.get(OPTaeroportoSpinner.getSelectedItemPosition()));
                 MainActivity.this.startActivity(intent);
             }
         });
@@ -115,60 +153,7 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void buildAeroportoDropDown()
-    {
-        List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
-        bgt = new BGTGetJSONArray(AEROPORTO_API_URL, "GET", apiParams);
-
-        try {
-            JSONArray apJSON = bgt.execute().get();
-
-            for(int i=0; i < apJSON.length(); i++)
-            {
-                JSONObject a = apJSON.getJSONObject(i);
-
-                long id = a.getLong(ID);
-                String pais = a.getString(PAIS);
-                String cidade = a.getString(CIDADE);
-                String nome = a.getString(NOME);
-                double latitude = a.getDouble(LATITUDE);
-                double longitude = a.getDouble(LONGITUDE);
-
-                airports.add(new Airport(id,pais,cidade,nome,latitude,longitude));
-
-                sortData(airports);
-
-                AirportAdapter aAdapter = new AirportAdapter(this, android.R.layout.simple_spinner_item, airports);
-                aeroportoSpinner = (Spinner) findViewById(R.id.aeroportos);
-
-                aeroportoSpinner.setAdapter(aAdapter);
-                aeroportoSpinner.setPrompt("Aeroporto");
-
-                aeroportoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        //Fazer nada
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-
-    public ArrayList<Airport> sortData(ArrayList<Airport> data)
+    public ArrayList<Airport> sortAirports(ArrayList<Airport> data)
     {
         LocationManager mlocManager=null;
         LocationListener mlocListener;
@@ -193,9 +178,78 @@ public class MainActivity extends Activity {
         return data;
     }
 
+    public void buildOPTAirportsDropDown()
+    {
+        List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
+        bgt = new BGTGetJSONArray(BASE_API_URL+GET_AIRPORTS_BY_TEXT, "GET", apiParams);
+
+        try {
+            JSONArray apJSON = bgt.execute().get();
+
+            for(int i=0; i < apJSON.length(); i++)
+            {
+                JSONObject a = apJSON.getJSONObject(i);
+
+                String code = a.getString(CODE);
+                String city = a.getString(CITY);
+                String country = a.getString(COUNTRY);
+                String email = a.getString(EMAIL);
+                String facebook = a.getString(FACEBOOK);
+                long flightadvisedpreparationtime = a.getLong(FLIGHTADVISEDPREPARATIONTIME);
+                double lat = a.getDouble(LAT);
+                long leaveduration = a.getLong(LEAVEDURATION);
+                double lon = a.getDouble(LON);
+                String name = a.getString(NAME);
+                long safetycheckaverageduration = a.getLong(SAFETYCHECKAVERAGEDURATION);
+                String telef = a.getString(TELEF);
+                String timezone = a.getString(TIMEZONE);
+                long toboardingduration = a.getLong(TOBOARDINGDURATION);
+                long tocheckinduration = a.getLong(TOCHECKINDURATION);
+                long toluggageduration = a.getLong(TOLUGGAGEDURATION);
+                long tosafetycheckduration = a.getLong(TOSAFETYCHECKDURATION);
+                String twitter = a.getString(TWITTER);
+                String website = a.getString(WEBSITE);
+
+                airports.add(new Airport(code,city,country,email,facebook,
+                        flightadvisedpreparationtime,lat,leaveduration,lon,name,
+                        safetycheckaverageduration,telef,timezone,toboardingduration,
+                        tocheckinduration,toluggageduration,tosafetycheckduration,twitter,website));
+
+                sortAirports(airports);
+
+                AirportAdapter aAdapter = new AirportAdapter(this, android.R.layout.simple_spinner_item, airports);
+                OPTaeroportoSpinner = (Spinner) findViewById(R.id.aeroportos);
+
+                OPTaeroportoSpinner.setAdapter(aAdapter);
+                OPTaeroportoSpinner.setPrompt("Aeroporto");
+
+                OPTaeroportoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        //Fazer nada
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
+        //super.onBackPressed();
+        ErrorManager.Exit(this);
     }
 }

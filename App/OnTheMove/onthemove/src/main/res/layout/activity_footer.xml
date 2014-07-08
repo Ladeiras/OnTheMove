@@ -198,6 +198,16 @@
                 android:layout_weight="1.5"
                 android:textSize="20dp"
                 android:background="@drawable/button_selector"
+                android:text="Não Seguir Voo"
+                android:textColor="@drawable/btn_text_color"
+                android:id="@+id/unfollow_button" />
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:textSize="20dp"
+                android:background="@drawable/button_selector"
                 android:text="Consultar Promoções das Lojas"
                 android:textColor="@drawable/btn_text_color"
                 android:id="@+id/promotions_button" />

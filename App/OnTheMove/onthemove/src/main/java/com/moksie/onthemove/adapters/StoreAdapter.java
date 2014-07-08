@@ -14,11 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.moksie.onthemove.R;
-import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.objects.Store;
 
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class StoreAdapter extends ArrayAdapter<Store> {
@@ -47,15 +45,15 @@ public class StoreAdapter extends ArrayAdapter<Store> {
             ImageView PromoIcon = (ImageView) row.findViewById(R.id.promo_icon);
 
             if (StoreName != null) {
-                StoreName.setText(item.getNome());
+                StoreName.setText(item.getLocation().getName());
             }
 
             if (StoreImage != null) {
-                new BGTGetMapImage(StoreImage).execute(item.getImagemurl());
+                new BGTGetMapImage(StoreImage).execute(item.getContact().getLogourl());
             }
 
             if(PromoIcon != null) {
-                if (item.isCompromocao()) {
+                if (item.isWithCampaign()) {
                     PromoIcon.setVisibility(View.VISIBLE);
                 }
                 else PromoIcon.setVisibility(View.INVISIBLE);

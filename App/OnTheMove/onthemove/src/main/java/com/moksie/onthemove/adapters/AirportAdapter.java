@@ -43,13 +43,13 @@ public class AirportAdapter extends ArrayAdapter<Airport> {
             AeroportoNome.setTextSize(14);
 
             if (AeroportoPais != null) {
-                AeroportoPais.setText(item.getPais());
+                AeroportoPais.setText(item.getCountry());
             }
             if (AeroportoCidade != null) {
-                AeroportoCidade.setText(item.getCidade());
+                AeroportoCidade.setText(item.getCity());
             }
             if (AeroportoNome != null) {
-                AeroportoNome.setText(item.getNome());
+                AeroportoNome.setText(item.getName());
             }
         }
 
@@ -76,13 +76,13 @@ public class AirportAdapter extends ArrayAdapter<Airport> {
             AeroportoNome.setTextSize(14);
 
             if (AeroportoPais != null) {
-                AeroportoPais.setText(item.getPais());
+                AeroportoPais.setText(item.getCountry());
             }
             if (AeroportoCidade != null) {
-                AeroportoCidade.setText(item.getCidade());
+                AeroportoCidade.setText(item.getCity());
             }
             if (AeroportoNome != null) {
-                AeroportoNome.setText(item.getNome());
+                AeroportoNome.setText(item.getName());
             }
         }
 

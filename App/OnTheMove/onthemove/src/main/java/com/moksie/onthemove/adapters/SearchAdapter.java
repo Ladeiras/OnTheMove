@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.moksie.onthemove.R;
-import com.moksie.onthemove.activities.FlightsActivity;
+import com.moksie.onthemove.activities.FlightListActivity;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,7 @@ public class SearchAdapter extends ArrayAdapter<String> {
         //String item = data.get(position);
         String item = getItem(position);
 
-        if( (item != null) && ( position == FlightsActivity.OPTION_DEFAULT)) {
+        if( (item != null) && ( position == FlightListActivity.OPTION_DEFAULT)) {
             row.setVisibility(View.GONE);
         } else {
             row.setVisibility(View.VISIBLE);

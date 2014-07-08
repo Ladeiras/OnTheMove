@@ -106,7 +106,7 @@ public class FileIO
         }
     }
 
-    public static FlightSerializable deserializeVooObject(String file, Context c)
+    public static FlightSerializable deserializeFlightObject(String file, Context c)
     {
         FileInputStream fis = null;
         FlightSerializable flightSerializable = null;

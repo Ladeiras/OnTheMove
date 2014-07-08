@@ -1,5 +1,7 @@
 package com.moksie.onthemove.activities;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -22,6 +24,8 @@ import java.text.SimpleDateFormat;
 public class FooterActivity extends FragmentActivity {
 
     private FlightSerializable flight;
+    private Context ctx = this;
+    private NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,23 +39,23 @@ public class FooterActivity extends FragmentActivity {
         parseVooFile();
 
         TextView CodigoVoo = (TextView) this.findViewById(R.id.codigo_voo_textView);
-        CodigoVoo.setText(String.valueOf(FooterFragment.flight.getCodigovoo()));
+        CodigoVoo.setText(String.valueOf(FooterFragment.flight.getCode()));
 
         TextView OrigemDestino = (TextView) this.findViewById(R.id.origem_destino_textView);
-        OrigemDestino.setText(FooterFragment.flight.getPartidacidade()+" - "+FooterFragment.flight.getChegadacidade());
+        OrigemDestino.setText(FooterFragment.flight.getDepartureairportcity()+" - "+FooterFragment.flight.getArrivalairportcity());
 
         TextView TempoEstimado = (TextView) this.findViewById(R.id.tempo_estimado_textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.applyPattern("dd/MM HH:mm");
 
-        if(FooterFragment.flight.isPartida())
-            TempoEstimado.setText(sdf.format(FooterFragment.flight.getPartidatempoestimado()));
+        if(FooterFragment.flight.isDeparture())
+            TempoEstimado.setText(sdf.format(FooterFragment.flight.getDepartplannedtimeDate()));
         else
-            TempoEstimado.setText(sdf.format(FooterFragment.flight.getChegadatempoestimado()));
+            TempoEstimado.setText(sdf.format(FooterFragment.flight.getArrivalplannedtimeDate()));
 
 
         LinearLayout cbLL = (LinearLayout) this.findViewById(R.id.checkboxesLinearLayout);
-        if(FooterFragment.flight.isChegada()) {
+        if(!FooterFragment.flight.isDeparture()) {
             cbLL.setVisibility(View.GONE);
         }
         else {
@@ -93,19 +97,35 @@ public class FooterActivity extends FragmentActivity {
         final Button promotionsButton = (Button) findViewById(R.id.promotions_button);
         promotionsButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(FooterActivity.this, StoresActivity.class);
+                Intent intent = new Intent(FooterActivity.this, StoreListActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
-                long idAirport;
-                if(FooterFragment.flight.isPartida())
-                    idAirport = FooterFragment.flight.getPartidaaeroportoid();
-                else idAirport = FooterFragment.flight.getChegadaaeroportoid();
+                String codeAirport;
+                if(FooterFragment.flight.isDeparture())
+                    codeAirport = FooterFragment.flight.getDepartureairportcode();
+                else codeAirport = FooterFragment.flight.getArrivalairportcode();
 
-                intent.putExtra("airport", idAirport);
+                intent.putExtra("airport", codeAirport);
                 intent.putExtra("option", "promo");
                 FooterActivity.this.startActivity(intent);
             }
         });
+
+        //Botao Nao Seguir Voo
+        final Button unfollowButton = (Button) findViewById(R.id.unfollow_button);
+        unfollowButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FileIO.removeFile(MainActivity.FILE_FLIGHT, ctx);
+                CancelNotification(ctx, 01);
+                onBackPressed();
+            }
+        });
+    }
+
+    public static void CancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
     }
 
     @Override
@@ -197,7 +217,7 @@ public class FooterActivity extends FragmentActivity {
         if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this))
         {
             //Ler flight do ficheiro
-            this.flight = FileIO.deserializeVooObject(MainActivity.FILE_FLIGHT, this);
+            this.flight = FileIO.deserializeFlightObject(MainActivity.FILE_FLIGHT, this);
             return true;
         }
 

@@ -36,8 +36,7 @@
         android:layout_width="fill_parent"
         android:orientation="vertical"
         android:layout_height="0dp"
-        android:layout_weight="9"
-        android:weightSum="16">
+        android:layout_weight="9">
 
         <LinearLayout
             android:id="@+id/store_ver_mapa_layout"
@@ -153,10 +152,66 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/store_facebook_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Facebook"
+                android:id="@+id/facebook_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_facebook"
+                android:id="@+id/facebook_icon_imageView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/store_twitter_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Twitter"
+                android:id="@+id/twitter_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_twitter"
+                android:id="@+id/twitter_icon_imageView" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:orientation="vertical"
             android:layout_height="0dp"
-            android:layout_weight="8">
+            android:layout_weight="6">
 
             <LinearLayout
                 android:layout_width="fill_parent"

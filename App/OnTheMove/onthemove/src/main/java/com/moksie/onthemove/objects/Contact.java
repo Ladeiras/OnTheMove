@@ -3,84 +3,119 @@ package com.moksie.onthemove.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
-
 /**
- * Created by belh0 on 14-04-2014.
+ * Created by belh0 on 08/07/2014.
  */
-public class Contact
+public class Contact implements Parcelable
 {
-    private long id;
-    private long idaeroporto;
-    private String titulo;
+    private String name;
+    private String email;
+    private String facebook;
+    private String telef;
+    private String twitter;
     private String website;
-    private String mapaurl;
-    private String descricao;
-    private ArrayList<Long> contactos;
+    private String logourl;
 
-    public Contact(long id, long idaeroporto, String titulo, String website, String mapaurl, String descricao, ArrayList<Long> contactos) {
-        this.id = id;
-        this.idaeroporto = idaeroporto;
-        this.titulo = titulo;
+    public Contact(String name, String email, String facebook, String telef, String twitter,
+                   String website, String logourl) {
+        this.name = name;
+        this.email = email;
+        this.facebook = facebook;
+        this.telef = telef;
+        this.twitter = twitter;
         this.website = website;
-        this.mapaurl = mapaurl;
-        this.descricao = descricao;
-        this.contactos = contactos;
+        this.logourl = logourl;
     }
 
-    public long getId() {
-        return id;
+    public Contact(Parcel in) {
+        this.name = in.readString();
+        this.email = in.readString();
+        this.facebook = in.readString();
+        this.telef = in.readString();
+        this.twitter = in.readString();
+        this.website = in.readString();
+        this.logourl = in.readString();
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public String getName() {
+        return name;
     }
 
-    public long getIdaeroporto() {
-        return idaeroporto;
+    public String getEmail() {
+        return email;
     }
 
-    public void setIdaeroporto(long idaeroporto) {
-        this.idaeroporto = idaeroporto;
+    public String getFacebook() {
+        return facebook;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTelef() {
+        return telef;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public String getTwitter() {
+        return twitter;
     }
 
     public String getWebsite() {
         return website;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public void setTelef(String telef) {
+        this.telef = telef;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
     public void setWebsite(String website) {
         this.website = website;
     }
 
-    public String getMapaurl() {
-        return mapaurl;
+    public String getLogourl() {
+        return logourl;
     }
 
-    public void setMapaurl(String mapaurl) {
-        this.mapaurl = mapaurl;
+    public void setLogourl(String logourl) {
+        this.logourl = logourl;
     }
 
-    public String getDescricao() {
-        return descricao;
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeString(email);
+        parcel.writeString(facebook);
+        parcel.writeString(telef);
+        parcel.writeString(twitter);
+        parcel.writeString(website);
+        parcel.writeString(logourl);
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public ArrayList<Long> getContactos() {
-        return contactos;
-    }
+    public static final Creator<Contact> CREATOR = new Creator<Contact>() {
+        public Contact createFromParcel(Parcel in) {
+            return new Contact(in);
+        }
 
-    public void setContactos(ArrayList<Long> contactos) {
-        this.contactos = contactos;
-    }
+        public Contact[] newArray(int size) {
+            return new Contact[size];
+        }
+    };
 }

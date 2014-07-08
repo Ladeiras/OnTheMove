@@ -53,5 +53,11 @@
     <string name="paraoaeroporto">Para o Aeroporto</string>
     <string name="apartirdoaeroporto">A Partir do Aeroporto</string>
     <string name="title_activity_routes">RoutesMenuActivity</string>
+    <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_plants">PlantsActivity</string>
+    <string name="title_activity_plant">PlantActivity</string>
+    <string name="title_activity_locations">LocationsActivity</string>
+    <string name="title_activity_stores2">StoresActivity2</string>
+    <string name="title_activity_store2">StoreActivity2</string>
 
 </resources>

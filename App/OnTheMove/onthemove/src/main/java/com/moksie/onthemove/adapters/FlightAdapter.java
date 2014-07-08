@@ -13,6 +13,7 @@ import com.moksie.onthemove.objects.Flight;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 public class FlightAdapter extends ArrayAdapter<Flight> {
     private Activity context;
@@ -38,25 +39,31 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         if (item != null) { // Parse the data from each object and set it.
             TextView CodigoVoo = (TextView) row.findViewById(R.id.codigoVoo);
             TextView OrigemDestino = (TextView) row.findViewById(R.id.origemDestino);
-            TextView Companhia = (TextView) row.findViewById(R.id.companhia);
+            //TextView Companhia = (TextView) row.findViewById(R.id.companhia);
             TextView TempoEstimado = (TextView) row.findViewById(R.id.tempoEstimado);
 
             if (CodigoVoo != null) {
-                CodigoVoo.setText(String.valueOf(item.getCodigovoo()));
+                CodigoVoo.setText(String.valueOf(item.getCode()));
             }
 
             if (OrigemDestino != null) {
-                OrigemDestino.setText(item.getPartidacidade()+" - "+item.getChegadacidade());
+                OrigemDestino.setText(item.getDepartureairportcity()+" - "+item.getArrivalairportcity());
             }
 
-            if (Companhia != null) {
-                Companhia.setText(item.getCodigocompanhia());
-            }
+          /*if (Companhia != null) {
+                Companhia.setText(item.getAirlinecode());
+            }*/
 
             if (TempoEstimado != null) {
+
                 SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                 sdf.applyPattern("dd/MM HH:mm");
-                TempoEstimado.setText(sdf.format(item.getPartidatempoestimado()));
+                sdf.setTimeZone(TimeZone.getDefault());
+
+                if(item.isDeparture())
+                    TempoEstimado.setText(sdf.format(item.getDepartplannedtimeDate()));
+                else
+                    TempoEstimado.setText(sdf.format(item.getArrivalplannedtimeDate()));
             }
         }
         else Log.w("FLAG", "Item Nulo!");

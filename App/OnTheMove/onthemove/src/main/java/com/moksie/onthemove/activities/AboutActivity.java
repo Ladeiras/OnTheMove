@@ -3,22 +3,14 @@ package com.moksie.onthemove.activities;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.moksie.onthemove.R;
@@ -27,11 +19,17 @@ import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
 
-import java.io.InputStream;
+/**
+ * Nesta atividade é mostrada uma página web com informações sobre a aplicação e sobre a empresa
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
 
 public class AboutActivity extends FragmentActivity {
 
-    private ProgressDialog pd;
+    private ProgressDialog pd; //Dialogo de progresso para os pedidos em background
 
     @Override
     public Context getApplicationContext() {
@@ -50,6 +48,7 @@ public class AboutActivity extends FragmentActivity {
         pd = new ProgressDialog(this);
         pd.setMessage("A carregar");
 
+        //Vista da página web
         WebView webview = (WebView) findViewById(R.id.webView);
         webview.getSettings().setJavaScriptEnabled(true);
 
@@ -73,8 +72,10 @@ public class AboutActivity extends FragmentActivity {
             }
         });
 
+        //Endereço da página web
         webview.loadUrl("http://moksie.pt/pages/projects.html#OnTheMove");
 
+        //Fragments
         updateFragments();
     }
 
@@ -82,6 +83,7 @@ public class AboutActivity extends FragmentActivity {
     protected void onStart() {
         super.onStart();
 
+        //Botão Ajuda
         HeaderFragment.setMsg("Neste ecrã poderá consultar informações sobre a aplicação e a empresa");
 
         updateFragments();
@@ -105,11 +107,19 @@ public class AboutActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         LinearLayout layout = (LinearLayout) findViewById(R.id.about_LinearLayout);
@@ -119,7 +129,7 @@ public class AboutActivity extends FragmentActivity {
         if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this))
         {
             //Ler voo do ficheiro
-            Flight tempFlight = FileIO.deserializeVooObject(MainActivity.FILE_FLIGHT, this).toParcelable();
+            Flight tempFlight = FileIO.deserializeFlightObject(MainActivity.FILE_FLIGHT, this).toParcelable();
 
             FooterFragment.setVisibility(true);
             FooterFragment.setFlight(tempFlight);

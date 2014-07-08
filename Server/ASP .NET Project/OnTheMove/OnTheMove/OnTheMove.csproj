@@ -131,29 +131,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AeroportosController.cs" />
-    <Compile Include="Controllers\ChegadasController.cs" />
-    <Compile Include="Controllers\LojasController.cs" />
-    <Compile Include="Controllers\ServicoController.cs" />
-    <Compile Include="Controllers\ContactoController.cs" />
-    <Compile Include="Controllers\PartidasController.cs" />
-    <Compile Include="Controllers\VoosController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lib\Lib_Loja.cs" />
-    <Compile Include="Lib\Lib_Servico.cs" />
-    <Compile Include="Lib\Lib_Contacto.cs" />
-    <Compile Include="Lib\Lib_Voo.cs" />
-    <Compile Include="Lib\Lib_Aeroporto.cs" />
-    <Compile Include="Lib\Model\Aeroporto.cs" />
-    <Compile Include="Lib\Model\Loja.cs" />
-    <Compile Include="Lib\Model\Mapa.cs" />
-    <Compile Include="Lib\Model\Servico.cs" />
-    <Compile Include="Lib\Model\Contacto.cs" />
-    <Compile Include="Lib\Model\Voo.cs" />
+    <Compile Include="Lib\Lib_Contact.cs" />
+    <Compile Include="Lib\Model\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

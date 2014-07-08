@@ -38,17 +38,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Porto - Lisboa"
+            android:textStyle="bold"
             android:id="@+id/top_origem_destino_textView"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
-            android:textColor="@color/onthemovetheme_color"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TAP"
-            android:id="@+id/top_companhia_textView"
             android:gravity="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Base.Widget.PopupMenu.Large"
             android:textColor="@color/onthemovetheme_color"/>

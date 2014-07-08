@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainMenuActivity"
+            android:name=".activities.MenuMainActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_menu" >
         </activity>
@@ -28,42 +28,37 @@
             android:label="@string/title_activity_gpsalert" >
         </activity>
         <activity
-            android:name=".activities.RoutesMenuActivity"
+            android:name=".activities.MenuRoutesActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_routes" >
         </activity>
         <activity
-            android:name=".activities.MoveMeMenuActivity"
+            android:name=".activities.MenuMoveMeActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_move_me" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.MapsActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_maps" >
-        </activity>
-        <activity
-            android:name="com.moksie.onthemove.activities.MapActivity"
+            android:name=".activities.PlantActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_map" >
         </activity>
         <activity
-            android:name=".activities.FlightsActivity"
+            android:name=".activities.FlightListActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_voos" >
         </activity>
         <activity
-            android:name=".activities.ServicesMenuActivity"
+            android:name=".activities.MenuServicesActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_services" >
         </activity>
         <activity
-            android:name=".activities.OtherServicesMenuActivity"
+            android:name=".activities.MenuOtherServicesActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_other_services" >
         </activity>
         <activity
-            android:name=".activities.ContactsMenuActivity"
+            android:name=".activities.MenuContactsActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_contacts" >
         </activity>
@@ -79,19 +74,29 @@
             android:noHistory="true">
         </activity>
         <activity
-            android:name=".activities.ServiceActivity"
+            android:name=".activities.ContactActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_service">
+            android:label="@string/title_activity_contact">
         </activity>
         <activity
-            android:name=".activities.StoresActivity"
+            android:name=".activities.StoreListActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_stores">
+            android:label="@string/title_activity_stores2">
         </activity>
         <activity
             android:name=".activities.StoreActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_activity_store">
+            android:label="@string/title_activity_store2">
+        </activity>
+        <activity
+            android:name=".activities.PlantListActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_plants">
+        </activity>
+        <activity
+            android:name=".activities.LocationListActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_locations">
         </activity>
         <activity
             android:name=".activities.AboutActivity"

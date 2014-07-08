@@ -1,0 +1,189 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="12">
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.HeaderFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_header"
+        android:id="@+id/move_me_header" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@drawable/title_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Large"
+            android:textColor="@color/header_text_color"
+            android:text="Serviço"
+            android:id="@+id/service_name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/service_LinearLayout"
+        android:layout_width="fill_parent"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:weightSum="9">
+
+        <LinearLayout
+            android:id="@+id/website_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/service_website_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/btn_website"
+                android:id="@+id/site_icon_imageView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/webmail_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/service_webmail_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/btn_webmail"
+                android:id="@+id/mail_icon_imageView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phone_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/service_phone_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/btn_phone"
+                android:id="@+id/phone_icon_imageView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/facebook_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:text="Facebook"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/facebook_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_facebook"
+                android:id="@+id/facebook_icon_imageView" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/twitter_LinearLayout"
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:background="@drawable/vertical_gradient_grey">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:paddingLeft="20dp"
+                android:text="Twitter"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:id="@+id/twitter_textView" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="2"
+                android:duplicateParentState="true"
+                android:src="@drawable/ic_twitter"
+                android:id="@+id/twitter_icon_imageView" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <fragment
+        android:name="com.moksie.onthemove.fragments.FooterFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_footer"
+        android:id="@+id/service_footer"/>
+
+</LinearLayout>

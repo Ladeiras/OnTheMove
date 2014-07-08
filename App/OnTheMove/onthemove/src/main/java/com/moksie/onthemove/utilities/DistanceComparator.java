@@ -33,12 +33,12 @@ public class DistanceComparator implements Comparator<Airport>
         location0.setLongitude(longitude);
 
         Location location1 = new Location("A1");
-        location1.setLatitude(a1.getLatitude());
-        location1.setLongitude(a1.getLatitude());
+        location1.setLatitude(a1.getLat());
+        location1.setLongitude(a1.getLon());
 
         Location location2 = new Location("A2");
-        location2.setLatitude(a2.getLatitude());
-        location2.setLongitude(a2.getLatitude());
+        location2.setLatitude(a2.getLat());
+        location2.setLongitude(a2.getLon());
 
         distance1 = location0.distanceTo(location1);
         distance2 = location0.distanceTo(location2);

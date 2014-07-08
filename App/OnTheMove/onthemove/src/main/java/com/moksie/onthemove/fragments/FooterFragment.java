@@ -16,6 +16,7 @@ import com.moksie.onthemove.activities.FooterActivity;
 import com.moksie.onthemove.objects.Flight;
 
 import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 
 public class FooterFragment extends Fragment
 {
@@ -70,18 +71,19 @@ public class FooterFragment extends Fragment
     public static void updateFlight(Activity a)
     {
         TextView CodigoVoo = (TextView) a.findViewById(R.id.codigo_voo_textView);
-        CodigoVoo.setText(String.valueOf(flight.getCodigovoo()));
+        CodigoVoo.setText(String.valueOf(flight.getCode()));
 
         TextView OrigemDestino = (TextView) a.findViewById(R.id.origem_destino_textView);
-        OrigemDestino.setText(flight.getPartidacidade()+" - "+ flight.getChegadacidade());
+        OrigemDestino.setText(flight.getDepartureairportcity()+" - "+ flight.getArrivalairportcity());
 
         TextView TempoEstimado = (TextView) a.findViewById(R.id.tempo_estimado_textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.applyPattern("dd/MM HH:mm");
+        sdf.setTimeZone(TimeZone.getDefault());
 
-        if(flight.isPartida())
-            TempoEstimado.setText(sdf.format(flight.getPartidatempoestimado()));
+        if(flight.isDeparture())
+            TempoEstimado.setText(sdf.format(flight.getDepartplannedtimeDate()));
         else
-            TempoEstimado.setText(sdf.format(flight.getChegadatempoestimado()));
+            TempoEstimado.setText(sdf.format(flight.getArrivalplannedtimeDate()));
     }
 }

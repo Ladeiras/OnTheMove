@@ -56,11 +56,26 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Nesta classe é mostrada uma lista com todas as lojas do aeorporto, contendo um spinner para
+ * filtrar a informação.
+ * As opções do spinner são nome da lojas, categoria, lojas com promoções e todas as lojas.
+ * Através de pedidos a ambos os servidores, são obtidas as informações de locations, contacts e
+ * campaigns.
+ * Cada loja é representada pelo logo, nome e um icone que mostra se a loja tem alguma promoção.
+ * Cada elemento loja contém um Listner que quando carregado inicia uma StoreActivity correspondendo
+ * à loja seleccionada, sendo passados um Contact, um Location e um Campaign (se existir promoção)
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class StoreListActivity extends FragmentActivity {
 
     private static final String OPTION_LOCATIONS = "locations";
 
-    //Locations
+    //Variáveis usadas no pedido dos Location ao servidor a partir do tipo (Shop)
     private static final String CODE = "Code";
     private static final String KEYWORDS = "Keywords";
     private static final String LANG = "Lang";
@@ -70,20 +85,15 @@ public class StoreListActivity extends FragmentActivity {
     private static final String TYPE_TAG = "Type";
     private static final String DESC = "Desc";
     private static final String GET_LOCATIONS_BY_TYPE = "getLocationsByType";
-    //private static final String GET_LOCATIONS_BY_PLANT = "getLocationsByPlant";
     private static final String PARAM_LOCATION_TYPES = "locationTypes";
     private static final String LOCATION_TYPE = "Shop";
-    //private static final String PARAM_PLANT_CODE = "plantCode";
     private static final String PARAM_LANG = "lang";
     private static final String PT = "PT";
 
     private ArrayList<Location> locations = new ArrayList<Location>();
 
 
-    //Contactos
-    private static final String CONTACT_TAXI = "taxi";
-
-    //private static final String CODE = "Code";
+    //Variáveis usadas no pedido dos Contact ao servidor a partir do tipo (Shop)
     private static final String EMAIL = "Email";
     private static final String FACEBOOK = "Facebook";
     private static final String TELEF = "Telef";
@@ -94,12 +104,12 @@ public class StoreListActivity extends FragmentActivity {
     private static final String PARAM_AIRPORT_CODE = "id";
     private static final String PARAM_TYPE = "type";
 
-    private static final String API2_URL = "http://onthemove.no-ip.org:3000/api/contact/";
+    private static final String GET_CONTACT = "contact/";
 
     private ArrayList<Contact> contacts = new ArrayList<Contact>();
 
 
-    //Promoçoes
+    //Variáveis usadas no pedido das Campaign ao servidor
     private static final String CAMPAIGNDESC = "CampaignDesc";
     private static final String IMAGEURL = "ImageUrl";
     private static final String SHOPCODE = "ShopCode";
@@ -108,7 +118,7 @@ public class StoreListActivity extends FragmentActivity {
 
     private ArrayList<Campaign> campaigns = new ArrayList<Campaign>();
 
-
+    //Variaveis para controlo e conteudo do spinner da pesquisa das lojas
     private static final int OPTION_NOME_LOJA = 0;
     private static final int OPTION_CATEGORIA = 1;
     private static final int OPTION_LOJA_COM_PROMOCOES = 2;
@@ -121,12 +131,15 @@ public class StoreListActivity extends FragmentActivity {
     private static final String OPTION_SHOW_ALL_VALUE = "Todas as Lojas";
     private static final String OPTION_DEFAULT_VALUE = "";
 
+    //Opções de pesquisa do spinner
     final ArrayList<String> options = new ArrayList(Arrays.asList(OPTION_NOME_LOJA_VALUE,
             OPTION_CATEGORIA_VALUE, OPTION_LOJA_COM_PROMOCOES_VALUE, OPTION_SHOW_ALL_VALUE, OPTION_DEFAULT_VALUE));
 
     private String idAirport;
     private String startOption;
     private BGTGetJSONArray bgt;
+
+    private boolean moksieFlag = true;
 
     private ProgressDialog pd;
 
@@ -152,6 +165,7 @@ public class StoreListActivity extends FragmentActivity {
         pd = new ProgressDialog(this);
         pd.setMessage("A carregar lojas");
 
+        //População das várias listas através dos pedidos ao servidor
         try {
             buildLocationsList();
             buildContactsList();
@@ -163,21 +177,37 @@ public class StoreListActivity extends FragmentActivity {
             e.printStackTrace();
         }
 
+        //Mensagem de erro caso o servidor moksie nao esteja a responder
+        if(!moksieFlag)
+        {
+            Toast.makeText(this, "Problemas de ligação ao servidor moksie",
+                    Toast.LENGTH_LONG).show();
+            finish();
+        }
+
+        //Construção da lista de lojas passando o array de lojas ao StoreAdapter
         StoreAdapter storeAdapter = new StoreAdapter(this, android.R.layout.simple_expandable_list_item_1, stores);
         storesList = (ListView) findViewById(R.id.stores_listView);
 
         storesList.setAdapter(storeAdapter);
 
-        //Search
+        //Spinner de pesquisa
         final Spinner searchStoresSpinner = (Spinner)findViewById(R.id.search_spinner);
         SearchAdapter adapter = new SearchAdapter(this, android.R.layout.simple_spinner_item, options);
 
         searchStoresSpinner.setAdapter(adapter);
 
+        //Opção de pesquisa inicial
         if(startOption.equals("promo"))
             searchStoresSpinner.setSelection(OPTION_LOJA_COM_PROMOCOES);
         else searchStoresSpinner.setSelection(OPTION_DEFAULT);
 
+        /**
+         * Listner do Spinner.
+         * Quando é carregado, são apresentadas as opções, e para cada opção excepto a opção de
+         * mostrar todas as lojas e lojas com promoção, é mostrada uma caixa de texto para o input
+         * a ser usado na pesquisa.
+         */
         searchStoresSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
@@ -226,7 +256,7 @@ public class StoreListActivity extends FragmentActivity {
             }
         });
 
-        //Lojas
+        //Listner das Lojas da Lista
         if(!stores.isEmpty()) {
             storesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -243,10 +273,12 @@ public class StoreListActivity extends FragmentActivity {
         }
         else
         {
+            //Mensagem de erro caso a lista de lojas esteja vazia, terminando a Activity
             Toast.makeText(this, "Ocorreu um erro", Toast.LENGTH_SHORT).show();
             this.finish();
         }
 
+        //Fragments
         updateFragments();
     }
 
@@ -278,6 +310,16 @@ public class StoreListActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Nesta função, dependendo da opção, são pesquisados as lojas.
+     * A pesquisa basicamente verifica se a string de input está contida na string a ser pesquisada
+     * e vice versa.
+     * Se for encontrado algum resultado, este é passado para um array temporario, que é colocado
+     * na view da lista de lojas.
+     * Se não for encontrado nenhum resultado é apresentada uma mensagem sem alterar a View.
+     * @param value String de input do utilizador
+     * @param option Opção de pesquisa
+     */
     private void filterStores(String value, int option)
     {
         ArrayList<Store> temp = new ArrayList<Store>();
@@ -308,22 +350,35 @@ public class StoreListActivity extends FragmentActivity {
         }
         else
         {
+            //Mensagem de erro caso não seja encontrada nehuma loja
             Toast.makeText(getApplicationContext(), "Não foram encontrados resultados",
                     Toast.LENGTH_SHORT).show();
         }
     }
 
+    /**
+     * Esta função é usada para atualizar a vista da lista das lojas
+     * @param tempStores
+     */
     private void updateStores(ArrayList<Store> tempStores) {
         StoreAdapter storesAdapter = new StoreAdapter(this, android.R.layout.simple_expandable_list_item_1, tempStores);
         storesList = (ListView) findViewById(R.id.stores_listView);
         storesList.setAdapter(storesAdapter);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         LinearLayout layout = (LinearLayout) findViewById(R.id.stores_LinearLayout);
@@ -355,9 +410,10 @@ public class StoreListActivity extends FragmentActivity {
         footer.updateVisibility();
     }
 
+    //Construção da lista das lojas a partir das listas de locations, contacts e campaigns
     public void buildStoresList()
     {
-        //Verificar se para todos os locais existem contactos
+        //Verificar se para todos os locais existem contactos e promoções
         for(int i=0;i<locations.size();i++)
         {
             Store tempStore = new Store();
@@ -387,6 +443,10 @@ public class StoreListActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Construção da lista de locations fazendo um pedido ao servidor
+     * @throws ParseException
+     */
     public void buildLocationsList() throws ParseException {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(2);
         apiParams.add(new BasicNameValuePair(PARAM_LOCATION_TYPES, LOCATION_TYPE));
@@ -420,30 +480,37 @@ public class StoreListActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Construção da lista de contacts fazendo um pedido ao servidor
+     * @throws ParseException
+     */
     public void buildContactsList() throws ParseException {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(2);
         apiParams.add(new BasicNameValuePair(PARAM_AIRPORT_CODE, idAirport));
         apiParams.add(new BasicNameValuePair(PARAM_TYPE, LOCATION_TYPE));
-        bgt = new BGTGetJSONArray(API2_URL, "GET", apiParams);
+        bgt = new BGTGetJSONArray(MainActivity.BASE_API2_URL+GET_CONTACT, "GET", apiParams);
 
         try {
             JSONArray apJSON = bgt.execute().get();
 
-            for(int i=0; i < apJSON.length(); i++)
-            {
-                JSONObject a = apJSON.getJSONObject(i);
+            if(null != apJSON) {
+                for(int i=0; i < apJSON.length(); i++)
+                {
+                    JSONObject a = apJSON.getJSONObject(i);
 
-                String code = a.getString(CODE);
-                String email = a.getString(EMAIL);
-                String facebook = a.getString(FACEBOOK);
-                String telef = a.getString(TELEF);
-                String twitter = a.getString(TWITTER);
-                String website = a.getString(WEBSITE);
-                String logourl = a.getString(LOGOURL);
+                    String code = a.getString(CODE);
+                    String email = a.getString(EMAIL);
+                    String facebook = a.getString(FACEBOOK);
+                    String telef = a.getString(TELEF);
+                    String twitter = a.getString(TWITTER);
+                    String website = a.getString(WEBSITE);
+                    String logourl = a.getString(LOGOURL);
 
-                contacts.add(new Contact(code, email, facebook, telef, twitter, website,
-                        logourl));
+                    contacts.add(new Contact(code, email, facebook, telef, twitter, website,
+                            logourl));
+                }
             }
+            else moksieFlag = false;
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -454,6 +521,10 @@ public class StoreListActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Construção da lista de campaigns fazendo um pedido ao servidor
+     * @throws ParseException
+     */
     public void buildCampaignsList() throws ParseException {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(2);
         apiParams.add(new BasicNameValuePair(PARAM_LANG, PT));
@@ -482,6 +553,11 @@ public class StoreListActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Esta classe tem como objectivo a criação de uma tarefa em background para fazer pedidos ao
+     * servidor sem bloquear a UI.
+     * Os pedidos poderão ser GET ou POST, sendo que o GET devolve um JSONArray
+     */
     class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 
         List<NameValuePair> postparams = new ArrayList<NameValuePair>();

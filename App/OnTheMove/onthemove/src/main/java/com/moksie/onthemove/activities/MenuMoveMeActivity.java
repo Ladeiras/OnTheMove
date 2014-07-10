@@ -17,9 +17,22 @@ import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
 
+/**
+ * Nesta classe são mostrados dois botões, A partir do Aeroporto e Para o Aeroporto, em que ambos
+ * fazem a ligação com a aplicação Move-me tendo como origem ou destino a localização do Aeroporto
+ * (latitude e longitude).
+ * Os dados do aeroporto são passados como parametro para esta Activity (objecto Airport).
+ * Se a aplicação Move-me não estiver instalada no dispositivo é feito o reencaminhamento para a
+ * PlayStore.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class MenuMoveMeActivity extends FragmentActivity {
 
-    private Airport airport;
+    private Airport airport;//Aeroporto escolhido no inicio da aplicação
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -33,6 +46,7 @@ public class MenuMoveMeActivity extends FragmentActivity {
 
         if(!isPackageInstalled("com.moveme", this))
         {
+            //Se a aplicação Move-me não estiver instalada
             Intent marketIntent = new Intent(Intent.ACTION_VIEW);
             marketIntent.setData(Uri.parse("market://details?id=com.moveme"));
             startActivity(intent);
@@ -67,21 +81,10 @@ public class MenuMoveMeActivity extends FragmentActivity {
                     startActivity(movemeIntent);
                 }
             });
-            /*Intent i;
-            PackageManager manager = getPackageManager();
-            try {
-                i = manager.getLaunchIntentForPackage("com.moveme");
-                if (i == null)
-                    throw new PackageManager.NameNotFoundException();
-                i.addCategory(Intent.CATEGORY_LAUNCHER);
-                startActivity(i);
-            } catch (PackageManager.NameNotFoundException e) {
-
-            }*/
         }
 
+        //Fragments
         updateFragments();
-
     }
 
     @Override
@@ -112,11 +115,19 @@ public class MenuMoveMeActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
@@ -140,6 +151,12 @@ public class MenuMoveMeActivity extends FragmentActivity {
         footer.updateVisibility();
     }
 
+    /**
+     * Esta função verifica se um dado pacote está instalado no dispositivo
+     * @param packagename Nome do pacote
+     * @param context Contexto da aplicação
+     * @return True se está instalado, False se não
+     */
     private boolean isPackageInstalled(String packagename, Context context) {
         PackageManager pm = context.getPackageManager();
         try {

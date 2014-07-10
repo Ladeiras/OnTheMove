@@ -4,6 +4,14 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 
+/**
+ * Listner da geolocalização
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class MyLocationListener implements LocationListener {
 
     public static double latitude;

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -21,11 +20,28 @@ import com.moksie.onthemove.utilities.FileIO;
 
 import java.text.SimpleDateFormat;
 
+/**
+ * Nesta classe são mostradas informações sobre o voo a ser seguido e é chamada quando o botão
+ * inferior da aplicação é carregado.
+ * É apresentada a informação resumida do voo numa barra superior (codigo, origem-destino e data
+ * estimada).
+ * No caso de ser um voo do tipo partida, são mostradas várias checkboxes que indicam os vários
+ * passos que o utilizador já tomou ou não, desde que seguiu o voo. Os passos são, se já está no
+ * aeroporto, se já fez o checkin, se passou a segurança e se entrou no embarque. Os valores destas
+ * checkboxes são usados na MenuMainActivity para tomar decisões sobre a notificação a mostrar.
+ * Tanto no caso de ser do tipo partida como chegada, são mostrados 3 botões que servem de atalho
+ * para consultar o voo (FlightInfoActivity), deixar de seguir voo (Apagar o ficheiro) e consultar
+ * as promoções das lojas (StoreListActivity com opção promo)
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class FooterActivity extends FragmentActivity {
 
-    private FlightSerializable flight;
+    private FlightSerializable flight;//Voo lido a partir do ficheiro
     private Context ctx = this;
-    private NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -35,25 +51,29 @@ public class FooterActivity extends FragmentActivity {
         overridePendingTransition( R.anim.abc_slide_in_bottom, R.anim.abc_fade_out);
         setContentView(R.layout.activity_footer);
 
-        //Ler flight do ficheiro
+        //Ler voo do ficheiro
         parseVooFile();
 
+        //Campo de texto da barra superior do codigo do voo
         TextView CodigoVoo = (TextView) this.findViewById(R.id.codigo_voo_textView);
         CodigoVoo.setText(String.valueOf(FooterFragment.flight.getCode()));
 
+        //Campo de texto da barra superior da origem-destino
         TextView OrigemDestino = (TextView) this.findViewById(R.id.origem_destino_textView);
         OrigemDestino.setText(FooterFragment.flight.getDepartureairportcity()+" - "+FooterFragment.flight.getArrivalairportcity());
 
+        //Campo de texto da barra superior da data estimada de partida ou chegada
         TextView TempoEstimado = (TextView) this.findViewById(R.id.tempo_estimado_textView);
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         sdf.applyPattern("dd/MM HH:mm");
 
         if(FooterFragment.flight.isDeparture())
-            TempoEstimado.setText(sdf.format(FooterFragment.flight.getDepartplannedtimeDate()));
+            TempoEstimado.setText(sdf.format(FooterFragment.flight.getDepartrealtimeDate()));
         else
-            TempoEstimado.setText(sdf.format(FooterFragment.flight.getArrivalplannedtimeDate()));
+            TempoEstimado.setText(sdf.format(FooterFragment.flight.getArrivalrealtimeDate()));
 
 
+        //Layout das checkboxes, somente visivel se o voo for do tipo partida
         LinearLayout cbLL = (LinearLayout) this.findViewById(R.id.checkboxesLinearLayout);
         if(!FooterFragment.flight.isDeparture()) {
             cbLL.setVisibility(View.GONE);
@@ -61,6 +81,7 @@ public class FooterActivity extends FragmentActivity {
         else {
             cbLL.setVisibility(View.VISIBLE);
 
+            //Verificação dos valores presentes no ficheiro do voo a seguir
             CheckBox airportCB = (CheckBox) findViewById(R.id.airport_checkBox);
             if (flight.isAirport() && !airportCB.isChecked()) {
                 airportCB.toggle();
@@ -122,6 +143,13 @@ public class FooterActivity extends FragmentActivity {
         });
     }
 
+    /**
+     * Esta função elimina uma notificação.
+     * Se a notificação não está presente fica sem efeito.
+     *
+     * @param ctx Contexto
+     * @param notifyId Identificador da notificação
+     */
     public static void CancelNotification(Context ctx, int notifyId) {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
@@ -135,11 +163,19 @@ public class FooterActivity extends FragmentActivity {
         HeaderFragment.setMsg("Neste ecrã pode informar a aplicação dos passos que foram tomados até ao momento e receber notificações apropriadas para cada estado. Pode também a partir daqui consultar o voo seguido ou então as promoções existentes no aeroporto.");
     }
 
+    /**
+     * Nesta funcao é verificada qual das checkboxes é clicada e alterado o seu estado.
+     * Só é permitido alterar um estado se todos os estados anteriores (mais acima) já estiverem
+     * "checados". Se um dos estados mais acima for "deschecado", todos os que estão mais abaixo
+     * também o serão.
+     *
+     * @param view Vista das checkboxes
+     */
     public void onCheckboxClicked(View view) {
-        // Is the view now checked?
+        //A vista está checada?
         boolean checked = ((CheckBox) view).isChecked();
 
-        // Check which checkbox was clicked
+        //Verificar qual das checkboxes foi clicada
         switch(view.getId()) {
             case R.id.airport_checkBox:
                 if (checked)
@@ -212,6 +248,12 @@ public class FooterActivity extends FragmentActivity {
         FileIO.serializeObject(MainActivity.FILE_FLIGHT, flight, this);
     }
 
+    /**
+     * Nesta função é verificado se o ficheiro 'flight' existe, o que indica se o utilizador está ou
+     * não a seguir um voo e é lido o ficheiro do voo a seguir para a variável flight
+     *
+     * @return True se o ficheiro existe, False se não
+     */
     public boolean parseVooFile()
     {
         if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this))
@@ -222,14 +264,6 @@ public class FooterActivity extends FragmentActivity {
         }
 
         return false;
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.footer, menu);
-        return true;
     }
 
     @Override

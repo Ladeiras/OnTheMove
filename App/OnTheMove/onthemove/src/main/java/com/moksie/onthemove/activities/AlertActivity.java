@@ -2,51 +2,40 @@ package com.moksie.onthemove.activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 import android.view.Window;
-import android.widget.Button;
 
 import com.moksie.onthemove.R;
 
-public class GPSAlertActivity extends Activity {
+/**
+ * Nesta classe, caso o GPS do dispositivo esteja desativado, é mostrada uma caixa de dialogo para
+ * que o utilizador seja encaminhado para as definições de geolocalização ou simplesmente ignorar.
+ * Caso opte por ativar as definições GPS, a lista de aeroportos inicial será organizada por ordem
+ * de proximidade.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
+public class AlertActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gpsalert);
+        setContentView(R.layout.activity_alert);
 
         showGPSDisabledAlertToUser();
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.gpsalert, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    /**
+     * Nesta função é mostrada a caixa de dialogo com as opções ir para as definições GPS ou
+     * cancelar.
+     * Após a escolha a Activity é terminada.
+     */
     private void showGPSDisabledAlertToUser(){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setMessage("O GPS está desligado no seu dispositivo. Gostaria de o ligar?")

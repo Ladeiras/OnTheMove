@@ -15,6 +15,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.TimeZone;
 
+/**
+ * Nesta classe é feita a população de uma vista (elemento de uma lista de voos) a partir de um
+ * Array de voos.
+ * Cada elemento é composto pelo código, origem-destino e data prevista.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class FlightAdapter extends ArrayAdapter<Flight> {
     private Activity context;
     ArrayList<Flight> data = null;
@@ -36,7 +46,7 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
 
         Flight item = data.get(position);
 
-        if (item != null) { // Parse the data from each object and set it.
+        if (item != null) {
             TextView CodigoVoo = (TextView) row.findViewById(R.id.codigoVoo);
             TextView OrigemDestino = (TextView) row.findViewById(R.id.origemDestino);
             //TextView Companhia = (TextView) row.findViewById(R.id.companhia);
@@ -61,9 +71,9 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
                 sdf.setTimeZone(TimeZone.getDefault());
 
                 if(item.isDeparture())
-                    TempoEstimado.setText(sdf.format(item.getDepartplannedtimeDate()));
+                    TempoEstimado.setText(sdf.format(item.getDepartrealtimeDate()));
                 else
-                    TempoEstimado.setText(sdf.format(item.getArrivalplannedtimeDate()));
+                    TempoEstimado.setText(sdf.format(item.getArrivalrealtimeDate()));
             }
         }
         else Log.w("FLAG", "Item Nulo!");

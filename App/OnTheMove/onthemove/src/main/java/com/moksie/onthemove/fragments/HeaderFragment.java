@@ -7,11 +7,20 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.moksie.onthemove.R;
+
+/**
+ * Este Fragment corresponde à área presente na parte superior das vistas da aplicação.
+ * Nesta vista são mostrados uma imagem para o icone, uma imagem de fundo e o botao de ajuda, que
+ * varia dependendo da vista atual.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
 
 public class HeaderFragment extends Fragment
 {

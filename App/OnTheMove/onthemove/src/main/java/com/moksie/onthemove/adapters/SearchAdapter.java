@@ -13,6 +13,16 @@ import com.moksie.onthemove.activities.FlightListActivity;
 
 import java.util.ArrayList;
 
+/**
+ * Nesta classe é feita a população de uma vista (elemento de um Spinner com opções de pesquisa) a
+ * partir de um Array de strings com o nome das opções de pesquisa.
+ * Cada elemento é composto pelo nome da opção.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class SearchAdapter extends ArrayAdapter<String> {
     private Activity context;
     ArrayList<String> data = null;
@@ -34,7 +44,7 @@ public class SearchAdapter extends ArrayAdapter<String> {
 
         String item = "Pesquisar por...";
 
-        if (item != null) { // Parse the data from each object and set it.
+        if (item != null) {
             TextView Option = (TextView) row.findViewById(R.id.search_option);
 
             Option.setTextSize(15);
@@ -55,18 +65,19 @@ public class SearchAdapter extends ArrayAdapter<String> {
             row = inflater.inflate(R.layout.search_spinner_item, parent, false);
         }
 
-        //String item = data.get(position);
         String item = getItem(position);
 
+        /*
+         * A opção por defeito é vazia para evitar aparecer no spinner, onde deverá aparecer
+         * ('Pesquisar por...')
+         */
         if( (item != null) && ( position == FlightListActivity.OPTION_DEFAULT)) {
             row.setVisibility(View.GONE);
         } else {
             row.setVisibility(View.VISIBLE);
         }
 
-        Log.d("ITEMS2",item);
-
-        if (item != null) { // Parse the data from each object and set it.
+        if (item != null) {
             TextView Option = (TextView) row.findViewById(R.id.search_option);
 
             Option.setTextSize(15);
@@ -79,40 +90,9 @@ public class SearchAdapter extends ArrayAdapter<String> {
         return row;
     }
 
+    //Numero de elementos do spinner
     @Override
     public int getCount() {
         return 4;
     }
-
-
-
-    /* @Override
-    public View getDropDownView(int position, View convertView, ViewGroup parent)
-    {
-        View row = convertView;
-        if (row == null) {
-            LayoutInflater inflater = context.getLayoutInflater();
-            row = inflater.inflate(R.layout.search_spinner_item, parent, false);
-        }
-
-        String item = data.get(position);
-
-        if (item != null) { // Parse the data from each object and set it.
-            TextView Option = (TextView) row.findViewById(R.id.search_option);
-
-            Option.setTextSize(15);
-
-            if (Option != null) {
-                Option.setText(item);
-            }
-        }
-        else
-        {
-            TextView tv = new TextView(getContext());
-            tv.setVisibility(View.GONE);
-            row = tv;
-        }
-
-        return row;
-    }*/
 }

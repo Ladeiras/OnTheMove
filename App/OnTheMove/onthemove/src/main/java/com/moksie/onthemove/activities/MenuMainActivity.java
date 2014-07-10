@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -18,6 +20,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
@@ -25,10 +28,20 @@ import com.moksie.onthemove.fragments.HeaderFragment;
 import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.objects.FlightSerializable;
+import com.moksie.onthemove.objects.Forecast;
+import com.moksie.onthemove.tasks.BGTGetJSONArray;
 import com.moksie.onthemove.utilities.FileIO;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -48,6 +61,15 @@ public class MenuMainActivity extends FragmentActivity {
     public static int TIMER_INTERVAL = 10; //Intervalo de tempo em que é feita a atualização das
                                            // notificações
     private static final long ONE_HOUR = 3600000;
+
+    /**
+     * Valores para o pedido de atualização do voo a seguir
+     */
+    private static final String GET_FORECAST = "getForecast";
+    private static final String PARAM_FLIGHT_CODES = "FlightCodes";
+    private static final String STATUS_ENDED = "Ended";
+    private BGTGetJSONArray bgt;
+    private Forecast forecast;
 
     /*
      * Valores usados na máquina de estados das notificações para representar estados diferentes,
@@ -145,22 +167,107 @@ public class MenuMainActivity extends FragmentActivity {
 
         //Notification Manager
         notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        final Context ctx = getApplicationContext();
 
-        //Scheduler - Thread que é repetida entre TIMER_INTERVAL, para verificação do tempo atual
-        //em relacao ao tempo dos vários passos do utilizador para poder notifica-lo
+        /*
+         * Scheduler - Thread que é repetida entre TIMER_INTERVAL, para verificação do tempo atual
+         * em relacao ao tempo dos vários passos do utilizador para poder notifica-lo
+         */
         scheduler = Executors.newSingleThreadScheduledExecutor();
-        scheduler.scheduleAtFixedRate
-                (new Runnable() {
-                    public void run() {
-                        Log.d("SCHEDULE", "tick");
-                        try {
-                            notificationController();
-                        } catch (ParseException e) {
-                            Log.e("Error","Notification controller");
-                            e.printStackTrace();
-                        }
+        scheduler.scheduleAtFixedRate( new Runnable() {
+            private Handler updateUI = new Handler(){
+                @Override
+                public void dispatchMessage(Message msg) {
+                    super.dispatchMessage(msg);
+
+                    Log.d("SCHEDULE", "tick");
+                    try {
+                        updateFlight(ctx);
+                        notificationController();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                }, 0, TIMER_INTERVAL, TimeUnit.SECONDS);
+                }
+            };
+            public void run() {
+                try {
+                    updateUI.sendEmptyMessage(0);
+                } catch (Exception e) {e.printStackTrace(); }
+            }
+        }, 0, TIMER_INTERVAL, TimeUnit.SECONDS);
+    }
+
+    private void updateFlight(Context ctx)
+    {
+        if(FileIO.fileExists(MainActivity.FILE_FLIGHT, this)) {
+            List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
+            apiParams.add(new BasicNameValuePair(PARAM_FLIGHT_CODES, FooterFragment.flight.getCode()));
+            bgt = new BGTGetJSONArray(MainActivity.BASE_API_URL + GET_FORECAST, "GET", apiParams);
+
+            try {
+                JSONArray apJSON = bgt.execute().get();
+                if(apJSON.length() != 0) {
+                    JSONArray a = apJSON.getJSONArray(0);
+
+                    String code = a.getString(0);
+                    String status = a.getString(1);
+                    String departure = a.getString(2);
+                    String arrival = a.getString(3);
+
+                    Log.d("FORECAST", departure + ", " + arrival);
+                    Log.d("A_SEGUIR", FooterFragment.flight.getDepartrealtime() + ", " + FooterFragment.flight.getDepartrealtime());
+
+                    boolean type = false;
+                    if (FooterFragment.flight.isDeparture())
+                        type = true;
+
+                    forecast = new Forecast(type, code, status, departure, arrival);
+                }
+                else
+                {
+                    Toast.makeText(ctx, "O voo que está a seguir já terminou",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            /*
+             * Indica através de um Toast se o voo que está a seguir já terminou segundo o pedido de
+             * forecast
+             */
+            if (forecast.getStatus().equals(STATUS_ENDED)) {
+                Toast.makeText(ctx, "O voo que está a seguir já terminou",
+                        Toast.LENGTH_LONG).show();
+            }
+            else {
+                /*
+                 * Se o voo a seguir contiver dados diferentes da atualização (forecast), este é
+                 * atualizado e indicado através de um Toast
+                 */
+                if(!FooterFragment.flight.getDepartrealtime().equals(forecast.getDeparture()) ||
+                    !FooterFragment.flight.getArrivalrealtime().equals(forecast.getArrival()))
+                {
+                    FooterFragment.flight.setDepartrealtime(forecast.getDeparture());
+                    FooterFragment.flight.setArrivalrealtime(forecast.getArrival());
+
+                    //Escrever o novo ficheiro do voo a seguir
+                    FileIO.serializeObject(MainActivity.FILE_FLIGHT,
+                            FooterFragment.flight.toSerializable(), ctx);
+
+                    Toast.makeText(ctx, "O voo que está a seguir foi atualizado",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+
+            updateFragments();
+        }
     }
 
     /**
@@ -177,13 +284,17 @@ public class MenuMainActivity extends FragmentActivity {
         if(FooterFragment.visibility) {
             long diff;
 
+            //Tempo atual
+            Calendar cal = Calendar.getInstance();
+            MainActivity.currentTime = cal.getTime();
+
             FlightSerializable followingFlight = getFlightSerializable();
 
             Log.d("FLIGHTUPDATED", "true");
 
             //Valores das diferenças entre os limites de tempo dos passos e o tempo atual
             // (milisegundos)
-            long diffPartida = getDateDiff(MainActivity.currentTime,followingFlight.getDepartplannedtimeDate(),TimeUnit.MILLISECONDS);
+            long diffPartida = getDateDiff(MainActivity.currentTime,followingFlight.getDepartrealtimeDate(),TimeUnit.MILLISECONDS);
             Log.d("diffPartida", ""+diffPartida);
             long diffEmbarque = getDateDiff(MainActivity.currentTime,followingFlight.getBoardingopentimeDate(),TimeUnit.MILLISECONDS);
             Log.d("diffEmbarque", ""+diffEmbarque);

@@ -59,5 +59,6 @@
     <string name="title_activity_locations">LocationsActivity</string>
     <string name="title_activity_stores2">StoresActivity2</string>
     <string name="title_activity_store2">StoreActivity2</string>
+    <string name="title_activity_netalert">NetAlertActivity</string>
 
 </resources>

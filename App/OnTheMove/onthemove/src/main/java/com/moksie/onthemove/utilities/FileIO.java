@@ -20,10 +20,23 @@ import java.io.OptionalDataException;
 import java.io.StreamCorruptedException;
 
 /**
- * Created by belh0 on 30-04-2014.
+ * Nesta classe são implementadas funções estáticas para fazer handling das várias tarefas de
+ * escrita e leitura de ficheiros da memória.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class FileIO
 {
+    /**
+     * Verifica se um ficheiro existe
+     *
+     * @param file Nome do ficheiro
+     * @param c Context da Activity de chamada
+     * @return True se existe, False se não
+     */
     public static boolean fileExists(String file, Context c)
     {
         String filename = c.getExternalFilesDir("")+ "/" + file;
@@ -34,6 +47,13 @@ public class FileIO
         return false;
     }
 
+    /**
+     * Escrita de um ficheiro em memória
+     *
+     * @param file Nome do ficheiro
+     * @param data Conteúdo do ficheiro
+     * @param c Context da Activity de chamada
+     */
     public static void writeToFile(String file, String data, Context c)
     {
         String filename = c.getExternalFilesDir("")+ "/" + file;
@@ -47,6 +67,13 @@ public class FileIO
         }
     }
 
+    /**
+     * Leitura de um ficheiro em memória
+     *
+     * @param file Nome do ficheiro
+     * @param c Context da Activity de chamada
+     * @return Conteúdo do ficheiro
+     */
     public static String readFromFile(String file, Context c)
     {
         String filename = c.getExternalFilesDir("")+ "/" + file;
@@ -77,6 +104,13 @@ public class FileIO
         return ret;
     }
 
+    /**
+     * Elimina um ficheiro
+     *
+     * @param file Nome do ficheiro
+     * @param c Context da Activity de chamada
+     * @return True se removido com sucesso, Flase se não
+     */
     public static boolean removeFile(String file, Context c)
     {
         String filename = c.getExternalFilesDir("")+ "/" + file;
@@ -84,13 +118,19 @@ public class FileIO
         return f.delete();
     }
 
+    /**
+     * Escrita de um ficheiro serializavel em memória
+     *
+     * @param file Nome do ficheiro
+     * @param obj Objecto Serializable
+     * @param c Context da Activity de chamada
+     */
     public static void serializeObject(String file, Object obj, Context c)
     {
         FileOutputStream fos = null;
         String filename = c.getExternalFilesDir("")+ "/" + file;
         try
         {
-            //fos = c.openFileOutput(filename, Context.MODE_PRIVATE);
             fos = new FileOutputStream (new File(filename));
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(obj);
@@ -106,6 +146,13 @@ public class FileIO
         }
     }
 
+    /**
+     * leitura de um ficheiro serializaval a partir da memoria
+     *
+     * @param file Nome do ficheiro
+     * @param c Context da Activity de chamada
+     * @return Objecto Serializable
+     */
     public static FlightSerializable deserializeFlightObject(String file, Context c)
     {
         FileInputStream fis = null;

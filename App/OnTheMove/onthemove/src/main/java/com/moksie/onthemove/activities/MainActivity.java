@@ -7,13 +7,12 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.adapters.AirportAdapter;
@@ -28,7 +27,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,28 +34,39 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Atividade inicial da aplicação. Aqui são definidas as variáveis globais, verificada a ligação
+ * GPS, e mostrados todos os aeroportos num spinner ordenado por proximidade com o dispositivo.
+ * Os aeroportos são obtidos num pedido ao servidor.
+ * Após seleccionado um aeroporto (o mais próximo por defeito) e carregado no botão 'OK', é iniciada
+ * a MenuMainActivity que se trata da Activity central da aplicação.
+ * É a unica vista que não apresenta nenhum dos Fragments.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class MainActivity extends Activity {
 
+    //Endereços dos WebServices
     public static final String BASE_API_URL = "http://move-me.mobi:35004/OnTheMove/OnTheMoveService.svc/";
+    public static final String BASE_API2_URL = "http://onthemove.no-ip.org:3000/api/";
+
+    //Nome do ficheiro a ser guardado em memória, correspondente ao voo a seguir atualmente
     public static String FILE_FLIGHT = "flight";
+
+    //Formato da data por defeito
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
-    //TODO usado somente para testes
+    //Tempo atual
     public static Date currentTime;
 
-    private static final String ID = "Id";
-    private static final String PAIS = "Pais";
-    private static final String CIDADE = "Cidade";
-    private static final String NOME = "Nome";
-    private static final String LATITUDE = "Latitude";
-    private static final String LONGITUDE = "Longitude";
-    private static final String AEROPORTO_API_URL = "http://onthemove.no-ip.org:3000/api/aeroportos";
-    private BGTGetJSONArray bgt;
-
+    //Spinner dos aeroportos
     Spinner OPTaeroportoSpinner;
     ArrayList<Airport> airports = new ArrayList<Airport>();
 
-    //OPT Airport
+    //Variáveis a ser usadas no pedido da informação dos aeroportos ao servidor
     private static final String CODE = "Code";
     private static final String CITY = "City";
     private static final String COUNTRY = "Country";
@@ -80,25 +89,33 @@ public class MainActivity extends Activity {
 
     private static final String GET_AIRPORTS_BY_TEXT = "getAirportsByText";
 
+    private BGTGetJSONArray bgt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        //TODO usado somente para testes
-        try {
-            currentTime = sdf.parse("2014-07-06T13:30:00");
-        } catch (ParseException e) {
-            e.printStackTrace();
+        /*
+         * Se a internet do dispositivo estiver desligada é apresentada uma mensagem de erro e
+         * terminada
+         */
+        if(!ErrorManager.isOnline(this))
+        {
+            Toast.makeText(this, "Verifique a sua ligação à internet.\nPor favor tente mais tarde",
+                    Toast.LENGTH_LONG).show();
+            this.finish();
         }
+        else
+        {
+            //Verificar se o GPS esta ligado
+            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        //Verificar se o GPS esta ligado
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            Intent intent = new Intent(MainActivity.this, GPSAlertActivity.class);
-            MainActivity.this.startActivity(intent);
+            if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                Intent intent = new Intent(MainActivity.this, AlertActivity.class);
+                MainActivity.this.startActivity(intent);
+            }
         }
     }
 
@@ -106,23 +123,33 @@ public class MainActivity extends Activity {
     protected void onStart() {
         super.onStart();
 
-        //Construir lista de aeroportos + botao "OK"
-        /*if(airports.isEmpty())
-            buildAirportsDropDown();*/
-
-        if(airports.isEmpty())
+        //Construir lista de aeroportos
+        if (airports.isEmpty())
             buildOPTAirportsDropDown();
 
+        //Organizar os aeroportos por proximidade
+        sortAirports(airports);
 
-        /*final Button button = (Button) findViewById(R.id.okbutton);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, MainMenuActivity.class);
-                intent.putExtra("airport", (Parcelable) airports.get(aeroportoSpinner.getSelectedItemPosition()));
-                MainActivity.this.startActivity(intent);
+        //Spinner com os aeroportos
+        AirportAdapter aAdapter = new AirportAdapter(this, android.R.layout.simple_spinner_item, airports);
+        OPTaeroportoSpinner = (Spinner) findViewById(R.id.aeroportos);
+
+        OPTaeroportoSpinner.setAdapter(aAdapter);
+        OPTaeroportoSpinner.setPrompt("Aeroporto");
+
+        OPTaeroportoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //Fazer nada
             }
-        });*/
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        //Botão 'OK' - Iniciada a MainMenuActivity com o objecto do aeroporto passado como parametro
         final Button button = (Button) findViewById(R.id.okbutton);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -133,26 +160,12 @@ public class MainActivity extends Activity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+    /**
+     * Nesta função é organizado um array de aeroportos por ordem crescente de proximidade
+     *
+     * @param data Array de aeroportos inicial
+     * @return Array de aeroportos ordenado
+     */
     public ArrayList<Airport> sortAirports(ArrayList<Airport> data)
     {
         LocationManager mlocManager=null;
@@ -162,9 +175,6 @@ public class MainActivity extends Activity {
         mlocManager = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
         mlocListener = new MyLocationListener();
         mlocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
-
-
-        //while(!mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {}
 
         if (mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER))
         {
@@ -178,6 +188,11 @@ public class MainActivity extends Activity {
         return data;
     }
 
+    /**
+     * Nesta função são obtidos os aeroportos fazendo um pedido ao servidor e colocados no spinner
+     * usando um adapter.
+     * Cada aeroporto representado contem o país, a cidade e o nome.
+     */
     public void buildOPTAirportsDropDown()
     {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
@@ -186,54 +201,41 @@ public class MainActivity extends Activity {
         try {
             JSONArray apJSON = bgt.execute().get();
 
-            for(int i=0; i < apJSON.length(); i++)
+            if(null != apJSON) {
+                for (int i = 0; i < apJSON.length(); i++) {
+                    JSONObject a = apJSON.getJSONObject(i);
+
+                    String code = a.getString(CODE);
+                    String city = a.getString(CITY);
+                    String country = a.getString(COUNTRY);
+                    String email = a.getString(EMAIL);
+                    String facebook = a.getString(FACEBOOK);
+                    long flightadvisedpreparationtime = a.getLong(FLIGHTADVISEDPREPARATIONTIME);
+                    double lat = a.getDouble(LAT);
+                    long leaveduration = a.getLong(LEAVEDURATION);
+                    double lon = a.getDouble(LON);
+                    String name = a.getString(NAME);
+                    long safetycheckaverageduration = a.getLong(SAFETYCHECKAVERAGEDURATION);
+                    String telef = a.getString(TELEF);
+                    String timezone = a.getString(TIMEZONE);
+                    long toboardingduration = a.getLong(TOBOARDINGDURATION);
+                    long tocheckinduration = a.getLong(TOCHECKINDURATION);
+                    long toluggageduration = a.getLong(TOLUGGAGEDURATION);
+                    long tosafetycheckduration = a.getLong(TOSAFETYCHECKDURATION);
+                    String twitter = a.getString(TWITTER);
+                    String website = a.getString(WEBSITE);
+
+                    airports.add(new Airport(code, city, country, email, facebook,
+                            flightadvisedpreparationtime, lat, leaveduration, lon, name,
+                            safetycheckaverageduration, telef, timezone, toboardingduration,
+                            tocheckinduration, toluggageduration, tosafetycheckduration, twitter, website));
+                }
+            }
+            else
             {
-                JSONObject a = apJSON.getJSONObject(i);
-
-                String code = a.getString(CODE);
-                String city = a.getString(CITY);
-                String country = a.getString(COUNTRY);
-                String email = a.getString(EMAIL);
-                String facebook = a.getString(FACEBOOK);
-                long flightadvisedpreparationtime = a.getLong(FLIGHTADVISEDPREPARATIONTIME);
-                double lat = a.getDouble(LAT);
-                long leaveduration = a.getLong(LEAVEDURATION);
-                double lon = a.getDouble(LON);
-                String name = a.getString(NAME);
-                long safetycheckaverageduration = a.getLong(SAFETYCHECKAVERAGEDURATION);
-                String telef = a.getString(TELEF);
-                String timezone = a.getString(TIMEZONE);
-                long toboardingduration = a.getLong(TOBOARDINGDURATION);
-                long tocheckinduration = a.getLong(TOCHECKINDURATION);
-                long toluggageduration = a.getLong(TOLUGGAGEDURATION);
-                long tosafetycheckduration = a.getLong(TOSAFETYCHECKDURATION);
-                String twitter = a.getString(TWITTER);
-                String website = a.getString(WEBSITE);
-
-                airports.add(new Airport(code,city,country,email,facebook,
-                        flightadvisedpreparationtime,lat,leaveduration,lon,name,
-                        safetycheckaverageduration,telef,timezone,toboardingduration,
-                        tocheckinduration,toluggageduration,tosafetycheckduration,twitter,website));
-
-                sortAirports(airports);
-
-                AirportAdapter aAdapter = new AirportAdapter(this, android.R.layout.simple_spinner_item, airports);
-                OPTaeroportoSpinner = (Spinner) findViewById(R.id.aeroportos);
-
-                OPTaeroportoSpinner.setAdapter(aAdapter);
-                OPTaeroportoSpinner.setPrompt("Aeroporto");
-
-                OPTaeroportoSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        //Fazer nada
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
-
-                    }
-                });
+                Toast.makeText(this, "Problemas de ligação ao servidor.\nPor favor tente mais tarde",
+                        Toast.LENGTH_LONG).show();
+                this.finish();
             }
 
         } catch (InterruptedException e) {

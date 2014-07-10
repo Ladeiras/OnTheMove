@@ -6,8 +6,13 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 
 /**
- * Created by belh0 on 14-04-2014.
+ * Classe Parcelable Campaign
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class Campaign implements Parcelable
 {
     private String campaigndesc;

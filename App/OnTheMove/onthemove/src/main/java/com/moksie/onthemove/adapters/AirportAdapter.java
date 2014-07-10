@@ -12,6 +12,16 @@ import com.moksie.onthemove.objects.Airport;
 
 import java.util.ArrayList;
 
+/**
+ * Nesta classe é feita a população de uma vista (elemento de um Spinner de aeroportos) a partir de
+ * um Array de aeroportos.
+ * Cada elemento é composto pelo país, cidade e nome do aeroporto.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class AirportAdapter extends ArrayAdapter<Airport> {
     private Activity context;
     ArrayList<Airport> data = null;
@@ -23,6 +33,7 @@ public class AirportAdapter extends ArrayAdapter<Airport> {
         this.data = data;
     }
 
+    //Elemento da lista
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -33,7 +44,7 @@ public class AirportAdapter extends ArrayAdapter<Airport> {
 
         Airport item = data.get(position);
 
-        if (item != null) { // Parse the data from each object and set it.
+        if (item != null) {
             TextView AeroportoPais = (TextView) row.findViewById(R.id.item_pais);
             TextView AeroportoCidade = (TextView) row.findViewById(R.id.item_cidade);
             TextView AeroportoNome = (TextView) row.findViewById(R.id.item_nome);
@@ -56,6 +67,7 @@ public class AirportAdapter extends ArrayAdapter<Airport> {
         return row;
     }
 
+    //Elemento por defeito do Spinner
     @Override
     public View getDropDownView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
@@ -66,7 +78,7 @@ public class AirportAdapter extends ArrayAdapter<Airport> {
 
         Airport item = data.get(position);
 
-        if (item != null) { // Parse the data from each object and set it.
+        if (item != null) {
             TextView AeroportoPais = (TextView) row.findViewById(R.id.item_pais);
             TextView AeroportoCidade = (TextView) row.findViewById(R.id.item_cidade);
             TextView AeroportoNome = (TextView) row.findViewById(R.id.item_nome);

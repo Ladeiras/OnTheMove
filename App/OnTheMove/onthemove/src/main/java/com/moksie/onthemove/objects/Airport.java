@@ -3,6 +3,14 @@ package com.moksie.onthemove.objects;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * Classe Parcelable Airport
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class Airport implements Parcelable
 {
     private String code;

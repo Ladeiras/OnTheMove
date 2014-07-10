@@ -4,8 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by belh0 on 08/07/2014.
+ * Classe Parcelable Contact
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class Contact implements Parcelable
 {
     private String name;

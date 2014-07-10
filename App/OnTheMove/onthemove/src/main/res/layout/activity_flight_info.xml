@@ -306,7 +306,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="5"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Hora Previta: 17:30"
+                        android:text="Hora Previta: TODO"
                         android:id="@+id/desembarque" />
                 </LinearLayout>
             </LinearLayout>

@@ -92,7 +92,7 @@ public class FlightInfoActivity extends FragmentActivity
             //No caso de ser uma partida
 
             //Texto do tempo estimado
-            TempoEstimado.setText(sdf.format(flight.getDepartplannedtimeDate()));
+            TempoEstimado.setText(sdf.format(flight.getDepartrealtimeDate()));
 
             //Texto do terminal
             TextView terminal = (TextView) findViewById(R.id.terminal);
@@ -116,7 +116,7 @@ public class FlightInfoActivity extends FragmentActivity
         }
         else {
             //No caso de ser uma chegada
-            TempoEstimado.setText(sdf.format(flight.getArrivalplannedtimeDate()));
+            TempoEstimado.setText(sdf.format(flight.getArrivalrealtimeDate()));
 
             //Texto do tapete de bagagem
             TextView tapeteBagagem = (TextView) findViewById(R.id.tapete_bagagem);

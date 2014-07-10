@@ -13,16 +13,25 @@ import android.widget.Button;
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.activities.FlightInfoActivity;
 
+/**
+ * Este Fragmente corresponde ao botão usado para deixar de seguir um voo na vista da
+ * FlightInfoActivity
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class NotFollowFragment extends Fragment
 {
     public static boolean visibility = true;
-    private NotificationManager notificationManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_not_follow, container, false);
 
+        //Listner do botão. Quando carregado cancela qualque notificação presente no momento
         Button mButton = (Button) rootView.findViewById(R.id.nao_seguir_button);
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -36,6 +45,9 @@ public class NotFollowFragment extends Fragment
         return rootView;
     }
 
+    /**
+     * Função que altera a visibilidade do botão dependendo da variavel visibility
+     */
     public void updateVisibility()
     {
         if(!visibility)
@@ -59,6 +71,12 @@ public class NotFollowFragment extends Fragment
         visibility = v;
     }
 
+    /**
+     * Função que cancela qualquer notificação
+     *
+     * @param ctx Contexto da Activity de chamada
+     * @param notifyId Id da notificação
+     */
     public static void CancelNotification(Context ctx, int notifyId) {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);

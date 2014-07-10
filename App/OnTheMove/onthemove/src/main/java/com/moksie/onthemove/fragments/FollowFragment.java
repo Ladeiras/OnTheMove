@@ -11,6 +11,14 @@ import android.widget.Button;
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.activities.FlightInfoActivity;
 
+/**
+ * Este Fragmente corresponde ao botão usado para seguir um voo na vista da FlightInfoActivity
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class FollowFragment extends Fragment
 {
     public static boolean visibility = true;
@@ -20,6 +28,7 @@ public class FollowFragment extends Fragment
     {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_follow, container, false);
 
+        //Listner do Botão
         Button mButton = (Button) rootView.findViewById(R.id.seguir_button);
         mButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -32,6 +41,9 @@ public class FollowFragment extends Fragment
         return rootView;
     }
 
+    /**
+     * Função que altera a visibilidade do botão dependendo da variavel visibility
+     */
     public void updateVisibility()
     {
         if(!visibility)

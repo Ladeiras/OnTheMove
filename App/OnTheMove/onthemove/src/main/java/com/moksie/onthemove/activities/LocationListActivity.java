@@ -47,10 +47,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Nesta classe são mostradas as várias localizações presentes numa planta (passada como parametro).
+ * Funciona como atividade intermedia entre a PlantListActivity e a PlantActivity.
+ * Os localizações são obtidas fazendo um pedido ao servidor com o código da planta.
+ * Cada localização é um botão que quando clicado da inicio a uma PlantActivity, onde é mostrada
+ * a imagem da planta com a atual localização.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class LocationListActivity extends FragmentActivity {
 
+    /*
+     * Opção passada como parametro, que indica que a planta a ser visualizada terá um ponto de
+     * localização.
+     */
     private static final String OPTION_LOCATIONS = "locations";
 
+    /*
+     * Variáveis usadas no pedido das localizações da planta ao servidor
+     */
     private static final String CODE = "Code";
     private static final String KEYWORDS = "Keywords";
     private static final String LANG = "Lang";
@@ -60,21 +79,19 @@ public class LocationListActivity extends FragmentActivity {
     private static final String TYPE_TAG = "Type";
     private static final String DESC = "Desc";
 
-    //private static final String GET_LOCATIONS_BY_TYPE = "getLocationsByType";
     private static final String GET_LOCATIONS_BY_PLANT = "getLocationsByPlant";
-    //private static final String PARAM_LOCATION_TYPES = "locationTypes";
     private static final String PARAM_PLANT_CODE = "plantCode";
     private static final String PARAM_LANG = "lang";
     private static final String PT = "PT";
 
     BGTGetJSONArray bgt;
 
+    //Contentor das localizações
     private ArrayList<Location> locations = new ArrayList<Location>();
     private String service;
     private ListView locationsList;
     private Plant plant;
     private Airport airport;
-    private String title;
 
     private ProgressDialog pd;
 
@@ -90,6 +107,7 @@ public class LocationListActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_locations);
 
+        //Variaveis passadas como parametro
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
         service = intent.getStringExtra("service");
@@ -107,6 +125,7 @@ public class LocationListActivity extends FragmentActivity {
             finish();
         }
 
+        //Lista das localizações
         LocationListAdapter plantsListAdapter = new LocationListAdapter(this, android.R.layout.simple_expandable_list_item_1, locations);
         locationsList = (ListView) findViewById(R.id.locations_listView);
 
@@ -115,6 +134,14 @@ public class LocationListActivity extends FragmentActivity {
         TextView titleTV = (TextView) findViewById(R.id.locations_name);
         titleTV.setText(service);
 
+        /*
+         * Listner da localização.
+         * É iniciada uma nova PlantActivity e passados como paramtros:
+         * option - se se trata de uma localização ou planta em geral
+         * location - objecto da localização
+         * title - titulo a ser apresentado na PlantActivity
+         * url - URL da imagem da planta
+         */
         locationsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int i, long l) {
@@ -132,6 +159,9 @@ public class LocationListActivity extends FragmentActivity {
         updateFragments();
     }
 
+    /**
+     * Depois de obtidas todas as plantas são seleccionadas as plantas onde o serviço está presente
+     */
     private void fiterLocations()
     {
         ArrayList<Location> temp = new ArrayList<Location>();
@@ -145,6 +175,10 @@ public class LocationListActivity extends FragmentActivity {
         locations = temp;
     }
 
+    /**
+     * Nesta função é feito um pedido ao servidor onde são obtidas todas as localizações por código
+     * da planta
+     */
     public void getLocations()
     {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(2);
@@ -206,11 +240,19 @@ public class LocationListActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
@@ -234,6 +276,11 @@ public class LocationListActivity extends FragmentActivity {
         footer.updateVisibility();
     }
 
+    /**
+     * Esta classe tem como objectivo a criação de uma tarefa em background para fazer pedidos ao
+     * servidor sem bloquear a UI.
+     * Os pedidos poderão ser GET ou POST, sendo que o GET devolve um JSONArray
+     */
     class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 
         List<NameValuePair> postparams = new ArrayList<NameValuePair>();

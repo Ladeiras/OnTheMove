@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Large"
             android:textColor="@color/header_text_color"
-            android:text="Serviço"
+            android:text="Contactos"
             android:id="@+id/service_name" />
     </LinearLayout>
 
@@ -53,7 +53,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:paddingLeft="20dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="http://website.com"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/service_website_textView" />
 
             <ImageView
@@ -80,7 +81,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:paddingLeft="20dp"
-                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="email@email.com"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/service_webmail_textView" />
 
             <ImageView
@@ -107,6 +109,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="6"
                 android:paddingLeft="20dp"
+                android:text="+351 000 000 000"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:id="@+id/service_phone_textView" />
 

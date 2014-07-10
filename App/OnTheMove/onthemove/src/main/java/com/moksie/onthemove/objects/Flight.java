@@ -9,6 +9,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * Classe Parcelable Flight
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class Flight implements Parcelable
 {
     private String airlinecode;
@@ -152,6 +160,10 @@ public class Flight implements Parcelable
         return arrivalrealtime;
     }
 
+    public Date getArrivalrealtimeDate() {
+        return uTimeToDate(arrivalrealtime);
+    }
+
     public String getBoardingclosetime() {
         return boardingclosetime;
     }
@@ -224,6 +236,10 @@ public class Flight implements Parcelable
         return departrealtime;
     }
 
+    public Date getDepartrealtimeDate() {
+        return uTimeToDate(departrealtime);
+    }
+
     public String getLuggageclosetime() {
         return luggageclosetime;
     }
@@ -250,6 +266,22 @@ public class Flight implements Parcelable
 
     public boolean isDeparture() {
         return tipovoo;
+    }
+
+    public void setArrivalplannedtime(String arrivalplannedtime) {
+        this.arrivalplannedtime = arrivalplannedtime;
+    }
+
+    public void setDepartplannedtime(String departplannedtime) {
+        this.departplannedtime = departplannedtime;
+    }
+
+    public void setArrivalrealtime(String arrivalrealtime) {
+        this.arrivalrealtime = arrivalrealtime;
+    }
+
+    public void setDepartrealtime(String departrealtime) {
+        this.departrealtime = departrealtime;
     }
 
     @Override

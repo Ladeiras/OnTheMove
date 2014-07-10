@@ -45,11 +45,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Nesta actividade são mostradas uma lista com todas as plantas do aeroporto.
+ * São passados como parametros:
+ *  airport - Aeroporto escolhido inicialmente na aplicação
+ *  service - tipo de localização
+ *  option - Se a planta a ser mostrada contem uma localização ou não (OPTION_LOCATIONS ou
+ *              OPTION_ALL)
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class PlantListActivity extends FragmentActivity {
 
+    //Opções
     private static final String OPTION_LOCATIONS = "locations";
     private static final String OPTION_ALL = "all";
 
+    //Variáveis a ser usadas no pedido de plantas ao servidor
     private static final String CODE = "Code";
     private static final String IMAGETYPE = "ImageType";
     private static final String IMAGEURL = "ImageUrl";
@@ -100,17 +115,20 @@ public class PlantListActivity extends FragmentActivity {
         pd.setMessage("A carregar Plantas");
         getPlants();
 
+        //Construção da vista da lista de plantas passando a lista de plantas a um PlantListAdapter
         PlantListAdapter plantListAdapter = new PlantListAdapter(this, android.R.layout.simple_expandable_list_item_1, plants);
         plantsList = (ListView) findViewById(R.id.service_maps_listView);
 
         plantsList.setAdapter(plantListAdapter);
 
+        //Texto do titulo
         TextView titleTV = (TextView) findViewById(R.id.service_name);
         titleTV.setText(title);
 
         ListView list = (ListView) findViewById(R.id.service_maps_listView);
 
         if(option.equals(OPTION_LOCATIONS)) {
+            //Se a opção contém locations é iniciada uma LocationListActivity
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView parent, View view, int i, long l) {
@@ -125,6 +143,7 @@ public class PlantListActivity extends FragmentActivity {
         }
         else if(option.equals(OPTION_ALL))
         {
+            //Se a opção não contém locations é iniciada uma PlantActivity
             list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView parent, View view, int i, long l) {
@@ -139,9 +158,13 @@ public class PlantListActivity extends FragmentActivity {
             });
         }
 
+        //Fragments
         updateFragments();
     }
 
+    /**
+     * Nesta função é feito um pedido ao servidor onde são obtidas todas as plantas do aeroporto
+     */
     public void getPlants()
     {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
@@ -208,11 +231,19 @@ public class PlantListActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
@@ -236,6 +267,11 @@ public class PlantListActivity extends FragmentActivity {
         footer.updateVisibility();
     }
 
+    /**
+     * Esta classe tem como objectivo a criação de uma tarefa em background para fazer pedidos ao
+     * servidor sem bloquear a UI.
+     * Os pedidos poderão ser GET ou POST, sendo que o GET devolve um JSONArray
+     */
     class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 
         List<NameValuePair> postparams = new ArrayList<NameValuePair>();

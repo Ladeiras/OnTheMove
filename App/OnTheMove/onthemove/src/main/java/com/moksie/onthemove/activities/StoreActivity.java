@@ -51,10 +51,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Nesta classe são mostrados os contactos, descrição e promoções (se existente) da loja
+ * seleccionada.
+ * São passados como parametros:
+ *  location - Informação sobre a localização da loja (objecto Location)
+ *  contact - Contactos da loja (objecto Contact)
+ *  campaign - Promoção da loja se existente (objecto Campaign)
+ * É também feito um pedido ao servidor para obter informções das plantas para mostrar a
+ * correspondente. Para isso é iniciado uma PlantActivity com a opção OPTION_LOCATIONS, que indica
+ * que o mapa a ser visualizado contém pontos e portanto também é passado o objecto Location
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class StoreActivity extends FragmentActivity {
 
     private static final String OPTION_LOCATIONS = "locations";
 
+    //Parametros para o pedido das plantas
     private static final String CODE = "Code";
     private static final String IMAGETYPE = "ImageType";
     private static final String IMAGEURL = "ImageUrl";
@@ -72,21 +89,13 @@ public class StoreActivity extends FragmentActivity {
     private static final String PARAM_LANG = "lang";
     private static final String PT = "PT";
 
-    //private static final String CODE = "Code";
+    //Paramentros para o pedido das localizações
     private static final String KEYWORDS = "Keywords";
-    //private static final String LANG = "Lang";
-    //private static final String NAME = "Name";
-    //private static final String POSX = "PosX";
-    //private static final String POSY = "PosY";
     private static final String TYPE_TAG = "Type";
     private static final String DESC = "Desc";
 
-    //private static final String GET_LOCATIONS_BY_TYPE = "getLocationsByType";
     private static final String GET_LOCATIONS_BY_PLANT = "getLocationsByPlant";
-    //private static final String PARAM_LOCATION_TYPES = "locationTypes";
     private static final String PARAM_PLANT_CODE = "plantCode";
-    //private static final String PARAM_LANG = "lang";
-    //private static final String PT = "PT";
 
     private BGTGetJSONArray bgt;
 
@@ -115,7 +124,7 @@ public class StoreActivity extends FragmentActivity {
 
         pd1 = new ProgressDialog(this);
         pd2 = new ProgressDialog(this);
-        pd1.setMessage("A carregar a imagem");
+        pd1.setMessage("A carregar a Imagem");
         pd2.setMessage("A carregar Plantas");
 
         Intent intent = getIntent();
@@ -123,11 +132,19 @@ public class StoreActivity extends FragmentActivity {
         contact = (Contact) intent.getParcelableExtra("contact");
         campaign = (Campaign) intent.getParcelableExtra("campaign");
 
+        //Obter todas as plantas
         getPlants();
 
+        /*
+         * A partir das plantas obtidas é verificado qual a que corresponde à localização da loja
+         * atual.
+         * Para isso, após obter as localizações a partir das plantas, são cruzados os dados
+         * para verificar qual a planta correspondente.
+         */
         for(int i=0;i<plants.size();i++)
         {
             locations = new ArrayList<Location>();
+            //Obter locations a partir dos codigos das plantas
             getLocations(plants.get(i).getCode());
 
             for(int j=0;j<locations.size();j++)
@@ -137,6 +154,7 @@ public class StoreActivity extends FragmentActivity {
             }
         }
 
+        //Botao Ver Mapa
         LinearLayout mapaLL = (LinearLayout) findViewById(R.id.store_ver_mapa_layout);
         mapaLL.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
@@ -151,6 +169,7 @@ public class StoreActivity extends FragmentActivity {
             }
         });
 
+        //Botao Website
         LinearLayout websiteLL = (LinearLayout) findViewById(R.id.store_website_LinearLayout);
         if(!contact.getWebsite().equals("null")) {
             websiteLL.setVisibility(View.VISIBLE);
@@ -165,6 +184,7 @@ public class StoreActivity extends FragmentActivity {
         }
         else websiteLL.setVisibility(View.GONE);
 
+        //Botao Telefone
         LinearLayout phoneLL = (LinearLayout) findViewById(R.id.store_phone_LinearLayout);
         if(!contact.getTelef().equals("null")) {
             phoneLL.setVisibility(View.VISIBLE);
@@ -184,6 +204,7 @@ public class StoreActivity extends FragmentActivity {
         }
         else phoneLL.setVisibility(View.GONE);
 
+        //Botao Webmail
         LinearLayout webmailLL = (LinearLayout) findViewById(R.id.store_webmail_LinearLayout);
         if(!contact.getEmail().equals("null")) {
             webmailLL.setVisibility(View.VISIBLE);
@@ -204,6 +225,7 @@ public class StoreActivity extends FragmentActivity {
         }
         else webmailLL.setVisibility(View.GONE);
 
+        //Botao Facebook
         LinearLayout facebookLL = (LinearLayout) findViewById(R.id.store_facebook_LinearLayout);
         if(!contact.getFacebook().equals("null")) {
             facebookLL.setVisibility(View.VISIBLE);
@@ -218,6 +240,7 @@ public class StoreActivity extends FragmentActivity {
         }
         else facebookLL.setVisibility(View.GONE);
 
+        //Botao Twitter
         LinearLayout twitterLL = (LinearLayout) findViewById(R.id.store_twitter_LinearLayout);
         if(!contact.getTwitter().equals("null")) {
             twitterLL.setVisibility(View.VISIBLE);
@@ -232,32 +255,39 @@ public class StoreActivity extends FragmentActivity {
         }
         else twitterLL.setVisibility(View.GONE);
 
+        //Texto do Titulo
         TextView title = (TextView) findViewById(R.id.title_textView);
         title.setText(location.getName());
 
+        //Texto do Botao Website
         TextView website = (TextView) findViewById(R.id.website_textView);
         website.setText(contact.getWebsite());
 
+        //Texto do Botao Telefone
         TextView phone = (TextView) findViewById(R.id.phone_textView);
         phone.setText(contact.getTelef());
 
+        //Texto do Botao Webmail
         TextView webmail = (TextView) findViewById(R.id.webmail_textView);
         webmail.setText(contact.getEmail());
 
+        //Logo da Loja
         ImageView image = (ImageView) findViewById(R.id.store_image);
         new BGTGetMapImage(image).execute(contact.getLogourl());
 
+        //Texto da Descriçãpo da Loja
         //TextView description = (TextView) findViewById(R.id.store_description);
         //description.setText(store.getDescricao());
 
+        //Texto da Promoção
         TextView promo = (TextView) findViewById(R.id.store_promotion);
-
         if(null != campaign) {
             promo.setVisibility(View.VISIBLE);
             promo.setText(campaign.getCampaigndesc());
         }
         else promo.setVisibility(View.GONE);
 
+        //Fragments
         updateFragments();
     }
 
@@ -289,11 +319,19 @@ public class StoreActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         LinearLayout layout = (LinearLayout) findViewById(R.id.store_LinearLayout);
@@ -325,6 +363,9 @@ public class StoreActivity extends FragmentActivity {
         footer.updateVisibility();
     }
 
+    /**
+     * Nesta função são obtidas todas as plantas do aeroporto fazendo um pedido ao servidor
+     */
     public void getPlants()
     {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(1);
@@ -364,6 +405,10 @@ public class StoreActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Nesta função são obtidas todas as locations do aeroporto a partir de um codigo de uma planta
+     * fazendo um pedido ao servidor
+     */
     public void getLocations(String plantCode)
     {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(2);
@@ -398,6 +443,10 @@ public class StoreActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Esta classe é usada para executar uma tarefa em background com o objectivo de obter um Bitmap
+     * a partir do URL da imagem sem que a UI seja bloqueada
+     */
     class BGTGetMapImage extends AsyncTask<String, Void, Bitmap> {
         private String url;
         private ImageView bmImage;
@@ -433,6 +482,11 @@ public class StoreActivity extends FragmentActivity {
         }
     }
 
+    /**
+     * Esta classe tem como objectivo a criação de uma tarefa em background para fazer pedidos ao
+     * servidor sem bloquear a UI.
+     * Os pedidos poderão ser GET ou POST, sendo que o GET devolve um JSONArray
+     */
     class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 
         List<NameValuePair> postparams = new ArrayList<NameValuePair>();

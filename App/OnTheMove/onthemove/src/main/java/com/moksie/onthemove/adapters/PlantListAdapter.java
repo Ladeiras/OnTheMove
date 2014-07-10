@@ -13,6 +13,16 @@ import com.moksie.onthemove.objects.Plant;
 
 import java.util.ArrayList;
 
+/**
+ * Nesta classe é feita a população de uma vista (elemento de uma lista de plantas) a partir de um
+ * Array de plantas.
+ * Cada elemento é composto pelo nome.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class PlantListAdapter extends ArrayAdapter<Plant> {
     private Activity context;
     ArrayList<Plant> data = null;

@@ -1,8 +1,13 @@
 package com.moksie.onthemove.objects;
 
 /**
- * Created by belh0 on 14-04-2014.
+ * Classe Store
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class Store
 {
     private Contact contact;

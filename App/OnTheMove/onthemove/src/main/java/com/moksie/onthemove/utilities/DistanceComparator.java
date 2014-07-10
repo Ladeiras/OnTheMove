@@ -2,15 +2,21 @@ package com.moksie.onthemove.utilities;
 
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 
 import com.moksie.onthemove.objects.Airport;
 
 import java.util.Comparator;
 
 /**
- * Created by belh0 on 30-04-2014.
+ * Esta classe que implementa Comparator, é usada para comparar distancias entre a posição atual e
+ * a posição de dois aeroportos. Os valores devolvidas poderão ser usados para organizar um array
+ * por ordem crescente de distancia.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class DistanceComparator implements Comparator<Airport>
 {
     Context context;
@@ -49,7 +55,6 @@ public class DistanceComparator implements Comparator<Airport>
         if(distance1 > distance2)
             return 1;
 
-        Log.w("FLAG", "4");
         return 0;
     }
 }

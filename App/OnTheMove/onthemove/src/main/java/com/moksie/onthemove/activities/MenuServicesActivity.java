@@ -14,8 +14,24 @@ import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
 
+/**
+ * Nesta classe são mostrados os serviços correspondentes ao menu 'Serviços' (botões).
+ * Mapa Aeroporto - Inicia PlantListActivity com a opção OPTION_ALL que significa a visualização da
+ *                  planta sem pontos de interesse.
+ * Lojas - Inicia StoreListActivity com a opção OPTION_ALL que significa que a opção de pesquisa
+ *          inicial das lojas é todas as lojas.
+ * Restaurantes - Inicia PlantListActivity onde é possivel ver a lista de plantas e respetivos
+ *                  restaurantes.
+ * Outros Serviços - Inicia MenuOtherServicesActivity onde é possivel escolher outros serviços
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class MenuServicesActivity extends FragmentActivity {
 
+    //Opções dos parametros a passar para as restantes Activities
     private static final String OPTION_ALL = "all";
     private static final String OPTION_LOCATIONS = "locations";
 
@@ -31,7 +47,7 @@ public class MenuServicesActivity extends FragmentActivity {
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
 
-        //Botao mapa Aeroporto
+        //Botao Mapa Aeroporto
         final Button mapButton = (Button) findViewById(R.id.services_mapa_aeroporto);
         mapButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -44,7 +60,7 @@ public class MenuServicesActivity extends FragmentActivity {
             }
         });
 
-        //Botao lojas
+        //Botao Lojas
         final Button storesButton = (Button) findViewById(R.id.services_botao_lojas);
         storesButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -69,7 +85,7 @@ public class MenuServicesActivity extends FragmentActivity {
             }
         });
 
-        //Botao outros serviços
+        //Botao Outros Serviços
         final Button othServButton = (Button) findViewById(R.id.services_botao_outrosservicos);
         othServButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -80,6 +96,7 @@ public class MenuServicesActivity extends FragmentActivity {
             }
         });
 
+        //Fragments
         updateFragments();
     }
 
@@ -110,11 +127,19 @@ public class MenuServicesActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()

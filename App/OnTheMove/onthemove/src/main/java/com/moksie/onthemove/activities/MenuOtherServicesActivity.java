@@ -14,9 +14,28 @@ import com.moksie.onthemove.objects.Airport;
 import com.moksie.onthemove.objects.Flight;
 import com.moksie.onthemove.utilities.FileIO;
 
+/**
+ * Nesta classe são mostrados os serviços correspondentes ao sub-menu 'Outros Serviços' (botões).
+ * Cada botão quando clicado é iniciada uma PlantListActivity onde são mostradas uma lista com as
+ * plantas do aeroporto.
+ * São passados como parametros:
+ * option - Opção se vai ser mostrada apenas a planta ou a planta com o ponto da localização do
+ *          serviço
+ * service - Nome do serviço usado mais tarde para obter informação a partir do servidor
+ * airport - Informação sobre o aeroporto (objecto Airport) escolhido no inicio da aplicação
+ *
+ * O parametro passado para esta Activity é apenas o objecto aeroport
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class MenuOtherServicesActivity extends FragmentActivity {
 
     private Airport airport;
+
+    //Opção que indica que se trata de uma localizaçao na planta e não a planta em geral
     private static final String OPTION_LOCATIONS = "locations";
 
     @Override
@@ -112,11 +131,19 @@ public class MenuOtherServicesActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()

@@ -24,7 +24,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by belh0 on 14-04-2014.
+ * Esta classe tem como objectivo a criação de uma tarefa em background para fazer pedidos ao
+ * servidor sem bloquear a UI.
+ * Os pedidos poderão ser GET ou POST, sendo que o GET devolve um JSONArray
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
 public class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 

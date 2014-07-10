@@ -23,7 +23,7 @@
             android:label="@string/title_activity_menu" >
         </activity>
         <activity
-            android:name="com.moksie.onthemove.activities.GPSAlertActivity"
+            android:name=".activities.AlertActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_gpsalert" >
         </activity>
@@ -112,5 +112,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

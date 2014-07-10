@@ -7,6 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+/**
+ * Classe Serilizable Flight
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class FlightSerializable implements Serializable
 {
     private String airlinecode;
@@ -160,6 +168,10 @@ public class FlightSerializable implements Serializable
         return arrivalrealtime;
     }
 
+    public Date getArrivalrealtimeDate() {
+        return uTimeToDate(arrivalrealtime);
+    }
+
     public String getBoardingclosetime() {
         return boardingclosetime;
     }
@@ -230,6 +242,10 @@ public class FlightSerializable implements Serializable
 
     public String getDepartrealtime() {
         return departrealtime;
+    }
+
+    public Date getDepartrealtimeDate() {
+        return uTimeToDate(departrealtime);
     }
 
     public String getLuggageclosetime() {

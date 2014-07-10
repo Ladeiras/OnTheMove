@@ -14,6 +14,16 @@ import com.moksie.onthemove.objects.Plant;
 
 import java.util.ArrayList;
 
+/**
+ * Nesta classe é feita a população de uma vista (elemento de uma lista de locations) a partir de um
+ * Array de locations.
+ * Cada elemento é composto pelo nome.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class LocationListAdapter extends ArrayAdapter<Location> {
     private Activity context;
     ArrayList<Location> data = null;
@@ -34,7 +44,7 @@ public class LocationListAdapter extends ArrayAdapter<Location> {
 
         Location item = data.get(position);
 
-        if (item != null) { // Parse the data from each object and set it.
+        if (item != null) {
             TextView LocationItem = (TextView) row.findViewById(R.id.location_textView);
 
             if (LocationItem != null) {

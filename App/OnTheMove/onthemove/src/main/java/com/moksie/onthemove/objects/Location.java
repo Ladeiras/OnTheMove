@@ -4,8 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by belh0 on 14-04-2014.
+ * Classe Parcelable Location
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class Location implements Parcelable
 {
     private String code;

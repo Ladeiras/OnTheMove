@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.moksie.onthemove.R;
 import com.moksie.onthemove.fragments.FooterFragment;
@@ -42,8 +43,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Esta classe representa o menu com as opções de contacto (botões).
+ * É obtida a informação dos contactos fazendo um pedido ao segundo WebService implementado (que
+ * contém apenas informação de contactos) antes de apresentar os botões.
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
+ */
+
 public class MenuContactsActivity extends FragmentActivity {
 
+    //Variáveis usadas no pedido dos contactos ao servidor
     private static final String LOST_AND_FOUND_TYPE = "LostAndFound";
     private static final String RESCUE_STATION_TYPE = "RescueStation";
 
@@ -58,7 +70,8 @@ public class MenuContactsActivity extends FragmentActivity {
     private static final String PARAM_AIRPORT_CODE = "id";
     private static final String PARAM_TYPE = "type";
 
-    private static final String API2_URL = "http://onthemove.no-ip.org:3000/api/contact/";
+    private static final String GET_CONTACT = "contact/";
+
 
     private Airport airport;
     private Contact lostAndFound;
@@ -66,6 +79,7 @@ public class MenuContactsActivity extends FragmentActivity {
     private ProgressDialog pd;
 
     private BGTGetJSONArray bgt;
+    private boolean moksieFlag = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -77,14 +91,32 @@ public class MenuContactsActivity extends FragmentActivity {
         pd = new ProgressDialog(this);
         pd.setMessage("A carregar Contactos");
 
+        /*
+         * Pedidos dos contactos ao servidor
+         * Apenas é feito o pedido dos contactos 'Perdidos e Achados' e 'Posto Socorro', pois os
+         * contactos do aeroporto estão contidos no objecto Airport passado como parametro para esta
+         * Activity e obtido quando é escolhido o aeroporto na MainActivity.
+         */
         Intent intent = getIntent();
         airport = (Airport) intent.getParcelableExtra("airport");
         try {
+            /*
+             * Caso o primeiro pedido tenha problemas de ligação, o segundo já não será feito e é
+             * apresentada uma mensagem de erro
+             */
             lostAndFound = getContact(LOST_AND_FOUND_TYPE);
-            rescueStation = getContact(RESCUE_STATION_TYPE);
+            if(moksieFlag)
+                rescueStation = getContact(RESCUE_STATION_TYPE);
+            else
+            {
+                Toast.makeText(this, "Problemas de ligação ao servidor moksie",
+                        Toast.LENGTH_LONG).show();
+            }
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        //Botões do menu - É passado como parametro o objecto Contact respetivo
 
         //Botao Contactos Aeroporto
         final Button CAButton = (Button) findViewById(R.id.contacts_aeroporto);
@@ -97,32 +129,39 @@ public class MenuContactsActivity extends FragmentActivity {
             }
         });
 
-
         //Botao Perdidos e Achados
         final Button PAButton = (Button) findViewById(R.id.contacts_perdidos_achados);
-        PAButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuContactsActivity.this, ContactActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                lostAndFound.setName("Perdidos e Achados");
-                intent.putExtra("contact", lostAndFound);
-                MenuContactsActivity.this.startActivity(intent);
-            }
-        });
+        if(moksieFlag) {
+            PAButton.setVisibility(View.VISIBLE);
+            PAButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(MenuContactsActivity.this, ContactActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    lostAndFound.setName("Perdidos e Achados");
+                    intent.putExtra("contact", lostAndFound);
+                    MenuContactsActivity.this.startActivity(intent);
+                }
+            });
+        }
+        else PAButton.setVisibility(View.INVISIBLE);
 
         //Botao Posto Socorro
         final Button PSButton = (Button) findViewById(R.id.contacts_posto_socorro);
-        PSButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuContactsActivity.this, ContactActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                rescueStation.setName("Posto de Socorro");
-                intent.putExtra("contact", rescueStation);
-                MenuContactsActivity.this.startActivity(intent);
-            }
-        });
+        if(moksieFlag) {
+            PSButton.setVisibility(View.VISIBLE);
+            PSButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent intent = new Intent(MenuContactsActivity.this, ContactActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    rescueStation.setName("Posto de Socorro");
+                    intent.putExtra("contact", rescueStation);
+                    MenuContactsActivity.this.startActivity(intent);
+                }
+            });
+        }
+        else PSButton.setVisibility(View.INVISIBLE);
 
-
+        //Fragments
         updateFragments();
     }
 
@@ -154,11 +193,19 @@ public class MenuContactsActivity extends FragmentActivity {
         overridePendingTransition(0, 0);
     }
 
+    /**
+     * Função de atualização de todos os Fragments desta vista
+     */
     public void updateFragments()
     {
         updateFooter();
     }
 
+    /**
+     * Função de atualização do Fragment Footer que corresponde ao voo que está a ser seguido.
+     * Nesta função também são atualizados os tamanhos dos restantes elementos da vista caso o
+     * fragment exista ou não.
+     */
     public void updateFooter()
     {
         FooterFragment footer = (FooterFragment) getSupportFragmentManager()
@@ -182,29 +229,37 @@ public class MenuContactsActivity extends FragmentActivity {
         footer.updateVisibility();
     }
 
+    /**
+     * Nesta função são obtidos os contactos de um determinado tipo, fazendo um pedido ao servidor
+     * @param contactType Tipo do contacto
+     * @return Objecto Contact contendo os resultados do pedido
+     * @throws ParseException
+     */
     public Contact getContact(String contactType) throws ParseException {
         List<NameValuePair> apiParams = new ArrayList<NameValuePair>(2);
         apiParams.add(new BasicNameValuePair(PARAM_AIRPORT_CODE, airport.getCode()));
         apiParams.add(new BasicNameValuePair(PARAM_TYPE, contactType));
-        bgt = new BGTGetJSONArray(API2_URL, "GET", apiParams);
+        bgt = new BGTGetJSONArray(MainActivity.BASE_API2_URL+GET_CONTACT, "GET", apiParams);
 
         try {
             JSONArray apJSON = bgt.execute().get();
 
-            for(int i=0; i < apJSON.length(); i++)
-            {
-                JSONObject a = apJSON.getJSONObject(i);
+            if(null != apJSON) {
+                for (int i = 0; i < apJSON.length(); i++) {
+                    JSONObject a = apJSON.getJSONObject(i);
 
-                String code = a.getString(CODE);
-                String email = a.getString(EMAIL);
-                String facebook = a.getString(FACEBOOK);
-                String telef = a.getString(TELEF);
-                String twitter = a.getString(TWITTER);
-                String website = a.getString(WEBSITE);
-                String logourl = a.getString(LOGOURL);
+                    String code = a.getString(CODE);
+                    String email = a.getString(EMAIL);
+                    String facebook = a.getString(FACEBOOK);
+                    String telef = a.getString(TELEF);
+                    String twitter = a.getString(TWITTER);
+                    String website = a.getString(WEBSITE);
+                    String logourl = a.getString(LOGOURL);
 
-                return new Contact(code, email, facebook, telef, twitter, website, logourl);
+                    return new Contact(code, email, facebook, telef, twitter, website, logourl);
+                }
             }
+            else moksieFlag = false;
 
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -217,6 +272,11 @@ public class MenuContactsActivity extends FragmentActivity {
         return null;
     }
 
+    /**
+     * Esta classe tem como objectivo a criação de uma tarefa em background para fazer pedidos ao
+     * servidor sem bloquear a UI.
+     * Os pedidos poderão ser GET ou POST, sendo que o GET devolve um JSONArray
+     */
     class BGTGetJSONArray extends AsyncTask<String, String, JSONArray> {
 
         List<NameValuePair> postparams = new ArrayList<NameValuePair>();

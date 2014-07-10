@@ -4,8 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by belh0 on 14-04-2014.
+ * Classe Plant
+ *
+ * @author David Clemente
+ * @author João Ladeiras
+ * @author Ricardo Pedroso
  */
+
 public class Plant implements Parcelable
 {
     private String code;
